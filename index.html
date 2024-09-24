@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resume</title>
+    <title>Interactive Resume</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,14 +38,29 @@
         }
         .skills {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
         }
         .skill {
             background-color: #ececec; /* Light Grey */
             border-radius: 5px;
+            margin: 5px 0;
+            position: relative;
+            height: 30px;
+        }
+        .skill-bar {
+            height: 100%;
+            width: 0;
+            background-color: #FF6F30; /* Orange */
+            transition: width 1s;
+        }
+        button {
+            margin: 10px 0;
             padding: 10px;
-            margin: 5px;
-            flex: 1 1 45%;
+            background-color: #FF6F30; /* Orange */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
         footer {
             text-align: center;
@@ -98,13 +113,24 @@
 
     <section>
         <h2>Skills</h2>
-        <div class="skills">
-            <div class="skill">Skill 1</div>
-            <div class="skill">Skill 2</div>
-            <div class="skill">Skill 3</div>
-            <div class="skill">Skill 4</div>
-            <div class="skill">Skill 5</div>
-            <div class="skill">Skill 6</div>
+        <button onclick="toggleSkills()">Show/Hide Skills</button>
+        <div class="skills" id="skills-section" style="display:none;">
+            <div class="skill">
+                <div class="skill-bar" style="width: 90%;" title="Skill 1: 90%"></div>
+                <span>Skill 1</span>
+            </div>
+            <div class="skill">
+                <div class="skill-bar" style="width: 80%;" title="Skill 2: 80%"></div>
+                <span>Skill 2</span>
+            </div>
+            <div class="skill">
+                <div class="skill-bar" style="width: 75%;" title="Skill 3: 75%"></div>
+                <span>Skill 3</span>
+            </div>
+            <div class="skill">
+                <div class="skill-bar" style="width: 85%;" title="Skill 4: 85%"></div>
+                <span>Skill 4</span>
+            </div>
         </div>
     </section>
 </div>
@@ -113,6 +139,17 @@
     <p>&copy; 2024 Your Name. All rights reserved.</p>
     <p>Connect with me on <a href="#">LinkedIn</a> | <a href="#">GitHub</a></p>
 </footer>
+
+<script>
+    function toggleSkills() {
+        const skillsSection = document.getElementById('skills-section');
+        if (skillsSection.style.display === "none") {
+            skillsSection.style.display = "block";
+        } else {
+            skillsSection.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
