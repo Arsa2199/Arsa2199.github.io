@@ -37,4 +37,82 @@
             margin-bottom: 20px;
         }
         .skills {
-            d
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .skill {
+            background-color: #ececec; /* Light Grey */
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            flex: 1 1 45%;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #FF6F30; /* Orange */
+            color: #fff;
+            position: relative;
+        }
+        a {
+            color: #FF6F30; /* Orange */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Your Name</h1>
+    <p>Your Tagline or Professional Title</p>
+</header>
+
+<div class="container">
+    <section>
+        <h2>Contact Information</h2>
+        <p>Email: your.email@example.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Location: City, Country</p>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <h3>Degree, Major</h3>
+        <p>University Name, Graduation Year</p>
+    </section>
+
+    <section>
+        <h2>Experience</h2>
+        <h3>Job Title</h3>
+        <p>Company Name, Employment Dates</p>
+        <ul>
+            <li>Responsibility/achievement 1</li>
+            <li>Responsibility/achievement 2</li>
+            <li>Responsibility/achievement 3</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <div class="skills">
+            <div class="skill">Skill 1</div>
+            <div class="skill">Skill 2</div>
+            <div class="skill">Skill 3</div>
+            <div class="skill">Skill 4</div>
+            <div class="skill">Skill 5</div>
+            <div class="skill">Skill 6</div>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2024 Your Name. All rights reserved.</p>
+    <p>Connect with me on <a href="#">LinkedIn</a> | <a href="#">GitHub</a></p>
+</footer>
+
+</body>
+</html>
