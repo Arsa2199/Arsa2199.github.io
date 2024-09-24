@@ -9,22 +9,22 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background-color: #f0f0f0;
             color: #333;
         }
         header {
             background-color: #FF6F30; /* Orange */
             color: #fff;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: auto;
             padding: 20px;
             background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
         h1, h2, h3 {
             color: #FF6F30; /* Orange */
@@ -32,9 +32,13 @@
         h2 {
             border-bottom: 2px solid #FF6F30;
             padding-bottom: 5px;
+            margin-bottom: 15px;
         }
         section {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 5px solid #FF6F30;
+            background-color: #f9f9f9; /* Light Grey */
         }
         .skills {
             display: flex;
@@ -43,7 +47,7 @@
         .skill {
             background-color: #ececec; /* Light Grey */
             border-radius: 5px;
-            margin: 5px 0;
+            margin: 10px 0;
             position: relative;
             height: 30px;
         }
@@ -51,7 +55,7 @@
             height: 100%;
             width: 0;
             background-color: #FF6F30; /* Orange */
-            transition: width 1s;
+            transition: width 1s ease-in-out;
         }
         button {
             margin: 10px 0;
@@ -61,6 +65,10 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #e65c23; /* Darker Orange */
         }
         footer {
             text-align: center;
@@ -98,12 +106,20 @@
         <h2>Education</h2>
         <h3>Degree, Major</h3>
         <p>University Name, Graduation Year</p>
+        <p>Description about your education, achievements, and relevant courses.</p>
     </section>
 
     <section>
         <h2>Experience</h2>
         <h3>Job Title</h3>
         <p>Company Name, Employment Dates</p>
+        <ul>
+            <li>Responsibility/achievement 1</li>
+            <li>Responsibility/achievement 2</li>
+            <li>Responsibility/achievement 3</li>
+        </ul>
+        <h3>Another Job Title</h3>
+        <p>Another Company Name, Employment Dates</p>
         <ul>
             <li>Responsibility/achievement 1</li>
             <li>Responsibility/achievement 2</li>
@@ -117,21 +133,35 @@
         <div class="skills" id="skills-section" style="display:none;">
             <div class="skill">
                 <div class="skill-bar" style="width: 90%;" title="Skill 1: 90%"></div>
-                <span>Skill 1</span>
+                <span style="position: absolute; left: 5px; line-height: 30px;">Skill 1</span>
             </div>
             <div class="skill">
                 <div class="skill-bar" style="width: 80%;" title="Skill 2: 80%"></div>
-                <span>Skill 2</span>
+                <span style="position: absolute; left: 5px; line-height: 30px;">Skill 2</span>
             </div>
             <div class="skill">
                 <div class="skill-bar" style="width: 75%;" title="Skill 3: 75%"></div>
-                <span>Skill 3</span>
+                <span style="position: absolute; left: 5px; line-height: 30px;">Skill 3</span>
             </div>
             <div class="skill">
                 <div class="skill-bar" style="width: 85%;" title="Skill 4: 85%"></div>
-                <span>Skill 4</span>
+                <span style="position: absolute; left: 5px; line-height: 30px;">Skill 4</span>
             </div>
         </div>
+    </section>
+
+    <section>
+        <h2>Projects</h2>
+        <h3>Project Title</h3>
+        <p>A brief description of the project, your role, technologies used, and outcomes.</p>
+        <h3>Another Project Title</h3>
+        <p>A brief description of the project, your role, technologies used, and outcomes.</p>
+    </section>
+
+    <section>
+        <h2>Certifications</h2>
+        <p>Certification Name, Issuing Organization, Date Obtained</p>
+        <p>Certification Name, Issuing Organization, Date Obtained</p>
     </section>
 </div>
 
@@ -145,6 +175,14 @@
         const skillsSection = document.getElementById('skills-section');
         if (skillsSection.style.display === "none") {
             skillsSection.style.display = "block";
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
         } else {
             skillsSection.style.display = "none";
         }
