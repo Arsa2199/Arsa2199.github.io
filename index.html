@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering CV - [Your Name]</title>
+    <title>Engineering CV - Arsa Damara Putra</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #F4F4F4;
-            color: #333;
             margin: 0;
             padding: 0;
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            color: #333;
+            transition: background 1.5s ease;
         }
         header {
-            background-color: #FF7300; /* Bright Engineering Orange */
+            background: linear-gradient(90deg, #FF7300 0%, #FF5100 100%);
             color: white;
             padding: 40px 0;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: gradientHeader 6s ease infinite;
+        }
+        @keyframes gradientHeader {
+            0%, 100% {
+                background: linear-gradient(90deg, #FF7300 0%, #FF5100 100%);
+            }
+            50% {
+                background: linear-gradient(90deg, #FF5100 0%, #FF7300 100%);
+            }
         }
         header h1 {
             font-size: 36px;
@@ -32,198 +42,4 @@
             margin: 20px auto;
             background-color: #FFFFFF;
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h2, h3 {
-            color: #FF7300; /* Engineering Orange */
-        }
-        h2 {
-            border-bottom: 2px solid #FF7300;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        section {
-            margin-bottom: 40px;
-        }
-        .experience, .education, .certifications {
-            display: flex;
-            flex-direction: column;
-            border-left: 4px solid #FF7300;
-            padding-left: 20px;
-        }
-        .experience-item, .education-item {
-            margin-bottom: 20px;
-        }
-        .experience-item h3, .education-item h3 {
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-        .timeline {
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background-color: #FF7300;
-        }
-        .timeline-item {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -10px;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            background-color: #FF7300;
-            border-radius: 50%;
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .skill {
-            width: 100%;
-            background-color: #ececec;
-            border-radius: 4px;
-            margin: 10px 0;
-            position: relative;
-            padding: 5px 0;
-        }
-        .skill-bar {
-            height: 20px;
-            background-color: #FF7300;
-            width: 0;
-            border-radius: 4px;
-            transition: width 1.5s;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
-        footer a {
-            color: #FF7300;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-        /* Button styles */
-        button {
-            background-color: #FF7300;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-top: 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #e65c00;
-        }
-    </style>
-</head>
-<body>
-
-<header>
-    <h1>Arsa Damara Putra</h1>
-    <p>Mechanical Engineer | Quality Control Expert | Systems Improvement Professional</p>
-</header>
-
-<div class="container">
-    <section>
-        <h2>Contact Information</h2>
-        <p>Email: Arsadamaraputra@gmail.com</p>
-        <p>Phone: 087736691451</p>
-        <p>Location: Jakarta, Indonesia</p>
-    </section>
-
-    <section class="experience">
-        <h2>Experience</h2>
-
-        <div class="experience-item">
-            <h3>Quality Engineer of System & Improvement</h3>
-            <p><strong>PT Hitachi Construction Machinery Indonesia</strong> | Apr 2024 - Present</p>
-            <ul>
-                <li>Troubleshooting, Reporting & Analysis</li>
-                <li>Developed digital-based inspection systems, real-time data visualization</li>
-                <li>Root cause identification of recurring issues in excavator systems</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <h3>Quality Engineer of Test & Final Inspection</h3>
-            <p><strong>PT Hitachi Construction Machinery Indonesia</strong> | May 2022 - Apr 2024</p>
-            <ul>
-                <li>Developed inspection systems, conducted failure analysis</li>
-                <li>Coordinated improvement activities across departments</li>
-                <li>Monthly assembly line patrols to ensure process adherence</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="education">
-        <h2>Education</h2>
-        <div class="education-item">
-            <h3>Associate's Degree in Mechanical Engineering</h3>
-            <p><strong>Universitas Gadjah Mada (UGM)</strong> | Jul 2017 - Jul 2021</p>
-        </div>
-    </section>
-
-    <section class="certifications">
-        <h2>Certifications & Awards</h2>
-        <p><strong>Visual Inspection Expert</strong> - Hitachi Construction Machinery (Issued Mar 2024)</p>
-        <p><strong>3rd Place Winner - SGA Convention 2024</strong> - Synchronization of Manufacturing Processes</p>
-        <p><strong>President's Award - Bronze</strong> (Issued Jan 2024)</p>
-    </section>
-
-    <section>
-        <h2>Skills</h2>
-        <div class="skills">
-            <div class="skill">
-                <span>Power BI</span>
-                <div class="skill-bar" style="width: 85%;"></div>
-            </div>
-            <div class="skill">
-                <span>Troubleshooting</span>
-                <div class="skill-bar" style="width: 90%;"></div>
-            </div>
-            <div class="skill">
-                <span>Data Analysis</span>
-                <div class="skill-bar" style="width: 80%;"></div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<footer>
-    <p>&copy; 2024 [Your Name] | Connect with me on <a href="#">LinkedIn</a></p>
-</footer>
-
-<script>
-    // Skill bar animation when page loads
-    window.onload = function () {
-        const skillBars = document.querySelectorAll('.skill-bar');
-        skillBars.forEach((bar) => {
-            bar.style.width = bar.style.width;
-        });
-    };
-</script>
-
-</body>
-</html>
+            box-shadow: 0 4px 15px rgba
