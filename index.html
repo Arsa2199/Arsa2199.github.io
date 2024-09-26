@@ -1,45 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering CV - Arsa Damara Putra</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-            color: #333;
-            transition: background 1.5s ease;
-        }
-        header {
-            background: linear-gradient(90deg, #FF7300 0%, #FF5100 100%);
-            color: white;
-            padding: 40px 0;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            animation: gradientHeader 6s ease infinite;
-        }
-        @keyframes gradientHeader {
-            0%, 100% {
-                background: linear-gradient(90deg, #FF7300 0%, #FF5100 100%);
-            }
-            50% {
-                background: linear-gradient(90deg, #FF5100 0%, #FF7300 100%);
-            }
-        }
-        header h1 {
-            font-size: 36px;
-        }
-        header p {
-            font-size: 18px;
-            margin-top: 5px;
-        }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-            background-color: #FFFFFF;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba
+<div class="logo-container">
+  <img src="pt-hitachi-logo.png" alt="PT Hitachi Construction Machinery Indonesia Logo" class="logo">
+  <div class="background-effect"></div>
+</div>
+.logo-container {
+  position: relative;
+  width: 200px; /* adjust the width to your liking */
+  height: 200px; /* adjust the height to your liking */
+  margin: 20px auto; /* adjust the margin to your liking */
+  border-radius: 10px; /* adjust the border radius to your liking */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* adjust the box shadow to your liking */
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px; /* adjust the border radius to your liking */
+}
+
+.background-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #3498db, #f1c40f); /* adjust the gradient colors to your liking */
+  opacity: 0.5; /* adjust the opacity to your liking */
+  border-radius: 10px; /* adjust the border radius to your liking */
+  animation: background-effect 5s infinite; /* adjust the animation duration and iteration count to your liking */
+}
+
+@keyframes background-effect {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+// Add an event listener to the logo container to toggle the background effect on hover
+document.addEventListener("DOMContentLoaded", function() {
+  const logoContainer = document.querySelector(".logo-container");
+  logoContainer.addEventListener("mouseover", function() {
+    logoContainer.classList.add("hover");
+  });
+  logoContainer.addEventListener("mouseout", function() {
+    logoContainer.classList.remove("hover");
+  });
+});
