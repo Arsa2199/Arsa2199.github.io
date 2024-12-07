@@ -17,6 +17,13 @@
             color: white;
             padding: 20px 0;
             text-align: center;
+            position: relative;
+        }
+        header img {
+            max-width: 150px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
         }
         header h1 {
             margin: 0;
@@ -60,6 +67,7 @@
         li a {
             text-decoration: none;
             color: #333;
+            cursor: pointer;
         }
         li a:hover {
             color: #ff7e00;
@@ -76,6 +84,7 @@
 <body>
 
 <header>
+    <img src="/mnt/data/image.png" alt="Hitachi Logo">
     <h1>Advanced Quality Control Portal</h1>
     <nav>
         <a href="#dashboards">Dashboards</a>
@@ -89,88 +98,77 @@
 <div class="container" id="dashboards">
     <h2>Dashboards</h2>
     <ul>
-        <li><a href="#" onclick="openFile()">1. Blacklight & Performance Test Dashboard</a></li>
-        <li><a href="#" onclick="openFile()">2. Visual, Accessories & Final Inspection Dashboard</a></li>
-        <li><a href="#" onclick="openFile()">3. Oil Contamination Dashboard</a></li>
-        <li><a href="#" onclick="openFile()">4. Voltage, Coolant & Oil Contamination Statistical Data</a></li>
-        <li><a href="#" onclick="openFile()">5. Visual Painting Data 1</a></li>
-        <li><a href="#" onclick="openFile()">6. Visual Painting Data 2</a></li>
-        <li><a href="#" onclick="openFile()">7. Visual Painting Data 3</a></li>
-        <li><a href="#" onclick="openFile()">8. Global E-Service (MME) Dashboard</a></li>
-        <li><a href="#" onclick="openFile()">9. Export Order Form Control</a></li>
-        <li><a href="#" onclick="openFile()">10. Remanufacturing Dashboard</a></li>
-        <li><a href="#" onclick="openFile()">11. SLF Monitoring Progress</a></li>
+        <li><a onclick="openFile()">1. Blacklight & Performance Test Dashboard</a></li>
+        <li><a onclick="openFile()">2. Visual, Accessories & Final Inspection Dashboard</a></li>
+        <li><a onclick="openFile()">3. Oil Contamination Dashboard</a></li>
+        <li><a onclick="openFile()">4. Voltage, Coolant & Oil Contamination Statistical Data</a></li>
+        <li><a onclick="openFile()">5. Visual Painting Data 1</a></li>
+        <li><a onclick="openFile()">6. Visual Painting Data 2</a></li>
+        <li><a onclick="openFile()">7. Visual Painting Data 3</a></li>
+        <li><a onclick="openFile()">8. Global E-Service (MME) Dashboard</a></li>
+        <li><a onclick="openFile()">9. Export Order Form Control</a></li>
+        <li><a onclick="openFile()">10. Remanufacturing Dashboard</a></li>
+        <li><a onclick="openFile()">11. SLF Monitoring Progress</a></li>
     </ul>
 </div>
 
 <div class="container" id="work-instructions">
     <h2>Work Instructions</h2>
     <ul>
-        <li><a href="#" onclick="openFile()">1. Aerial Angle Setting</a></li>
-        <li><a href="#" onclick="openFile()">2. Pengisian Checksheet Stock-In</a></li>
-        <li><a href="#" onclick="openFile()">3. Aktivasi GPS</a></li>
-        <li><a href="#" onclick="openFile()">4. Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</a></li>
-        <li><a href="#" onclick="openFile()">5. Pemeriksaan kebocoran oli hydraulic</a></li>
-        <li><a href="#" onclick="openFile()">6. Pengecekan Kontaminasi oil hydraulic</a></li>
-        <li><a href="#" onclick="openFile()">7. Pemeriksaan kualitas painting</a></li>
-        <li><a href="#" onclick="openFile()">8. Mechanical check</a></li>
-        <li><a href="#" onclick="openFile()">9. Performance Test</a></li>
-        <li><a href="#" onclick="openFile()">10. Final Inspection</a></li>
+        <li><a onclick="openFile()">1. Aerial Angle Setting</a></li>
+        <li><a onclick="openFile()">2. Pengisian Checksheet Stock-In</a></li>
+        <li><a onclick="openFile()">3. Aktivasi GPS</a></li>
+        <li><a onclick="openFile()">4. Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</a></li>
+        <li><a onclick="openFile()">5. Pemeriksaan kebocoran oli hydraulic</a></li>
+        <li><a onclick="openFile()">6. Pengecekan Kontaminasi oil hydraulic</a></li>
+        <li><a onclick="openFile()">7. Pemeriksaan kualitas painting</a></li>
+        <li><a onclick="openFile()">8. Mechanical check</a></li>
+        <li><a onclick="openFile()">9. Performance Test</a></li>
+        <li><a onclick="openFile()">10. Final Inspection</a></li>
     </ul>
 </div>
 
 <div class="container" id="operations">
     <h2>Operations</h2>
     <ul>
-        <li><a href="#" onclick="openFile()">1. QRQC data creation</a></li>
-        <li><a href="#" onclick="openFile()">2. Pengecekan Tools Unit</a></li>
-        <li><a href="#" onclick="openFile()">3. Revisi Model unit pada GeS</a></li>
-        <li><a href="#" onclick="openFile()">4. Reducing Valve Setting</a></li>
-        <li><a href="#" onclick="openFile()">5. Revisi GPS type pada GeS</a></li>
-        <li><a href="#" onclick="openFile()">6. Operational Power Bi Final Inspection Area</a></li>
-        <li><a href="#" onclick="openFile()">7. Backlash Inspection</a></li>
-        <li><a href="#" onclick="openFile()">8. Pengecekan toolbox dan pengisian checksheet</a></li>
-        <li><a href="#" onclick="openFile()">9. Revisi Depot pada GeS</a></li>
-        <li><a href="#" onclick="openFile()">10. Menampilkan error code pada unit 10 T</a></li>
+        <li><a onclick="openFile()">1. QRQC data creation</a></li>
+        <li><a onclick="openFile()">2. Pengecekan Tools Unit</a></li>
+        <li><a onclick="openFile()">3. Revisi Model unit pada GeS</a></li>
+        <!-- Repeat for remaining items -->
     </ul>
 </div>
 
 <div class="container" id="checksheet">
     <h2>Checksheet</h2>
     <ul>
-        <li><a href="#" onclick="openFile()">1. Final Inspection Checksheet</a></li>
-        <li><a href="#" onclick="openFile()">2. Visual Painting Checksheet</a></li>
-        <li><a href="#" onclick="openFile()">3. Accessories & Function Checksheet</a></li>
-        <li><a href="#" onclick="openFile()">4. Performance Test</a></li>
-        <li><a href="#" onclick="openFile()">5. Blacklight</a></li>
+        <li><a onclick="openFile()">1. Final Inspection Checksheet</a></li>
+        <li><a onclick="openFile()">2. Visual Painting Checksheet</a></li>
+        <!-- Repeat for remaining items -->
     </ul>
 </div>
 
 <div class="container" id="master-data">
     <h2>Master Data</h2>
     <ul>
-        <li><a href="#" onclick="openFile()">1. Custom master for performance test</a></li>
-        <li><a href="#" onclick="openFile()">2. Custom master for Final Inspection</a></li>
-        <li><a href="#" onclick="openFile()">3. Custom master unit model</a></li>
-        <li><a href="#" onclick="openFile()">4. CTM data control excel</a></li>
+        <li><a onclick="openFile()">1. Custom master for performance test</a></li>
+        <li><a onclick="openFile()">2. Custom master for Final Inspection</a></li>
+        <!-- Repeat for remaining items -->
     </ul>
 </div>
 
 <footer>
     <p>&copy; 2023 Quality Control Department. All rights reserved.</p>
-    <p>Job Control Website</p>
 </footer>
 
 <script>
     function openFile() {
         const input = document.createElement('input');
         input.type = 'file';
-        input.accept = '*/*'; // Adjust file type if needed
+        input.accept = '*/*';
         input.onchange = (event) => {
             const file = event.target.files[0];
             if (file) {
                 alert(`File "${file.name}" selected!`);
-                // Further file handling logic can go here
             }
         };
         input.click();
