@@ -3,124 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QUALITY CONTROL TEST & FINAL Job Control Panel</title>
+  <title>Quality Control Test & Final Job Control</title>
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      background: #fdf3e1;
+      background-color: #f9f9f9;
       color: #333;
     }
     header {
-      background: #ff8c00;
+      background-color: #ff8c00;
       color: white;
-      text-align: center;
-      padding: 20px;
+      padding: 15px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
     header img {
       height: 50px;
-      margin-left: 10px;
     }
     header h1 {
       margin: 0;
-      flex-grow: 1;
+      font-size: 1.5em;
+      text-shadow: 1px 1px 2px black;
     }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      margin: 20px;
+    .content {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
     }
-    .category {
-      flex: 1;
-      min-width: 300px;
-      margin: 10px;
-      background: #ffebcc;
-      border: 1px solid #ff8c00;
+    .section {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: #fff;
     }
-    .category h2 {
+    .section h2 {
+      margin: 0;
+      padding: 15px;
       background: #ff8c00;
       color: white;
-      padding: 10px;
-      margin: 0;
-      text-align: center;
+      font-size: 1.2em;
       border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section h2:hover {
+      background: #ff7000;
+    }
+    .section h2 span {
+      font-size: 0.9em;
+      font-weight: normal;
+    }
+    .items {
+      display: none;
+      padding: 10px 20px;
     }
     .item {
-      padding: 10px;
+      padding: 8px 0;
+      font-size: 1em;
       cursor: pointer;
-      border-bottom: 1px solid #ff8c00;
+      border-bottom: 1px solid #eee;
       transition: background 0.3s, color 0.3s;
     }
     .item:hover {
-      background: #ffd1a3;
+      background: #ffe3c4;
       color: #ff4500;
     }
-    .item:last-child {
-      border-bottom: none;
-    }
-    #viewer {
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 90%;
-      background: white;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      display: none;
+    .item a {
+      text-decoration: none;
+      color: inherit;
     }
     footer {
-      background: #ff4500;
+      background-color: #ff8c00;
       color: white;
       text-align: center;
       padding: 10px;
       position: fixed;
       bottom: 0;
       width: 100%;
-    }
-    iframe {
-      width: 100%;
-      height: 500px;
-      border: none;
+      font-size: 0.9em;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="hitachi-logo.png" alt="Hitachi Logo">
-    <h1>Hitachi Job Control Panel</h1>
+    <img src="path/to/hitachi-logo.png" alt="Hitachi Logo">
+    <h1>Quality Control Test & Final Job Control</h1>
   </header>
 
-  <div class="container">
-    <!-- Power BI Section -->
-    <div class="category" id="powerbi">
-      <h2>Power BI</h2>
-      <div class="item" onclick="openLocalFile('\\hcmi10007.kenki.global.hitachi.net\F-iReporter\Section\QA For Excavator & Reman\03. Power BI\QC Test & Final\Trial\QC PT & BL - Progress & Performance Monitoring.pbix')">1. Blacklight & Performance Test Dashboard</div>
-      <div class="item" onclick="openLocalFile('C:/YourPath/powerbi2.pbix')">2. Visual, Accessories & Final Inspection Dashboard</div>
-    </div>
-
-    <!-- Work Instruction Section -->
-    <div class="category" id="work-instruction">
-      <h2>Work Instruction</h2>
-      <div class="item" onclick="openLocalFile('C:/YourPath/workinstruction1.xlsx')">1. Aerial Angle Setting</div>
-    </div>
+  <div class="content">
+    <!-- Dynamically Adding All Sections -->
+    <div id="sections"></div>
   </div>
 
   <footer>
-    <p>&copy; 2024 Hitachi Job Control Panel</p>
+    &copy; 2024 Hitachi Quality Control Dashboard
   </footer>
 
   <script>
-    function openLocalFile(filePath) {
-      alert(`Opening file: ${filePath}`);
-      window.open(filePath, '_blank');
+    const data = {
+      "Power BI": [
+        "Blacklight & Performance Test Dashboard",
+        "Visual, Accessories & Final Inspection Dashboard",
+        "Oil Contamination Dashboard",
+        "Voltage, Coolant & Oil Contamination Statistical data",
+        "Visual Painting Data 1",
+        "Visual Painting Data 2",
+        "Visual Painting Data 3",
+        "Global E-Service (MME) Dashboard",
+        "Export Order Form Control",
+        "Remanufacturing Dashboard",
+        "SLF Monitoring Progress"
+      ],
+      "Work Instruction": [
+        "Aerial Angle Setting",
+        "Pengisian Checksheet Stock-In",
+        "Aktivasi GPS",
+        "Petunjuk Kerja Setting Tampilan Aplikasi M-Pro",
+        "Pemeriksaan kebocoran oli hydraulic",
+        "Pengecekan Kontaminasi oil hydraulic",
+        "Pemeriksaan kualitas painting",
+        "Mechanical check",
+        "Performance Test",
+        "Final Inspection"
+      ],
+      "OPS": [
+        "QRQC data creation",
+        "Pengecekan Tools Unit",
+        "Revisi Model unit pada GeS",
+        "Reducing Valve Setting",
+        "Revisi GPS type pada GeS",
+        "Operational Power Bi Final Inspection Area",
+        "Backlash Inspection",
+        "pengecekan toolbox dan pengisian checksheet",
+        "Revisi Depot pada GeS",
+        "Menampilkan error code pada unit 10 T",
+        "Flow Apply, Approve, & Completion Pada Checksheet Stock-In dan Export Order",
+        "Penggunaan dan perawatan refraktometer",
+        "Area parkir khusus untuk unit ZX10T",
+        "Jarak aman melihat monitor display progress",
+        "Prosedur pemakaian iPad Surface yang aman dalam proses pemeriksaan unit excavator",
+        "Pembuatan WI untuk proses Engine Learning dengan bantuan Live Camera",
+        "Urutan proses inspeksi visual painting pada unit",
+        "Penggunaan pemberat pada test beban unit",
+        "Cara pengecekan hammer test",
+        "Langkah membuka dan menutup engine guard secara aman",
+        "Langkah untuk naik turun unit secara aman",
+        "Langkah melakukan engine learning yang aman"
+      ],
+      "Checksheet": [
+        "Final Inspection Checksheet",
+        "Visual Painting Checksheet",
+        "Accessories & Function Checksheet",
+        "Performance Test",
+        "Blacklight",
+        "Daily Painting Inspection",
+        "Weekly Painting Inspection",
+        "Product Audit",
+        "NCR Local",
+        "Super Long Front HCMA",
+        "Oil Contamination",
+        "Quality Patrol",
+        "Stock-In checksheet"
+      ],
+      "Master Data": [
+        "Custom master for performance test",
+        "Custom master for Final Inspection",
+        "Custom master unit model",
+        "CTM data control excel",
+        "CTM data checksheet stock in",
+        "Certification list Performance test & blacklight",
+        "Certification list Visual-Stock in Inspection",
+        "Spesification list performance test"
+      ]
+    };
+
+    const filePaths = {
+      "Blacklight & Performance Test Dashboard": "\\hcmi10007.kenki.global.hitachi.net\F-iReporter\Section\QA For Excavator & Reman\03. Power BI\QC Test & Final\Trial\QC PT & BL - Progress & Performance Monitoring.pbix",
+      // Add other file paths here
+    };
+
+    const sectionsDiv = document.getElementById('sections');
+
+    for (const sectionName in data) {
+      const section = document.createElement('div');
+      section.className = 'section';
+
+      const header = document.createElement('h2');
+      header.textContent = sectionName;
+      header.onclick = () => toggleSection(header);
+
+      const itemsDiv = document.createElement('div');
+      itemsDiv.className = 'items';
+
+      data[sectionName].forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+        itemDiv.innerHTML = `<a href="${filePaths[item] || '#'}" target="_blank">${index + 1}. ${item}</a>`;
+        itemsDiv.appendChild(itemDiv);
+      });
+
+      section.appendChild(header);
+      section.appendChild(itemsDiv);
+      sectionsDiv.appendChild(section);
+    }
+
+    function toggleSection(header) {
+      const items = header.nextElementSibling;
+      items.style.display = items.style.display === 'none' || items.style.display === '' ? 'block' : 'none';
     }
   </script>
 </body>
