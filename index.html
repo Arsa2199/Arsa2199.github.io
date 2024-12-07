@@ -10,12 +10,12 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #333, #111);
-            color: #fff;
+            background: #f5f5f5;
+            color: #333;
         }
         header {
-            background: linear-gradient(to right, #ff7e00, #ff3d00);
-            color: white;
+            background: #000;
+            color: #fff;
             padding: 20px;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -24,19 +24,31 @@
             margin: 0;
             font-size: 2.5em;
         }
-        h2 {
+        nav {
             margin: 20px 0;
-            font-size: 1.8em;
-            color: #ff7e00;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
         }
         .container {
             width: 80%;
             margin: auto;
-            overflow: hidden;
             padding: 20px;
-            background: #222;
+            background: #fff;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #ff7e00;
+            border-bottom: 2px solid #ff7e00;
+            padding-bottom: 10px;
         }
         ul {
             list-style-type: none;
@@ -44,27 +56,14 @@
         }
         li {
             padding: 15px;
-            border-bottom: 1px solid #444;
-            transition: background 0.3s;
+            border-bottom: 1px solid #ddd;
         }
         li:last-child {
             border-bottom: none;
         }
-        li:hover {
-            background: rgba(255, 126, 0, 0.1);
-        }
-        a {
-            text-decoration: none;
-            color: #ff7e00;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #ff3d00;
-        }
         footer {
-            background-color: #333;
-            color: white;
+            background-color: #000;
+            color: #fff;
             text-align: center;
             padding: 10px;
             position: relative;
@@ -78,37 +77,113 @@
 
 <header>
     <h1>Quality Control Test & Final</h1>
+    <nav>
+        <a href="#dashboards">Dashboards</a>
+        <a href="#work-instructions">Work Instructions</a>
+        <a href="#operations">Operations</a>
+        <a href="#checksheet">Checksheet</a>
+        <a href="#master-data">Master Data</a>
+    </nav>
 </header>
 
-<div class="container">
+<div class="container" id="dashboards">
     <h2>Dashboards</h2>
     <ul>
-        <li><a href="file:///C:/path/to/your/file1.html">1. Blacklight & Performance Test Dashboard</a></li>
-        <li><a href="file:///C:/path/to/your/file2.html">2. Visual, Accessories & Final Inspection Dashboard</a></li>
-        <li><a href="file:///C:/path/to/your/file3.html">3. Oil Contamination Dashboard</a></li>
-        <li><a href="file:///C:/path/to/your/file4.html">4. Voltage, Coolant & Oil Contamination Statistical data</a></li>
-        <li><a href="file:///C:/path/to/your/file5.html">5. Visual Painting Data 1</a></li>
-        <li><a href="file:///C:/path/to/your/file6.html">6. Visual Painting Data 2</a></li>
-        <li><a href="file:///C:/path/to/your/file7.html">7. Visual Painting Data 3</a></li>
-        <li><a href="file:///C:/path/to/your/file8.html">8. Global E-Service (MME) Dashboard</a></li>
-        <li><a href="file:///C:/path/to/your/file9.html">9. Export Order Form Control</a></li>
-        <li><a href="file:///C:/path/to/your/file10.html">10. Remanufacturing Dashboard</a></li>
-        <li><a href="file:///C:/path/to/your/file11.html">11. SLF Monitoring Progress</a></li>
+        <li><a href="#">1. Blacklight & Performance Test Dashboard</a></li>
+        <li><a href="#">2. Visual, Accessories & Final Inspection Dashboard</a></li>
+        <li><a href="#">3. Oil Contamination Dashboard</a></li>
+        <li><a href="#">4. Voltage, Coolant & Oil Contamination Statistical Data</a></li>
+        <li><a href="#">5. Visual Painting Data 1</a></li>
+        <li><a href="#">6. Visual Painting Data 2</a></li>
+        <li><a href="#">7. Visual Painting Data 3</a></li>
+        <li><a href="#">8. Global E-Service (MME) Dashboard</a></li>
+        <li><a href="#">9. Export Order Form Control</a></li>
+        <li><a href="#">10. Remanufacturing Dashboard</a></li>
+        <li><a href="#">11. SLF Monitoring Progress</a></li>
     </ul>
+</div>
 
+<div class="container" id="work-instructions">
     <h2>Work Instructions</h2>
     <ul>
-        <li><a href="file:///C:/path/to/your/file12.html">1. Aerial Angle Setting</a></li>
-        <li><a href="file:/// C:/path/to/your/file13.html">2. Engine Assembly Process</a></li>
-        <li><a href="file:///C:/path/to/your/file14.html">3. Quality Control Procedures</a></li>
-        <li><a href="file:///C:/path/to/your/file15.html">4. Safety Protocols</a></li>
-        <li><a href="file:///C:/path/to/your/file16.html">5. Maintenance Guidelines</a></li>
+        <li><a href="#">1. Aerial Angle Setting</a></li>
+        <li><a href="#">2. Pengisian Checksheet Stock-In</a></li>
+        <li><a href="#">3. Aktivasi GPS</a></li>
+        <li><a href="#">4. Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</a></li>
+        <li><a href="#">5. Pemeriksaan kebocoran oli hydraulic</a></li>
+        <li><a href="#">6. Pengecekan Kontaminasi oil hydraulic</a></li>
+        <li><a href="#">7. Pemeriksaan kualitas painting</a></li>
+        <li><a href="#">8. Mechanical check</a></li>
+        <li><a href="#">9. Performance Test</a></li>
+        <li><a href="#">10. Final Inspection</a></li>
+    </ul>
+</div>
+
+<div class="container" id="operations">
+    <h2>Operations</h2>
+    <ul>
+        <li><a href="#">1. QRQC data creation</a></li>
+        <li><a href="#">2. Pengecekan Tools Unit</a></li>
+        <li><a href="#">3. Revisi Model unit pada GeS</a></li>
+        <li><a href="#">4. Reducing Valve Setting</a></li>
+        <li><a href="#">5. Revisi GPS type pada GeS</a></li>
+        <li><a href="#">6. Operational Power Bi Final Inspection Area</a></li>
+        <li><a href="#">7. Backlash Inspection</a></li>
+        <li><a href="#">8. Pengecekan toolbox dan pengisian checksheet</a></li>
+        <li><a href="#">9. Revisi Depot pada GeS</a></li>
+        <li><a href="#">10. Menampilkan error code pada unit 10 T</a></li>
+        <li><a href="#">11. Flow Apply, Approve, & Completion Pada Checksheet Stock-In dan Export Order</a></li>
+        <li><a href="#">12. Penggunaan dan perawatan refraktometer</a></li>
+        <li><a href="#">13. Area parkir khusus untuk unit ZX10T</a></li>
+        <li><a href="#">14. Jarak aman melihat monitor display progress</a></li>
+        <li><a href="#">15. Prosedur pemakaian iPad Surface yang aman dalam proses pemeriksaan unit excavator</a></li>
+        <li><a href="#">16. Pembuatan WI untuk proses Engine Learning dengan bantuan Live Camera</a></li>
+        <li><a href="#">17. Urutan proses inspeksi visual painting pada unit</a></li>
+        <li><a href="#">18. Penggunaan pemberat pada test beban unit</a></li>
+        <li><a href="#">19. Cara pengecekan hammer test</a></li>
+        <li><a href="#">20. Langkah membuka dan menutup engine guard secara aman</a></li>
+        <li><a href="#">21. Langkah untuk naik turun unit secara aman</a></li>
+        <li><a href="#">22. Langkah melakukan engine learning yang aman</a></li>
+    </ul>
+</div>
+
+<div class="container" id="checksheet">
+    <h2>Checksheet</h2>
+    <ul>
+        <li><a href="#">1. Final Inspection Checksheet</a></li>
+        <li><a href="#">2. Visual Painting Checksheet</a></li>
+        <li><a href="#">3. Accessories & Function Checksheet</a></li>
+        <li><a href="#">4. Performance Test</a></li>
+        <li><a href="#">5. Blacklight</a></li>
+        <li><a href="#">6. Daily Painting Inspection</a></li>
+        <li><a href="#">7. Weekly Painting Inspection</a></li>
+        <li><a href="#">8. Product Audit</a></li>
+        <li><a href="#">9. NCR Local</a></li>
+        <li><a href="#">10. Super Long Front HCMA</a></li>
+        <li><a href="#">11. Oil Contamination</a></li>
+        <li><a href="#">12. Quality Patrol</a></li>
+        <li><a href="#">13. Stock-In Checksheet</a></li>
+    </ul>
+</div>
+
+<div class="container" id="master-data">
+    <h2>Master Data</h2>
+    <ul>
+        <li><a href="#">1. Custom master for performance test</a></li>
+        <li><a href="#">2. Custom master for Final Inspection</a></li>
+        <li><a href="#">3. Custom master unit model</a></li>
+        <li><a href="#">4. CTM data control excel</a></li>
+        <li><a href="#">5. CTM data checksheet stock in</a ```html
+        <li><a href="#">6. Certification list Performance test & blacklight</a></li>
+        <li><a href="#">7. Certification list Visual-Stock in Inspection</a></li>
+        <li><a href="#">8. Specification list performance test</a></li>
     </ul>
 </div>
 
 <footer>
     <p>&copy; 2023 Quality Control Department. All rights reserved.</p>
+    <p>Job Control Website</p>
 </footer>
 
 </body>
-</html> 
+</html>
