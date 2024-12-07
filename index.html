@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hitachi Job Control Panel</title>
+  <title>QUALITY CONTROL TEST & FINAL Job Control Panel</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -102,30 +102,15 @@
     <!-- Power BI Section -->
     <div class="category" id="powerbi">
       <h2>Power BI</h2>
-      <div class="item" onclick="showFile('\\hcmi10007.kenki.global.hitachi.net\F-iReporter\Section\QA For Excavator & Reman\03. Power BI\QC Test & Final\Trial\QC PT & BL - Progress & Performance Monitoring.pbix')">1. Blacklight & Performance Test Dashboard</div>
-      <div class="item" onclick="showFile('files/powerbi2.pbix')">2. Visual, Accessories & Final Inspection Dashboard</div>
-      <div class="item" onclick="showFile('files/powerbi3.pbix')">3. Oil Contamination Dashboard</div>
+      <div class="item" onclick="openLocalFile('\\hcmi10007.kenki.global.hitachi.net\F-iReporter\Section\QA For Excavator & Reman\03. Power BI\QC Test & Final\Trial\QC PT & BL - Progress & Performance Monitoring.pbix')">1. Blacklight & Performance Test Dashboard</div>
+      <div class="item" onclick="openLocalFile('C:/YourPath/powerbi2.pbix')">2. Visual, Accessories & Final Inspection Dashboard</div>
     </div>
 
     <!-- Work Instruction Section -->
     <div class="category" id="work-instruction">
       <h2>Work Instruction</h2>
-      <div class="item" onclick="showFile('files/workinstruction1.xlsx')">1. Aerial Angle Setting</div>
-      <div class="item" onclick="showFile('files/workinstruction2.xlsx')">2. Pengisian Checksheet Stock-In</div>
+      <div class="item" onclick="openLocalFile('C:/YourPath/workinstruction1.xlsx')">1. Aerial Angle Setting</div>
     </div>
-
-    <!-- Checksheet Section -->
-    <div class="category" id="checksheet">
-      <h2>Checksheet</h2>
-      <div class="item" onclick="showFile('files/checksheet1.xlsx')">1. Final Inspection Checksheet</div>
-      <div class="item" onclick="showFile('files/checksheet2.xlsx')">2. Visual Painting Checksheet</div>
-    </div>
-  </div>
-
-  <!-- Viewer Section -->
-  <div id="viewer">
-    <h2>File Viewer</h2>
-    <iframe id="fileFrame" src=""></iframe>
   </div>
 
   <footer>
@@ -133,19 +118,9 @@
   </footer>
 
   <script>
-    function showFile(filePath) {
-      const viewer = document.getElementById('viewer');
-      const fileFrame = document.getElementById('fileFrame');
-      viewer.style.display = 'block';
-
-      // Check file type and update iframe source
-      if (filePath.endsWith('.pbix')) {
-        fileFrame.src = `https://app.powerbi.com/view?r=${filePath}`;
-      } else if (filePath.endsWith('.xlsx')) {
-        fileFrame.src = `https://view.officeapps.live.com/op/embed.aspx?src=${filePath}`;
-      } else {
-        fileFrame.src = filePath;
-      }
+    function openLocalFile(filePath) {
+      alert(`Opening file: ${filePath}`);
+      window.open(filePath, '_blank');
     }
   </script>
 </body>
