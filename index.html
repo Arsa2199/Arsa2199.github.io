@@ -1,229 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hitachi Construction Machinery QA Dashboard</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-    }
-
-    header {
-      background-color: #333;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    header .logo-container {
-      display: flex;
-      align-items: center;
-    }
-
-    header img {
-      height: 50px;
-      margin-right: 10px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.8em;
-      white-space: nowrap;
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-size: 1em;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #ff8c00;
-    }
-
-    .content {
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section {
-      margin-bottom: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      background: #fff;
-    }
-
-    .section h2 {
-      margin: 0;
-      padding: 15px;
-      background: #ff8c00;
-      color: white;
-      font-size: 1.2em;
-      border-radius: 8px 8px 0 0;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .section h2:hover {
-      background: #ff7000;
-    }
-
-    .items {
-      display: none;
-      padding: 10px 20px;
-    }
-
-    .item {
-      padding: 8px 0;
-      font-size: 1em;
-      cursor: pointer;
-      border-bottom: 1px solid #eee;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .item:hover {
-      background: #ffe3c4;
-      color: #ff4500;
-    }
-
-    .item a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      font-size: 0.9em;
-    }
-
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.4em;
-      }
-
-      nav {
-        display: none;
-      }
-
-      header {
-        justify-content: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Control Test & Final</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        h2 {
+            margin: 20px 0;
+            font-size: 1.5em;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo-container">
-      <img src="path/to/hitachi-logo.png" alt="Hitachi Logo">
-      <h1>Hitachi QA Dashboard</h1>
-    </div>
-    <nav>
-      <a href="#sections">Home</a>
-      <a href="#Power BI">Power BI</a>
-      <a href="#Work Instruction">Work Instructions</a>
-      <a href="#Contact">Contact</a>
-    </nav>
-  </header>
 
-  <div class="content">
-    <!-- Dynamically Adding All Sections -->
-    <div id="sections"></div>
-  </div>
+<header>
+    <h1>Quality Control Test & Final</h1>
+</header>
 
-  <footer>
-    &copy; 2024 Hitachi Construction Machinery QA Dashboard | All Rights Reserved.
-  </footer>
+<div class="container">
+    <h2>Dashboards</h2>
+    <ul>
+        <li><a href="file:///C:/path/to/your/file1.html">1. Blacklight & Performance Test Dashboard</a></li>
+        <li><a href="file:///C:/path/to/your/file2.html">2. Visual, Accessories & Final Inspection Dashboard</a></li>
+        <li><a href="file:///C:/path/to/your/file3.html">3. Oil Contamination Dashboard</a></li>
+        <li><a href="file:///C:/path/to/your/file4.html">4. Voltage, Coolant & Oil Contamination Statistical data</a></li>
+        <li><a href="file:///C:/path/to/your/file5.html">5. Visual Painting Data 1</a></li>
+        <li><a href="file:///C:/path/to/your/file6.html">6. Visual Painting Data 2</a></li>
+        <li><a href="file:///C:/path/to/your/file7.html">7. Visual Painting Data 3</a></li>
+        <li><a href="file:///C:/path/to/your/file8.html">8. Global E-Service (MME) Dashboard</a></li>
+        <li><a href="file:///C:/path/to/your/file9.html">9. Export Order Form Control</a></li>
+        <li><a href="file:///C:/path/to/your/file10.html">10. Remanufacturing Dashboard</a></li>
+        <li><a href="file:///C:/path/to/your/file11.html">11. SLF Monitoring Progress</a></li>
+    </ul>
 
-  <script>
-    const data = {
-      "Power BI": [
-        "Blacklight & Performance Test Dashboard",
-        "Visual, Accessories & Final Inspection Dashboard",
-        "Oil Contamination Dashboard",
-        "Voltage, Coolant & Oil Contamination Statistical data",
-        "Visual Painting Data 1",
-        "Visual Painting Data 2",
-        "Visual Painting Data 3",
-        "Global E-Service (MME) Dashboard",
-        "Export Order Form Control",
-        "Remanufacturing Dashboard",
-        "SLF Monitoring Progress"
-      ],
-      "Work Instruction": [
-        "Aerial Angle Setting",
-        "Pengisian Checksheet Stock-In",
-        "Aktivasi GPS",
-        "Petunjuk Kerja Setting Tampilan Aplikasi M-Pro",
-        "Pemeriksaan kebocoran oli hydraulic",
-        "Pengecekan Kontaminasi oil hydraulic",
-        "Pemeriksaan kualitas painting",
-        "Mechanical check",
-        "Performance Test",
-        "Final Inspection"
-      ],
-      // Add other categories as needed
-    };
-
-    const filePaths = {
-      "Blacklight & Performance Test Dashboard": "\\hcmi10007.kenki.global.hitachi.net\\F-iReporter\Section\QA For Excavator & Reman\03. Power BI\QC Test & Final\Trial\QC PT & BL - Progress & Performance Monitoring.pbix",
-      "Aerial Angle Setting": "R:\public\2. FIle Support GMD\13. WI New Document Format\WI dan OPS\WI\WI-XQC-017 Aerial Angle Camera Setting.pdf"
-    };
-
-    const sectionsDiv = document.getElementById('sections');
-
-    for (const sectionName in data) {
-      const section = document.createElement('div');
-      section.className = 'section';
-
-      const header = document.createElement('h2');
-      header.textContent = sectionName;
-      header.onclick = () => toggleSection(header);
-
-      const itemsDiv = document.createElement('div');
-      itemsDiv.className = 'items';
-
-      data[sectionName].forEach((item, index) => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'item';
-        itemDiv.innerHTML = `<a href="${filePaths[item] || '#'}" target="_blank">${index + 1}. ${item}</a>`;
-        itemsDiv.appendChild(itemDiv);
-      });
-
-      section.appendChild(header);
-      section.appendChild(itemsDiv);
-      sectionsDiv.appendChild(section);
-    }
-
-    function toggleSection(header) {
-      const items = header.nextElementSibling;
-      items.style.display = items.style.display === 'none' || items.style.display === '' ? 'block' : 'none';
-    }
-  </script>
-</body>
-</html>
+    <h2>Work Instructions</h2>
+    <ul>
+        <li><a href="file:///C:/path/to/your/file12.html">1. Aerial Angle Setting</a></li>
+        <li><a href="file:///C:/path/to/your/file13.html">2. Pengisian Checksheet Stock-In</a></li>
+        <li><a href="file:///C:/path/to/your/file14.html">3. Aktivasi GPS</a></li>
+        <li><a href="file:///C:/path/to/your/file15.html">4. Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</a></li>
+        <li><a href="file:///C:/path/to/your/file16.html">5. Pemeriksaan kebocoran oli hydraulic</ ⬤
