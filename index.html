@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Control Test & Final Job Control</title>
+  <title>Hitachi Construction Machinery QA Dashboard</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -11,30 +11,58 @@
       background-color: #f9f9f9;
       color: #333;
     }
+
     header {
-      background-color: #ff8c00;
+      background-color: #333;
       color: white;
-      padding: 15px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 10px 20px;
       position: sticky;
       top: 0;
       z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
+
+    header .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
     header img {
       height: 50px;
+      margin-right: 10px;
     }
+
     header h1 {
       margin: 0;
-      font-size: 1.5em;
-      text-shadow: 1px 1px 2px black;
+      font-size: 1.8em;
+      white-space: nowrap;
     }
+
+    nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-size: 1em;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff8c00;
+    }
+
     .content {
       padding: 20px;
       max-width: 1200px;
       margin: auto;
     }
+
     .section {
       margin-bottom: 20px;
       border: 1px solid #ddd;
@@ -42,6 +70,7 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       background: #fff;
     }
+
     .section h2 {
       margin: 0;
       padding: 15px;
@@ -54,17 +83,16 @@
       justify-content: space-between;
       align-items: center;
     }
+
     .section h2:hover {
       background: #ff7000;
     }
-    .section h2 span {
-      font-size: 0.9em;
-      font-weight: normal;
-    }
+
     .items {
       display: none;
       padding: 10px 20px;
     }
+
     .item {
       padding: 8px 0;
       font-size: 1em;
@@ -72,16 +100,19 @@
       border-bottom: 1px solid #eee;
       transition: background 0.3s, color 0.3s;
     }
+
     .item:hover {
       background: #ffe3c4;
       color: #ff4500;
     }
+
     .item a {
       text-decoration: none;
       color: inherit;
     }
+
     footer {
-      background-color: #ff8c00;
+      background-color: #333;
       color: white;
       text-align: center;
       padding: 10px;
@@ -90,12 +121,34 @@
       width: 100%;
       font-size: 0.9em;
     }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.4em;
+      }
+
+      nav {
+        display: none;
+      }
+
+      header {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="path/to/hitachi-logo.png" alt="Hitachi Logo">
-    <h1>Quality Control Test & Final Job Control</h1>
+    <div class="logo-container">
+      <img src="path/to/hitachi-logo.png" alt="Hitachi Logo">
+      <h1>Hitachi QA Dashboard</h1>
+    </div>
+    <nav>
+      <a href="#sections">Home</a>
+      <a href="#Power BI">Power BI</a>
+      <a href="#Work Instruction">Work Instructions</a>
+      <a href="#Contact">Contact</a>
+    </nav>
   </header>
 
   <div class="content">
@@ -104,7 +157,7 @@
   </div>
 
   <footer>
-    &copy; 2024 Hitachi Quality Control Dashboard
+    &copy; 2024 Hitachi Construction Machinery QA Dashboard | All Rights Reserved.
   </footer>
 
   <script>
@@ -134,59 +187,11 @@
         "Performance Test",
         "Final Inspection"
       ],
-      "OPS": [
-        "QRQC data creation",
-        "Pengecekan Tools Unit",
-        "Revisi Model unit pada GeS",
-        "Reducing Valve Setting",
-        "Revisi GPS type pada GeS",
-        "Operational Power Bi Final Inspection Area",
-        "Backlash Inspection",
-        "pengecekan toolbox dan pengisian checksheet",
-        "Revisi Depot pada GeS",
-        "Menampilkan error code pada unit 10 T",
-        "Flow Apply, Approve, & Completion Pada Checksheet Stock-In dan Export Order",
-        "Penggunaan dan perawatan refraktometer",
-        "Area parkir khusus untuk unit ZX10T",
-        "Jarak aman melihat monitor display progress",
-        "Prosedur pemakaian iPad Surface yang aman dalam proses pemeriksaan unit excavator",
-        "Pembuatan WI untuk proses Engine Learning dengan bantuan Live Camera",
-        "Urutan proses inspeksi visual painting pada unit",
-        "Penggunaan pemberat pada test beban unit",
-        "Cara pengecekan hammer test",
-        "Langkah membuka dan menutup engine guard secara aman",
-        "Langkah untuk naik turun unit secara aman",
-        "Langkah melakukan engine learning yang aman"
-      ],
-      "Checksheet": [
-        "Final Inspection Checksheet",
-        "Visual Painting Checksheet",
-        "Accessories & Function Checksheet",
-        "Performance Test",
-        "Blacklight",
-        "Daily Painting Inspection",
-        "Weekly Painting Inspection",
-        "Product Audit",
-        "NCR Local",
-        "Super Long Front HCMA",
-        "Oil Contamination",
-        "Quality Patrol",
-        "Stock-In checksheet"
-      ],
-      "Master Data": [
-        "Custom master for performance test",
-        "Custom master for Final Inspection",
-        "Custom master unit model",
-        "CTM data control excel",
-        "CTM data checksheet stock in",
-        "Certification list Performance test & blacklight",
-        "Certification list Visual-Stock in Inspection",
-        "Spesification list performance test"
-      ]
+      // Add other categories as needed
     };
 
     const filePaths = {
-      "Blacklight & Performance Test Dashboard": "\\hcmi10007.kenki.global.hitachi.net\F-iReporter\Section\QA For Excavator & Reman\03. Power BI\QC Test & Final\Trial\QC PT & BL - Progress & Performance Monitoring.pbix",
+      "Blacklight & Performance Test Dashboard": "\\hcmi10007.kenki.global.hitachi.net\\F-iReporter\\Section\\QA For Excavator & Reman\\03. Power BI\\QC Test & Final\\Trial\\QC PT & BL - Progress & Performance Monitoring.pbix",
       // Add other file paths here
     };
 
