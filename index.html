@@ -5,172 +5,324 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality Control Test & Final Section</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+    /* Basic Reset */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #2f2f2f;
+      color: #fff;
     }
 
     header {
-      background-color: #333;
-      color: white;
+      background-color: #1a1a1a;
+      color: #fff;
       text-align: center;
       padding: 20px;
     }
 
-    h1, h2 {
-      margin: 0;
+    header h1 {
+      font-size: 2.5em;
+      color: #f39c12; /* Reliable Orange */
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      color: #f39c12; /* Reliable Orange */
+    }
+
+    .content-wrapper {
+      padding: 20px;
     }
 
     .job-items {
-      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .job-item {
-      background-color: white;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      padding: 10px;
+    details {
+      background-color: #333;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
-    button.toggle-btn {
-      width: 100%;
-      text-align: left;
-      background-color: #f0f0f0;
-      border: none;
-      padding: 10px;
-      font-size: 16px;
+    details[open] {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    summary {
+      font-size: 1.3em;
+      font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
+      padding: 10px;
+      background-color: #444;
+      color: #f39c12; /* Reliable Orange */
+      border: none;
+      border-radius: 5px;
     }
 
-    button.toggle-btn:hover {
-      background-color: #ddd;
+    summary:hover {
+      background-color: #555;
     }
 
     .content {
-      display: none;
-      padding: 10px;
-      background-color: #fafafa;
+      margin-top: 10px;
+      font-size: 1.1em;
+      color: #ccc;
+    }
+
+    .file-content {
+      margin-top: 10px;
+      font-style: italic;
+      color: #aaa;
+    }
+
+    @media (min-width: 768px) {
+      .job-items {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    }
+
+    .section-header {
+      color: #f39c12;
+      font-size: 1.6em;
+      margin-top: 20px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Quality Control Test & Final Section</h1>
-    <h2>Job Control Item</h2>
+    <div class="container">
+      <h1>Quality Control Test & Final Section</h1>
+      <p>Professional Job Control Items</p>
+    </div>
   </header>
 
-  <div class="job-items">
-    <!-- Each Job Item -->
-    <div class="job-item" id="item-1">
-      <button class="toggle-btn">Blacklight & Performance Test Dashboard</button>
-      <div class="content">
-        <h3>Blacklight & Performance Test Dashboard</h3>
-        <p>This section displays the Blacklight & Performance Test Dashboard data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-2">
-      <button class="toggle-btn">Visual, Accessories & Final Inspection Dashboard</button>
-      <div class="content">
-        <h3>Visual, Accessories & Final Inspection Dashboard</h3>
-        <p>This section displays the Visual, Accessories & Final Inspection Dashboard data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-3">
-      <button class="toggle-btn">Oil Contamination Dashboard</button>
-      <div class="content">
-        <h3>Oil Contamination Dashboard</h3>
-        <p>This section displays the Oil Contamination Dashboard data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-4">
-      <button class="toggle-btn">Voltage, Coolant & Oil Contamination Statistical Data</button>
-      <div class="content">
-        <h3>Voltage, Coolant & Oil Contamination Statistical Data</h3>
-        <p>This section displays Voltage, Coolant & Oil Contamination Statistical data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-5">
-      <button class="toggle-btn">Visual Painting Data 1</button>
-      <div class="content">
-        <h3>Visual Painting Data 1</h3>
-        <p>This section displays the Visual Painting Data 1.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-6">
-      <button class="toggle-btn">Visual Painting Data 2</button>
-      <div class="content">
-        <h3>Visual Painting Data 2</h3>
-        <p>This section displays the Visual Painting Data 2.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-7">
-      <button class="toggle-btn">Visual Painting Data 3</button>
-      <div class="content">
-        <h3>Visual Painting Data 3</h3>
-        <p>This section displays the Visual Painting Data 3.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-8">
-      <button class="toggle-btn">Global E-Service (MME) Dashboard</button>
-      <div class="content">
-        <h3>Global E-Service (MME) Dashboard</h3>
-        <p>This section displays the Global E-Service (MME) Dashboard data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-9">
-      <button class="toggle-btn">Export Order Form Control</button>
-      <div class="content">
-        <h3>Export Order Form Control</h3>
-        <p>This section displays the Export Order Form Control data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-10">
-      <button class="toggle-btn">Remanufacturing Dashboard</button>
-      <div class="content">
-        <h3>Remanufacturing Dashboard</h3>
-        <p>This section displays the Remanufacturing Dashboard data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-    <div class="job-item" id="item-11">
-      <button class="toggle-btn">SLF Monitoring Progress</button>
-      <div class="content">
-        <h3>SLF Monitoring Progress</h3>
-        <p>This section displays the SLF Monitoring Progress data.</p>
-        <!-- Add your charts or visualizations here -->
-      </div>
-    </div>
-  </div>
+  <section class="content-wrapper">
+    <div class="job-items">
+      
+      <!-- POWER BI Section -->
+      <div class="section-header">POWER BI</div>
+      <details>
+        <summary>Blacklight & Performance Test Dashboard</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const buttons = document.querySelectorAll('.toggle-btn');
+      <details>
+        <summary>Visual, Accessories & Final Inspection Dashboard</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
 
-      buttons.forEach(button => {
-        button.addEventListener('click', function() {
-          const content = this.nextElementSibling;
+      <details>
+        <summary>Oil Contamination Dashboard</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
 
-          // Toggle the content display with smooth transition
-          if (content.style.display === "none" || content.style.display === "") {
-            content.style.display = "block";
-          } else {
-            content.style.display = "none";
-          }
-        });
-      });
-    });
-  </script>
+      <details>
+        <summary>Voltage, Coolant & Oil Contamination Statistical Data</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Visual Painting Data 1</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Visual Painting Data 2</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Visual Painting Data 3</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Global E-Service (MME) Dashboard</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Export Order Form Control</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Remanufacturing Dashboard</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>SLF Monitoring Progress</summary>
+        <div class="content">
+          <p>This section will load the local file content or visualization here.</p>
+        </div>
+      </details>
+
+      <!-- WORK INSTRUCTION Section -->
+      <div class="section-header">WORK INSTRUCTION</div>
+      <details>
+        <summary>Aerial Angle Setting</summary>
+        <div class="content">
+          <p>This section will load the work instruction here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Pengisian Checksheet Stock-In</summary>
+        <div class="content">
+          <p>This section will load the work instruction here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Aktivasi GPS</summary>
+        <div class="content">
+          <p>This section will load the work instruction here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</summary>
+        <div class="content">
+          <p>This section will load the work instruction here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Pemeriksaan Kebocoran Oli Hydraulic</summary>
+        <div class="content">
+          <p>This section will load the work instruction here.</p>
+        </div>
+      </details>
+
+      <!-- OPS Section -->
+      <div class="section-header">OPS</div>
+      <details>
+        <summary>QRQC Data Creation</summary>
+        <div class="content">
+          <p>This section will load the OPS file or data here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Pengecekan Tools Unit</summary>
+        <div class="content">
+          <p>This section will load the OPS file or data here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Revisi Model Unit pada GeS</summary>
+        <div class="content">
+          <p>This section will load the OPS file or data here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Reducing Valve Setting</summary>
+        <div class="content">
+          <p>This section will load the OPS file or data here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Revisi GPS type pada GeS</summary>
+        <div class="content">
+          <p>This section will load the OPS file or data here.</p>
+        </div>
+      </details>
+
+      <!-- CHECKSHEET Section -->
+      <div class="section-header">CHECKSHEET</div>
+      <details>
+        <summary>Final Inspection Checksheet</summary>
+        <div class="content">
+          <p>This section will load the checksheet here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Visual Painting Checksheet</summary>
+        <div class="content">
+          <p>This section will load the checksheet here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Accessories & Function Checksheet</summary>
+        <div class="content">
+          <p>This section will load the checksheet here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Performance Test Checksheet</summary>
+        <div class="content">
+          <p>This section will load the checksheet here.</p>
+        </div>
+      </details>
+
+      <!-- Master Data Section -->
+      <div class="section-header">Master Data</div>
+      <details>
+        <summary>Custom Master for Performance Test</summary>
+        <div class="content">
+          <p>This section will load the master data here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Custom Master for Final Inspection</summary>
+        <div class="content">
+          <p>This section will load the master data here.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>Custom Master Unit Model</summary>
+        <div class="content">
+          <p>This section will load the master data here.</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
 </body>
 </html>
