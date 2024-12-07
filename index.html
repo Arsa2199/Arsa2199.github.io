@@ -60,6 +60,7 @@
         li {
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            cursor: pointer;
         }
         li:last-child {
             border-bottom: none;
@@ -67,10 +68,17 @@
         li a {
             text-decoration: none;
             color: #333;
-            cursor: pointer;
         }
         li a:hover {
             color: #ff7e00;
+        }
+        .file-display {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
         footer {
             background: #000;
@@ -95,64 +103,67 @@
     </nav>
 </header>
 
+<!-- Dashboards Section -->
 <div class="container" id="dashboards">
     <h2>Dashboards</h2>
     <ul>
-        <li><a onclick="openFile()">1. Blacklight & Performance Test Dashboard</a></li>
-        <li><a onclick="openFile()">2. Visual, Accessories & Final Inspection Dashboard</a></li>
-        <li><a onclick="openFile()">3. Oil Contamination Dashboard</a></li>
-        <li><a onclick="openFile()">4. Voltage, Coolant & Oil Contamination Statistical Data</a></li>
-        <li><a onclick="openFile()">5. Visual Painting Data 1</a></li>
-        <li><a onclick="openFile()">6. Visual Painting Data 2</a></li>
-        <li><a onclick="openFile()">7. Visual Painting Data 3</a></li>
-        <li><a onclick="openFile()">8. Global E-Service (MME) Dashboard</a></li>
-        <li><a onclick="openFile()">9. Export Order Form Control</a></li>
-        <li><a onclick="openFile()">10. Remanufacturing Dashboard</a></li>
-        <li><a onclick="openFile()">11. SLF Monitoring Progress</a></li>
+        <li onclick="handleFileDisplay(this)">1. Blacklight & Performance Test Dashboard<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">2. Visual, Accessories & Final Inspection Dashboard<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">3. Oil Contamination Dashboard<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">4. Voltage, Coolant & Oil Statistical Data<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">5. Visual Painting Data 1<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">6. Visual Painting Data 2<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">7. Visual Painting Data 3<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">8. Global E-Service (MME) Dashboard<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">9. Export Order Form Control<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">10. Remanufacturing Dashboard<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">11. SLF Monitoring Progress<div class="file-display"></div></li>
     </ul>
 </div>
 
+<!-- Work Instructions Section -->
 <div class="container" id="work-instructions">
     <h2>Work Instructions</h2>
     <ul>
-        <li><a onclick="openFile()">1. Aerial Angle Setting</a></li>
-        <li><a onclick="openFile()">2. Pengisian Checksheet Stock-In</a></li>
-        <li><a onclick="openFile()">3. Aktivasi GPS</a></li>
-        <li><a onclick="openFile()">4. Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</a></li>
-        <li><a onclick="openFile()">5. Pemeriksaan kebocoran oli hydraulic</a></li>
-        <li><a onclick="openFile()">6. Pengecekan Kontaminasi oil hydraulic</a></li>
-        <li><a onclick="openFile()">7. Pemeriksaan kualitas painting</a></li>
-        <li><a onclick="openFile()">8. Mechanical check</a></li>
-        <li><a onclick="openFile()">9. Performance Test</a></li>
-        <li><a onclick="openFile()">10. Final Inspection</a></li>
+        <li onclick="handleFileDisplay(this)">1. Aerial Angle Setting<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">2. Pengisian Checksheet Stock-In<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">3. Aktivasi GPS<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">4. Petunjuk Kerja Setting Tampilan M-Pro<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">5. Pemeriksaan Kebocoran Oli<div class="file-display"></div></li>
+        <!-- Add more points as needed -->
     </ul>
 </div>
 
+<!-- Operations Section -->
 <div class="container" id="operations">
     <h2>Operations</h2>
     <ul>
-        <li><a onclick="openFile()">1. QRQC data creation</a></li>
-        <li><a onclick="openFile()">2. Pengecekan Tools Unit</a></li>
-        <li><a onclick="openFile()">3. Revisi Model unit pada GeS</a></li>
-        <!-- Repeat for remaining items -->
+        <li onclick="handleFileDisplay(this)">1. QRQC Data Creation<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">2. Pengecekan Tools Unit<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">3. Revisi Model Unit<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">4. Reducing Valve Setting<div class="file-display"></div></li>
+        <!-- Add more points as needed -->
     </ul>
 </div>
 
+<!-- Checksheet Section -->
 <div class="container" id="checksheet">
     <h2>Checksheet</h2>
     <ul>
-        <li><a onclick="openFile()">1. Final Inspection Checksheet</a></li>
-        <li><a onclick="openFile()">2. Visual Painting Checksheet</a></li>
-        <!-- Repeat for remaining items -->
+        <li onclick="handleFileDisplay(this)">1. Final Inspection Checksheet<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">2. Visual Painting Checksheet<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">3. Accessories & Function Checksheet<div class="file-display"></div></li>
+        <!-- Add more points as needed -->
     </ul>
 </div>
 
+<!-- Master Data Section -->
 <div class="container" id="master-data">
     <h2>Master Data</h2>
     <ul>
-        <li><a onclick="openFile()">1. Custom master for performance test</a></li>
-        <li><a onclick="openFile()">2. Custom master for Final Inspection</a></li>
-        <!-- Repeat for remaining items -->
+        <li onclick="handleFileDisplay(this)">1. Custom Master for Performance Test<div class="file-display"></div></li>
+        <li onclick="handleFileDisplay(this)">2. Custom Master for Final Inspection<div class="file-display"></div></li>
+        <!-- Add more points as needed -->
     </ul>
 </div>
 
@@ -161,16 +172,20 @@
 </footer>
 
 <script>
-    function openFile() {
+    function handleFileDisplay(item) {
         const input = document.createElement('input');
         input.type = 'file';
         input.accept = '*/*';
+
         input.onchange = (event) => {
             const file = event.target.files[0];
             if (file) {
-                alert(`File "${file.name}" selected!`);
+                const fileDisplay = item.querySelector('.file-display');
+                fileDisplay.textContent = `Selected File: ${file.name}`;
+                fileDisplay.style.display = 'block';
             }
         };
+
         input.click();
     }
 </script>
