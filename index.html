@@ -3,40 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Control Panel</title>
+  <title>Hitachi Job Control Panel</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #fff5e6;
+      background: #fdf3e1;
       color: #333;
     }
     header {
-      background: linear-gradient(45deg, #ff8c00, #ff4500);
+      background: #ff8c00;
       color: white;
       text-align: center;
       padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header img {
+      height: 50px;
+      margin-left: 10px;
     }
     header h1 {
       margin: 0;
-    }
-    nav {
-      text-align: center;
-      padding: 10px;
-      background: #ff8c00;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-      font-weight: bold;
+      flex-grow: 1;
     }
     .container {
       display: flex;
       flex-wrap: wrap;
-      padding: 20px;
+      margin: 20px;
     }
     .category {
       flex: 1;
@@ -59,22 +57,24 @@
       padding: 10px;
       cursor: pointer;
       border-bottom: 1px solid #ff8c00;
-      transition: background 0.3s;
+      transition: background 0.3s, color 0.3s;
     }
     .item:hover {
       background: #ffd1a3;
+      color: #ff4500;
     }
     .item:last-child {
       border-bottom: none;
     }
-    #details {
+    #viewer {
       padding: 20px;
       margin: 20px auto;
-      max-width: 600px;
-      background: #ffebcc;
+      max-width: 90%;
+      background: white;
       border-radius: 8px;
-      border: 1px solid #ff8c00;
+      border: 1px solid #ddd;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: none;
     }
     footer {
       background: #ff4500;
@@ -85,78 +85,67 @@
       bottom: 0;
       width: 100%;
     }
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Job Control Panel</h1>
-    <p>Click on a job to see the details</p>
+    <img src="hitachi-logo.png" alt="Hitachi Logo">
+    <h1>Hitachi Job Control Panel</h1>
   </header>
-  <nav>
-    <a href="#powerbi">Power BI</a>
-    <a href="#work-instruction">Work Instruction</a>
-    <a href="#ops">OPS</a>
-    <a href="#checksheet">Checksheet</a>
-    <a href="#master-data">Master Data</a>
-  </nav>
 
   <div class="container">
-    <!-- Power BI -->
+    <!-- Power BI Section -->
     <div class="category" id="powerbi">
       <h2>Power BI</h2>
-      <div class="item" onclick="showDetails('Blacklight & Performance Test Dashboard')">1. Blacklight & Performance Test Dashboard</div>
-      <div class="item" onclick="showDetails('Visual, Accessories & Final Inspection Dashboard')">2. Visual, Accessories & Final Inspection Dashboard</div>
-      <div class="item" onclick="showDetails('Oil Contamination Dashboard')">3. Oil Contamination Dashboard</div>
-      <!-- Add more items here -->
+      <div class="item" onclick="showFile('files/powerbi1.pbix')">1. Blacklight & Performance Test Dashboard</div>
+      <div class="item" onclick="showFile('files/powerbi2.pbix')">2. Visual, Accessories & Final Inspection Dashboard</div>
+      <div class="item" onclick="showFile('files/powerbi3.pbix')">3. Oil Contamination Dashboard</div>
     </div>
 
-    <!-- Work Instruction -->
+    <!-- Work Instruction Section -->
     <div class="category" id="work-instruction">
       <h2>Work Instruction</h2>
-      <div class="item" onclick="showDetails('Aerial Angle Setting')">1. Aerial Angle Setting</div>
-      <div class="item" onclick="showDetails('Pengisian Checksheet Stock-In')">2. Pengisian Checksheet Stock-In</div>
-      <!-- Add more items here -->
+      <div class="item" onclick="showFile('files/workinstruction1.xlsx')">1. Aerial Angle Setting</div>
+      <div class="item" onclick="showFile('files/workinstruction2.xlsx')">2. Pengisian Checksheet Stock-In</div>
     </div>
 
-    <!-- OPS -->
-    <div class="category" id="ops">
-      <h2>OPS</h2>
-      <div class="item" onclick="showDetails('QRQC data creation')">1. QRQC data creation</div>
-      <div class="item" onclick="showDetails('Pengecekan Tools Unit')">2. Pengecekan Tools Unit</div>
-      <!-- Add more items here -->
-    </div>
-
-    <!-- Checksheet -->
+    <!-- Checksheet Section -->
     <div class="category" id="checksheet">
       <h2>Checksheet</h2>
-      <div class="item" onclick="showDetails('Final Inspection Checksheet')">1. Final Inspection Checksheet</div>
-      <div class="item" onclick="showDetails('Visual Painting Checksheet')">2. Visual Painting Checksheet</div>
-      <!-- Add more items here -->
-    </div>
-
-    <!-- Master Data -->
-    <div class="category" id="master-data">
-      <h2>Master Data</h2>
-      <div class="item" onclick="showDetails('Custom master for performance test')">1. Custom master for performance test</div>
-      <div class="item" onclick="showDetails('Custom master for Final Inspection')">2. Custom master for Final Inspection</div>
-      <!-- Add more items here -->
+      <div class="item" onclick="showFile('files/checksheet1.xlsx')">1. Final Inspection Checksheet</div>
+      <div class="item" onclick="showFile('files/checksheet2.xlsx')">2. Visual Painting Checksheet</div>
     </div>
   </div>
 
-  <!-- Details Section -->
-  <div id="details">
-    <h2>Details</h2>
-    <p>Select a job to view details here.</p>
+  <!-- Viewer Section -->
+  <div id="viewer">
+    <h2>File Viewer</h2>
+    <iframe id="fileFrame" src=""></iframe>
   </div>
 
   <footer>
-    <p>&copy; 2024 Job Control Panel</p>
+    <p>&copy; 2024 Hitachi Job Control Panel</p>
   </footer>
 
   <script>
-    function showDetails(content) {
-      const details = document.getElementById('details');
-      details.innerHTML = `<h2>Details</h2><p>${content}</p>`;
+    function showFile(filePath) {
+      const viewer = document.getElementById('viewer');
+      const fileFrame = document.getElementById('fileFrame');
+      viewer.style.display = 'block';
+
+      // Check file type and update iframe source
+      if (filePath.endsWith('.pbix')) {
+        fileFrame.src = `https://app.powerbi.com/view?r=${filePath}`;
+      } else if (filePath.endsWith('.xlsx')) {
+        fileFrame.src = `https://view.officeapps.live.com/op/embed.aspx?src=${filePath}`;
+      } else {
+        fileFrame.src = filePath;
+      }
     }
   </script>
 </body>
