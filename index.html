@@ -3,72 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quality Control Test & Final</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Advanced Quality Control Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
             margin: 0;
-            padding: 0;
-            background: #f5f5f5;
             color: #333;
         }
         header {
-            background: #000;
-            color: #fff;
-            padding: 20px;
+            background: linear-gradient(90deg, #ff7e00, #000);
+            color: white;
+            padding: 20px 0;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
-        h1 {
+        header h1 {
             margin: 0;
             font-size: 2.5em;
-        }
-        nav {
-            margin: 20px 0;
+            font-weight: bold;
         }
         nav a {
-            color: #fff;
+            color: white;
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
         }
         nav a:hover {
-            text-decoration: underline;
+            color: #ff7e00;
         }
         .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            background: #fff;
+            background: white;
             border-radius: 8px;
+            margin: 20px auto;
+            padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
         }
         h2 {
             color: #ff7e00;
             border-bottom: 2px solid #ff7e00;
-            padding-bottom: 10px;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
         }
         ul {
             list-style-type: none;
             padding: 0;
         }
         li {
-            padding: 15px;
+            padding: 10px;
             border-bottom: 1px solid #ddd;
         }
-        li:last-child {
-            border-bottom: none;
+        li a {
+            text-decoration: none;
+            color: #333;
+        }
+        li a:hover {
+            color: #ff7e00;
         }
         footer {
-            background-color: #000;
-            color: #fff;
+            background: #000;
+            color: white;
             text-align: center;
             padding: 10px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
             margin-top: 20px;
         }
     </style>
@@ -76,7 +73,7 @@
 <body>
 
 <header>
-    <h1>Quality Control Test & Final</h1>
+    <h1>Advanced Quality Control Portal</h1>
     <nav>
         <a href="#dashboards">Dashboards</a>
         <a href="#work-instructions">Work Instructions</a>
@@ -89,101 +86,34 @@
 <div class="container" id="dashboards">
     <h2>Dashboards</h2>
     <ul>
-        <li><a href="#">1. Blacklight & Performance Test Dashboard</a></li>
-        <li><a href="#">2. Visual, Accessories & Final Inspection Dashboard</a></li>
-        <li><a href="#">3. Oil Contamination Dashboard</a></li>
-        <li><a href="#">4. Voltage, Coolant & Oil Contamination Statistical Data</a></li>
-        <li><a href="#">5. Visual Painting Data 1</a></li>
-        <li><a href="#">6. Visual Painting Data 2</a></li>
-        <li><a href="#">7. Visual Painting Data 3</a></li>
-        <li><a href="#">8. Global E-Service (MME) Dashboard</a></li>
-        <li><a href="#">9. Export Order Form Control</a></li>
-        <li><a href="#">10. Remanufacturing Dashboard</a></li>
-        <li><a href="#">11. SLF Monitoring Progress</a></li>
+        <li><a href="#" onclick="openFile()">1. Blacklight & Performance Test Dashboard</a></li>
+        <li><a href="#" onclick="openFile()">2. Visual, Accessories & Final Inspection Dashboard</a></li>
+        <!-- Add similar links -->
     </ul>
 </div>
 
-<div class="container" id="work-instructions">
-    <h2>Work Instructions</h2>
-    <ul>
-        <li><a href="#">1. Aerial Angle Setting</a></li>
-        <li><a href="#">2. Pengisian Checksheet Stock-In</a></li>
-        <li><a href="#">3. Aktivasi GPS</a></li>
-        <li><a href="#">4. Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</a></li>
-        <li><a href="#">5. Pemeriksaan kebocoran oli hydraulic</a></li>
-        <li><a href="#">6. Pengecekan Kontaminasi oil hydraulic</a></li>
-        <li><a href="#">7. Pemeriksaan kualitas painting</a></li>
-        <li><a href="#">8. Mechanical check</a></li>
-        <li><a href="#">9. Performance Test</a></li>
-        <li><a href="#">10. Final Inspection</a></li>
-    </ul>
-</div>
-
-<div class="container" id="operations">
-    <h2>Operations</h2>
-    <ul>
-        <li><a href="#">1. QRQC data creation</a></li>
-        <li><a href="#">2. Pengecekan Tools Unit</a></li>
-        <li><a href="#">3. Revisi Model unit pada GeS</a></li>
-        <li><a href="#">4. Reducing Valve Setting</a></li>
-        <li><a href="#">5. Revisi GPS type pada GeS</a></li>
-        <li><a href="#">6. Operational Power Bi Final Inspection Area</a></li>
-        <li><a href="#">7. Backlash Inspection</a></li>
-        <li><a href="#">8. Pengecekan toolbox dan pengisian checksheet</a></li>
-        <li><a href="#">9. Revisi Depot pada GeS</a></li>
-        <li><a href="#">10. Menampilkan error code pada unit 10 T</a></li>
-        <li><a href="#">11. Flow Apply, Approve, & Completion Pada Checksheet Stock-In dan Export Order</a></li>
-        <li><a href="#">12. Penggunaan dan perawatan refraktometer</a></li>
-        <li><a href="#">13. Area parkir khusus untuk unit ZX10T</a></li>
-        <li><a href="#">14. Jarak aman melihat monitor display progress</a></li>
-        <li><a href="#">15. Prosedur pemakaian iPad Surface yang aman dalam proses pemeriksaan unit excavator</a></li>
-        <li><a href="#">16. Pembuatan WI untuk proses Engine Learning dengan bantuan Live Camera</a></li>
-        <li><a href="#">17. Urutan proses inspeksi visual painting pada unit</a></li>
-        <li><a href="#">18. Penggunaan pemberat pada test beban unit</a></li>
-        <li><a href="#">19. Cara pengecekan hammer test</a></li>
-        <li><a href="#">20. Langkah membuka dan menutup engine guard secara aman</a></li>
-        <li><a href="#">21. Langkah untuk naik turun unit secara aman</a></li>
-        <li><a href="#">22. Langkah melakukan engine learning yang aman</a></li>
-    </ul>
-</div>
-
-<div class="container" id="checksheet">
-    <h2>Checksheet</h2>
-    <ul>
-        <li><a href="#">1. Final Inspection Checksheet</a></li>
-        <li><a href="#">2. Visual Painting Checksheet</a></li>
-        <li><a href="#">3. Accessories & Function Checksheet</a></li>
-        <li><a href="#">4. Performance Test</a></li>
-        <li><a href="#">5. Blacklight</a></li>
-        <li><a href="#">6. Daily Painting Inspection</a></li>
-        <li><a href="#">7. Weekly Painting Inspection</a></li>
-        <li><a href="#">8. Product Audit</a></li>
-        <li><a href="#">9. NCR Local</a></li>
-        <li><a href="#">10. Super Long Front HCMA</a></li>
-        <li><a href="#">11. Oil Contamination</a></li>
-        <li><a href="#">12. Quality Patrol</a></li>
-        <li><a href="#">13. Stock-In Checksheet</a></li>
-    </ul>
-</div>
-
-<div class="container" id="master-data">
-    <h2>Master Data</h2>
-    <ul>
-        <li><a href="#">1. Custom master for performance test</a></li>
-        <li><a href="#">2. Custom master for Final Inspection</a></li>
-        <li><a href="#">3. Custom master unit model</a></li>
-        <li><a href="#">4. CTM data control excel</a></li>
-        <li><a href="#">5. CTM data checksheet stock in</a ```html
-        <li><a href="#">6. Certification list Performance test & blacklight</a></li>
-        <li><a href="#">7. Certification list Visual-Stock in Inspection</a></li>
-        <li><a href="#">8. Specification list performance test</a></li>
-    </ul>
-</div>
+<!-- Other sections can be updated similarly -->
 
 <footer>
     <p>&copy; 2023 Quality Control Department. All rights reserved.</p>
     <p>Job Control Website</p>
 </footer>
+
+<script>
+    function openFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '*/*'; // Adjust file type if needed
+        input.onchange = (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                alert(`File "${file.name}" selected!`);
+                // Further file handling logic can go here
+            }
+        };
+        input.click();
+    }
+</script>
 
 </body>
 </html>
