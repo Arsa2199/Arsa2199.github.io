@@ -5,19 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality Control Test & Final Section</title>
   <style>
-    /* Basic Reset */
+    /* Reset styles */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    
+
     body {
       font-family: 'Arial', sans-serif;
       background-color: #2f2f2f;
       color: #fff;
     }
 
+    /* Header Styles */
     header {
       background-color: #1a1a1a;
       color: #fff;
@@ -27,17 +28,61 @@
 
     header h1 {
       font-size: 2.5em;
-      color: #f39c12; /* Reliable Orange */
+      color: #f39c12;
     }
 
     header p {
       font-size: 1.2em;
       margin-top: 10px;
-      color: #f39c12; /* Reliable Orange */
+      color: #f39c12;
     }
 
+    /* Sidebar Menu */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background-color: #333;
+      padding-top: 20px;
+      padding-left: 20px;
+      color: #fff;
+      font-size: 1.1em;
+      z-index: 1000;
+      display: none;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #f39c12;
+    }
+
+    .menu-btn {
+      display: block;
+      background-color: #f39c12;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    /* Content Wrapper */
     .content-wrapper {
       padding: 20px;
+      margin-left: 220px;
     }
 
     .job-items {
@@ -48,9 +93,10 @@
       margin: 0 auto;
     }
 
+    /* Collapsible Sections */
     details {
-      background-color: #333;
-      border: 1px solid #444;
+      background-color: #444;
+      border: 1px solid #555;
       border-radius: 8px;
       padding: 20px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -67,14 +113,14 @@
       font-weight: bold;
       cursor: pointer;
       padding: 10px;
-      background-color: #444;
-      color: #f39c12; /* Reliable Orange */
+      background-color: #555;
+      color: #f39c12;
       border: none;
       border-radius: 5px;
     }
 
     summary:hover {
-      background-color: #555;
+      background-color: #666;
     }
 
     .content {
@@ -83,17 +129,42 @@
       color: #ccc;
     }
 
-    .file-content {
-      margin-top: 10px;
-      font-style: italic;
-      color: #aaa;
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
     }
 
-    @media (min-width: 768px) {
-      .job-items {
-        max-width: 1200px;
-        margin: 0 auto;
-      }
+    .modal-content {
+      background-color: #fff;
+      color: #333;
+      padding: 30px;
+      border-radius: 10px;
+      width: 50%;
+      max-height: 70%;
+      overflow-y: auto;
+    }
+
+    .close-btn {
+      background-color: #f39c12;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      float: right;
+    }
+
+    .close-btn:hover {
+      background-color: #e67e22;
     }
 
     .section-header {
@@ -102,227 +173,144 @@
       margin-top: 20px;
       margin-bottom: 10px;
     }
+
+    /* Media Query */
+    @media (min-width: 768px) {
+      .content-wrapper {
+        margin-left: 220px;
+      }
+    }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="container">
-      <h1>Quality Control Test & Final Section</h1>
-      <p>Professional Job Control Items</p>
-    </div>
+    <h1>Quality Control Test & Final Section</h1>
+    <p>Professional Job Control Items</p>
   </header>
 
+  <!-- Sidebar Menu -->
+  <div class="sidebar" id="sidebar">
+    <button class="close-btn" onclick="closeMenu()">Close Menu</button>
+    <a href="#powerbi">POWER BI</a>
+    <a href="#work-instruction">WORK INSTRUCTION</a>
+    <a href="#ops">OPS</a>
+    <a href="#checksheet">CHECKSHEET</a>
+    <a href="#master-data">Master Data</a>
+  </div>
+
+  <!-- Menu Button -->
+  <button class="menu-btn" onclick="openMenu()">Open Menu</button>
+
+  <!-- Main Content Section -->
   <section class="content-wrapper">
+
+    <!-- POWER BI Section -->
+    <div class="section-header" id="powerbi">POWER BI</div>
     <div class="job-items">
-      
-      <!-- POWER BI Section -->
-      <div class="section-header">POWER BI</div>
       <details>
         <summary>Blacklight & Performance Test Dashboard</summary>
         <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
+          <button onclick="openModal('Blacklight & Performance Test Dashboard')">View Details</button>
         </div>
       </details>
 
       <details>
         <summary>Visual, Accessories & Final Inspection Dashboard</summary>
         <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
+          <button onclick="openModal('Visual, Accessories & Final Inspection Dashboard')">View Details</button>
         </div>
       </details>
 
       <details>
         <summary>Oil Contamination Dashboard</summary>
         <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
+          <button onclick="openModal('Oil Contamination Dashboard')">View Details</button>
         </div>
       </details>
 
-      <details>
-        <summary>Voltage, Coolant & Oil Contamination Statistical Data</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
+      <!-- More items can be added here following the same pattern -->
+    </div>
 
-      <details>
-        <summary>Visual Painting Data 1</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Visual Painting Data 2</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Visual Painting Data 3</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Global E-Service (MME) Dashboard</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Export Order Form Control</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Remanufacturing Dashboard</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>SLF Monitoring Progress</summary>
-        <div class="content">
-          <p>This section will load the local file content or visualization here.</p>
-        </div>
-      </details>
-
-      <!-- WORK INSTRUCTION Section -->
-      <div class="section-header">WORK INSTRUCTION</div>
+    <!-- WORK INSTRUCTION Section -->
+    <div class="section-header" id="work-instruction">WORK INSTRUCTION</div>
+    <div class="job-items">
       <details>
         <summary>Aerial Angle Setting</summary>
         <div class="content">
-          <p>This section will load the work instruction here.</p>
+          <button onclick="openModal('Aerial Angle Setting')">View Details</button>
         </div>
       </details>
+      <!-- More items can be added here -->
+    </div>
 
-      <details>
-        <summary>Pengisian Checksheet Stock-In</summary>
-        <div class="content">
-          <p>This section will load the work instruction here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Aktivasi GPS</summary>
-        <div class="content">
-          <p>This section will load the work instruction here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</summary>
-        <div class="content">
-          <p>This section will load the work instruction here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Pemeriksaan Kebocoran Oli Hydraulic</summary>
-        <div class="content">
-          <p>This section will load the work instruction here.</p>
-        </div>
-      </details>
-
-      <!-- OPS Section -->
-      <div class="section-header">OPS</div>
+    <!-- OPS Section -->
+    <div class="section-header" id="ops">OPS</div>
+    <div class="job-items">
       <details>
         <summary>QRQC Data Creation</summary>
         <div class="content">
-          <p>This section will load the OPS file or data here.</p>
+          <button onclick="openModal('QRQC Data Creation')">View Details</button>
         </div>
       </details>
+      <!-- More items can be added here -->
+    </div>
 
-      <details>
-        <summary>Pengecekan Tools Unit</summary>
-        <div class="content">
-          <p>This section will load the OPS file or data here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Revisi Model Unit pada GeS</summary>
-        <div class="content">
-          <p>This section will load the OPS file or data here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Reducing Valve Setting</summary>
-        <div class="content">
-          <p>This section will load the OPS file or data here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Revisi GPS type pada GeS</summary>
-        <div class="content">
-          <p>This section will load the OPS file or data here.</p>
-        </div>
-      </details>
-
-      <!-- CHECKSHEET Section -->
-      <div class="section-header">CHECKSHEET</div>
+    <!-- CHECKSHEET Section -->
+    <div class="section-header" id="checksheet">CHECKSHEET</div>
+    <div class="job-items">
       <details>
         <summary>Final Inspection Checksheet</summary>
         <div class="content">
-          <p>This section will load the checksheet here.</p>
+          <button onclick="openModal('Final Inspection Checksheet')">View Details</button>
         </div>
       </details>
+      <!-- More items can be added here -->
+    </div>
 
-      <details>
-        <summary>Visual Painting Checksheet</summary>
-        <div class="content">
-          <p>This section will load the checksheet here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Accessories & Function Checksheet</summary>
-        <div class="content">
-          <p>This section will load the checksheet here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Performance Test Checksheet</summary>
-        <div class="content">
-          <p>This section will load the checksheet here.</p>
-        </div>
-      </details>
-
-      <!-- Master Data Section -->
-      <div class="section-header">Master Data</div>
+    <!-- Master Data Section -->
+    <div class="section-header" id="master-data">Master Data</div>
+    <div class="job-items">
       <details>
         <summary>Custom Master for Performance Test</summary>
         <div class="content">
-          <p>This section will load the master data here.</p>
+          <button onclick="openModal('Custom Master for Performance Test')">View Details</button>
         </div>
       </details>
-
-      <details>
-        <summary>Custom Master for Final Inspection</summary>
-        <div class="content">
-          <p>This section will load the master data here.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>Custom Master Unit Model</summary>
-        <div class="content">
-          <p>This section will load the master data here.</p>
-        </div>
-      </details>
-
+      <!-- More items can be added here -->
     </div>
+
   </section>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">Close</button>
+      <h2>Details for <span id="modal-title"></span></h2>
+      <p id="modal-content">Content will be displayed here...</p>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function openMenu() {
+      document.getElementById('sidebar').style.display = 'block';
+    }
+
+    function closeMenu() {
+      document.getElementById('sidebar').style.display = 'none';
+    }
+
+    function openModal(title) {
+      document.getElementById('modal').style.display = 'flex';
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-content').innerText = 'This is where the content related to ' + title + ' will be shown.';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+  </script>
 
 </body>
 </html>
