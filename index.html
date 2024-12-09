@@ -148,9 +148,17 @@
       color: #333;
       padding: 30px;
       border-radius: 10px;
-      width: 50%;
-      max-height: 70%;
-      overflow-y: auto;
+      width: 80%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
     }
 
     .close-btn {
@@ -160,7 +168,7 @@
       border: none;
       cursor: pointer;
       border-radius: 5px;
-      float: right;
+      align-self: flex-end;
     }
 
     .close-btn:hover {
@@ -204,370 +212,23 @@
 
   <!-- Main Content Section -->
   <section class="content-wrapper">
-
     <!-- POWER BI Section -->
     <div class="section-header" id="powerbi">POWER BI</div>
     <div class="job-items">
       <details>
         <summary>Blacklight & Performance Test Dashboard</summary>
         <div class="content">
-          <button onclick="openModal('Blacklight & Performance Test Dashboard')">View Details</button>
+          <button onclick="openModal('Blacklight & Performance Test Dashboard', 'docs/blacklight_performance_test.pdf')">View Details</button>
         </div>
       </details>
 
       <details>
         <summary>Visual, Accessories & Final Inspection Dashboard</summary>
         <div class="content">
-          <button onclick="openModal('Visual, Accessories & Final Inspection Dashboard')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Oil Contamination Dashboard</summary>
-        <div class="content">
-          <button onclick="openModal('Oil Contamination Dashboard')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Voltage, Coolant & Oil Contamination Statistical Data</summary>
-        <div class="content">
-          <button onclick="openModal('Voltage, Coolant & Oil Contamination Statistical Data')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Visual Painting Data 1</summary>
-        <div class="content">
-          <button onclick="openModal('Visual Painting Data 1')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Visual Painting Data 2</summary>
-        <div class="content">
-          <button onclick="openModal('Visual Painting Data 2')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Visual Painting Data 3</summary>
-        <div class="content">
-          <button onclick="openModal('Visual Painting Data 3')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Global E-Service (MME) Dashboard</summary>
-        <div class="content">
-          <button onclick="openModal('Global E-Service (MME) Dashboard')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Export Order Form Control</summary>
-        <div class="content">
-          <button onclick="openModal('Export Order Form Control')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Remanufacturing Dashboard</summary>
-        <div class="content">
-          <button onclick="openModal('Remanufacturing Dashboard')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>SLF Monitoring Progress</summary>
-        <div class="content">
-          <button onclick="openModal('SLF Monitoring Progress')">View Details</button>
+          <button onclick="openModal('Visual, Accessories & Final Inspection Dashboard', 'docs/final_inspection_dashboard.pdf')">View Details</button>
         </div>
       </details>
     </div>
-
-    <!-- WORK INSTRUCTION Section -->
-    <div class="section-header" id="work-instruction">WORK INSTRUCTION</div>
-    <div class="job-items">
-      <details>
-        <summary>Aerial Angle Setting</summary>
-        <div class="content">
-          <button onclick="openModal('Aerial Angle Setting')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Pengisian Checksheet Stock-In</summary>
-        <div class="content">
-          <button onclick="openModal('Pengisian Checksheet Stock-In')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Aktivasi GPS</summary>
-        <div class="content">
-          <button onclick="openModal('Aktivasi GPS')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Petunjuk Kerja Setting Tampilan Aplikasi M-Pro</summary>
-        <div class="content">
-          <button onclick="openModal('Petunjuk Kerja Setting Tampilan Aplikasi M-Pro')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Pemeriksaan Kebocoran Oli Hydraulic</summary>
-        <div class="content">
-          <button onclick="openModal('Pemeriksaan Kebocoran Oli Hydraulic')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Pengecekan Kontaminasi Oil Hydraulic</summary>
-        <div class="content">
-          <button onclick="openModal('Pengecekan Kontaminasi Oil Hydraulic')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Pemeriksaan Kualitas Painting</summary>
-        <div class="content">
-          <button onclick="openModal('Pemeriksaan Kualitas Painting')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Mechanical Check</summary>
-        <div class="content">
-          <button onclick="openModal('Mechanical Check')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Performance Test</summary>
-        <div class="content">
-          <button onclick="openModal('Performance Test')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Final Inspection</summary>
-        <div class="content">
-          <button onclick="openModal('Final Inspection')">View Details</button>
-        </div>
-      </details>
-    </div>
-
-    <!-- OPS Section -->
-    <div class="section-header" id="ops">OPS</div>
-    <div class="job-items">
-      <details>
-        <summary>QRQC Data Creation</summary>
-        <div class="content">
-          <button onclick="openModal('QRQC Data Creation')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Pengecekan Tools Unit</summary>
-        <div class="content">
-          <button onclick="openModal('Pengecekan Tools Unit')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Revisi Model Unit pada GeS</summary>
-        <div class="content">
-          <button onclick="openModal('Revisi Model Unit pada GeS')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Reducing Valve Setting</summary>
-        <div class="content">
-          <button onclick="openModal('Reducing Valve Setting')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Revisi GPS Type pada GeS</summary>
-        <div class="content">
-          <button onclick="openModal('Revisi GPS Type pada GeS')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Operational Power BI Final Inspection Area</summary>
-        <div class="content">
-          <button onclick="openModal('Operational Power BI Final Inspection Area')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Backlash Inspection</summary>
-        <div class="content">
-          <button onclick="openModal('Backlash Inspection')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Pengecekan Toolbox dan Pengisian Checksheet</summary>
-        <div class="content">
-          <button onclick="openModal('Pengecekan Toolbox dan Pengisian Checksheet')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Revisi Depot pada GeS</summary>
-        <div class="content">
-          <button onclick="openModal('Revisi Depot pada GeS')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Menampilkan Error Code pada Unit 10T</summary>
-        <div class="content">
-          <button onclick="openModal('Menampilkan Error Code pada Unit 10T')">View Details</button>
-        </div>
-      </details>
-    </div>
-
-    <!-- CHECKSHEET Section -->
-    <div class="section-header" id="checksheet">CHECKSHEET</div>
-    <div class="job-items">
-      <details>
-        <summary>Final Inspection Checksheet</summary>
-        <div class="content">
-          <button onclick="openModal('Final Inspection Checksheet')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Visual Painting Checksheet</summary>
-        <div class="content">
-          <button onclick="openModal('Visual Painting Checksheet')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Accessories & Function Checksheet</summary>
-        <div class="content">
-          <button onclick="openModal('Accessories & Function Checksheet')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Performance Test</summary>
-        <div class="content">
-          <button onclick="openModal('Performance Test')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Blacklight</summary>
-        <div class="content">
-          <button onclick="openModal('Blacklight')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Daily Painting Inspection</summary>
-        <div class="content">
-          <button onclick="openModal('Daily Painting Inspection')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Weekly Painting Inspection</summary>
-        <div class="content">
-          <button onclick="openModal('Weekly Painting Inspection')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Product Audit</summary>
-        <div class="content">
-          <button onclick="openModal('Product Audit')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>NCR Local</summary>
-        <div class="content">
-          <button onclick="openModal('NCR Local')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Super Long Front HCMA</summary>
-        <div class="content">
-          <button onclick="openModal('Super Long Front HCMA')">View Details</button>
-        </div>
-      </details>
-    </div>
-
-    <!-- Master Data Section -->
-    <div class="section-header" id="master-data">Master Data</div>
-    <div class="job-items">
-      <details>
-        <summary>Custom Master for Performance Test</summary>
-        <div class="content">
-          <button onclick="openModal('Custom Master for Performance Test')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Custom Master for Final Inspection</summary>
-        <div class="content">
-          <button onclick="openModal('Custom Master for Final Inspection')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Custom Master Unit Model</summary>
-        <div class="content">
-          <button onclick="openModal('Custom Master Unit Model')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>CTM Data Control Excel</summary>
-        <div class="content">
-          <button onclick="openModal('CTM Data Control Excel')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>CTM Data Checksheet Stock In</summary>
-        <div class="content">
-          <button onclick="openModal('CTM Data Checksheet Stock In')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Certification List Performance Test & Blacklight</summary>
-        <div class="content">
-          <button onclick="openModal('Certification List Performance Test & Blacklight')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Certification List Visual-Stock In Inspection</summary>
-        <div class="content">
-          <button onclick="openModal('Certification List Visual-Stock In Inspection')">View Details</button>
-        </div>
-      </details>
-
-      <details>
-        <summary>Specification List Performance Test</summary>
-        <div class="content">
-          <button onclick="openModal('Specification List Performance Test')">View Details</button>
-        </div>
-      </details>
-    </div>
-
   </section>
 
   <!-- Modal -->
@@ -575,7 +236,7 @@
     <div class="modal-content">
       <button class="close-btn" onclick="closeModal()">Close</button>
       <h2 id="modal-title"></h2>
-      <p id="modal-content"></p>
+      <iframe id="modal-iframe"></iframe>
     </div>
   </div>
 
@@ -586,4 +247,19 @@
     }
 
     function closeMenu() {
-     
+      document.getElementById('sidebar').style.display = 'none';
+    }
+
+    function openModal(title, filePath) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-iframe').src = filePath;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+      document.getElementById('modal-iframe').src = '';
+    }
+  </script>
+</body>
+</html>
