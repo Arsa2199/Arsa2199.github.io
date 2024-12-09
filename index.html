@@ -5,287 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quality Control Test & Final Section</title>
   <style>
-    /* Reset styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #2f2f2f;
-      color: #fff;
-    }
-
-    header {
-      background-color: #1a1a1a;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-
-    header h1 {
-      font-size: 2.5em;
-      color: #f39c12;
-    }
-
-    header p {
-      font-size: 1.2em;
-      margin-top: 10px;
-      color: #f39c12;
-    }
-
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 200px;
-      height: 100%;
-      background-color: #333;
-      padding-top: 20px;
-      padding-left: 20px;
-      color: #fff;
-      font-size: 1.1em;
-      z-index: 1000;
-      display: none;
-    }
-
-    .sidebar a {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px;
-      display: block;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      transition: background-color 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: #f39c12;
-    }
-
-    .menu-btn {
-      display: block;
-      background-color: #f39c12;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      cursor: pointer;
-      border: none;
-      border-radius: 5px;
-      margin: 10px;
-    }
-
-    .content-wrapper {
-      padding: 20px;
-      margin-left: 220px;
-    }
-
-    .job-items {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    details {
-      background-color: #444;
-      border: 1px solid #555;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    details[open] {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    summary {
-      font-size: 1.3em;
-      font-weight: bold;
-      cursor: pointer;
-      padding: 10px;
-      background-color: #555;
-      color: #f39c12;
-      border: none;
-      border-radius: 5px;
-    }
-
-    summary:hover {
-      background-color: #666;
-    }
-
-    .content {
-      margin-top: 10px;
-      font-size: 1.1em;
-      color: #ccc;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background-color: #fff;
-      color: #333;
-      padding: 30px;
-      border-radius: 10px;
-      width: 80%;
-      height: 80%;
-      display: flex;
-      flex-direction: column;
-    }
-
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-    }
-
-    .close-btn {
-      background-color: #f39c12;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      align-self: flex-end;
-    }
-
-    .close-btn:hover {
-      background-color: #e67e22;
-    }
-
-    .section-header {
-      color: #f39c12;
-      font-size: 1.6em;
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-
-    @media (min-width: 768px) {
-      .content-wrapper {
-        margin-left: 220px;
-      }
-    }
+    /* CSS styling */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background-color: #2f2f2f; color: #fff; }
+    header { background-color: #1a1a1a; color: #fff; text-align: center; padding: 20px; }
+    header h1 { font-size: 2.5em; color: #f39c12; }
+    .sidebar { position: fixed; top: 0; left: 0; width: 200px; height: 100%; background-color: #333; padding: 20px; color: #fff; display: none; }
+    .sidebar a { color: #fff; text-decoration: none; padding: 10px; display: block; margin-bottom: 10px; border-radius: 5px; }
+    .sidebar a:hover { background-color: #f39c12; }
+    .menu-btn { background-color: #f39c12; color: #fff; padding: 10px; border: none; cursor: pointer; border-radius: 5px; margin: 10px; }
+    .content-wrapper { padding: 20px; margin-left: 220px; }
+    .job-items { display: flex; flex-direction: column; gap: 15px; }
+    details { background-color: #444; padding: 20px; border-radius: 8px; }
+    summary { font-size: 1.2em; color: #f39c12; cursor: pointer; }
+    .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; }
+    .modal-content { background: #fff; padding: 20px; border-radius: 8px; width: 80%; height: 80%; }
+    iframe { width: 100%; height: 90%; border: none; }
+    .close-btn { background: #f39c12; color: #fff; padding: 10px; border: none; cursor: pointer; border-radius: 5px; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Quality Control Test & Final Section</h1>
-  <p>Professional Job Control Items</p>
 </header>
 
+<button class="menu-btn" onclick="toggleSidebar()">Toggle Menu</button>
 <div class="sidebar" id="sidebar">
-  <button class="close-btn" onclick="closeMenu()">Close Menu</button>
   <a href="#powerbi">POWER BI</a>
   <a href="#work-instruction">WORK INSTRUCTION</a>
   <a href="#ops">OPS</a>
   <a href="#checksheet">CHECKSHEET</a>
-  <a href="#master-data">Master Data</a>
+  <a href="#master-data">MASTER DATA</a>
 </div>
 
-<button class="menu-btn" onclick="openMenu()">Open Menu</button>
-
-<section class="content-wrapper">
+<div class="content-wrapper">
   <!-- POWER BI Section -->
-  <div class="section-header" id="powerbi">POWER BI</div>
-  <div class="job-items">
-    <details>
-      <summary>12. Specification List Performance Test Insert</summary>
-      <div class="content">
-        <button onclick="openModal('Specification List Performance Test Insert', 'docs/specification_performance_test.pdf')">View Details</button>
-      </div>
-    </details>
-    <!-- Add other POWER BI items here if needed -->
+  <div id="powerbi">
+    <h2>POWER BI</h2>
+    <div class="job-items">
+      <details><summary>1. Blacklight & Performance Test Dashboard</summary></details>
+      <details><summary>2. Visual, Accessories & Final Inspection Dashboard</summary></details>
+      <details><summary>3. Oil Contamination Dashboard</summary></details>
+      <details><summary>4. Voltage, Coolant & Oil Contamination Statistical Data</summary></details>
+      <details><summary>5. Visual Painting Data 1</summary></details>
+      <details><summary>6. Visual Painting Data 2</summary></details>
+      <details><summary>7. Visual Painting Data 3</summary></details>
+      <details><summary>8. Global E-Service (MME) Dashboard</summary></details>
+      <details><summary>9. Export Order Form Control</summary></details>
+      <details><summary>10. Remanufacturing Dashboard</summary></details>
+      <details><summary>11. SLF Monitoring Progress</summary></details>
+    </div>
   </div>
 
   <!-- WORK INSTRUCTION Section -->
-  <div class="section-header" id="work-instruction">WORK INSTRUCTION</div>
-  <div class="job-items">
-    <details>
-      <summary>Item 1: Detailed Explanation</summary>
-      <div class="content">
-        <button onclick="openModal('Item 1 Details', 'docs/item1-details.pdf')">View Details</button>
-      </div>
-    </details>
+  <div id="work-instruction">
+    <h2>WORK INSTRUCTION</h2>
+    <div class="job-items">
+      <details><summary>1. Aerial Angle Setting</summary></details>
+      <details><summary>2. Pengisian Checksheet Stock-In</summary></details>
+      <details><summary>3. Aktivasi GPS</summary></details>
+      <details><summary>4. Setting Tampilan Aplikasi M-Pro</summary></details>
+      <details><summary>5. Pemeriksaan Kebocoran Oli Hydraulic</summary></details>
+      <details><summary>6. Pengecekan Kontaminasi Oil Hydraulic</summary></details>
+      <details><summary>7. Pemeriksaan Kualitas Painting</summary></details>
+      <details><summary>8. Mechanical Check</summary></details>
+      <details><summary>9. Performance Test</summary></details>
+      <details><summary>10. Final Inspection</summary></details>
+    </div>
   </div>
 
   <!-- OPS Section -->
-  <div class="section-header" id="ops">OPS</div>
-  <div class="job-items">
-    <details>
-      <summary>OPS Item Example</summary>
-      <div class="content">
-        <button onclick="openModal('OPS Example', 'docs/ops-example.pdf')">View Details</button>
-      </div>
-    </details>
+  <div id="ops">
+    <h2>OPS</h2>
+    <div class="job-items">
+      <details><summary>1. QRQC Data Creation</summary></details>
+      <details><summary>2. Pengecekan Tools Unit</summary></details>
+      <details><summary>3. Revisi Model Unit Pada GeS</summary></details>
+      <details><summary>4. Reducing Valve Setting</summary></details>
+      <details><summary>5. Revisi GPS Type Pada GeS</summary></details>
+      <details><summary>6. Operational Power BI Final Inspection Area</summary></details>
+      <details><summary>7. Backlash Inspection</summary></details>
+      <details><summary>8. Pengecekan Toolbox dan Pengisian Checksheet</summary></details>
+      <details><summary>9. Revisi Depot Pada GeS</summary></details>
+      <details><summary>10. Menampilkan Error Code Pada Unit 10 T</summary></details>
+      <details><summary>11. Flow Apply, Approve, & Completion Pada Checksheet Stock-In dan Export Order</summary></details>
+      <details><summary>12. Penggunaan dan Perawatan Refraktometer</summary></details>
+      <details><summary>13. Area Parkir Khusus untuk Unit ZX10T</summary></details>
+      <details><summary>14. Jarak Aman Melihat Monitor Display Progress</summary></details>
+      <details><summary>15. Prosedur Pemakaian iPad Surface yang Aman dalam Proses Pemeriksaan Unit Excavator</summary></details>
+      <details><summary>16. Pembuatan WI untuk Proses Engine Learning dengan Bantuan Live Camera</summary></details>
+      <details><summary>17. Urutan Proses Inspeksi Visual Painting Pada Unit</summary></details>
+      <details><summary>18. Penggunaan Pemberat pada Test Beban Unit</summary></details>
+      <details><summary>19. Cara Pengecekan Hammer Test</summary></details>
+      <details><summary>20. Langkah Membuka dan Menutup Engine Guard Secara Aman</summary></details>
+      <details><summary>21. Langkah untuk Naik Turun Unit Secara Aman</summary></details>
+      <details><summary>22. Langkah Melakukan Engine Learning yang Aman</summary></details>
+    </div>
   </div>
 
   <!-- CHECKSHEET Section -->
-  <div class="section-header" id="checksheet">CHECKSHEET</div>
-  <div class="job-items">
-    <details>
-      <summary>Checksheet Template</summary>
-      <div class="content">
-        <button onclick="openModal('Checksheet Template', 'docs/checksheet-template.pdf')">View Details</button>
-      </div>
-    </details>
+  <div id="checksheet">
+    <h2>CHECKSHEET</h2>
+    <div class="job-items">
+      <details><summary>1. Final Inspection Checksheet</summary></details>
+      <details><summary>2. Visual Painting Checksheet</summary></details>
+      <details><summary>3. Accessories & Function Checksheet</summary></details>
+      <details><summary>4. Performance Test</summary></details>
+      <details><summary>5. Blacklight</summary></details>
+      <details><summary>6. Daily Painting Inspection</summary></details>
+      <details><summary>7. Weekly Painting Inspection</summary></details>
+      <details><summary>8. Product Audit</summary></details>
+      <details><summary>9. NCR Local</summary></details>
+      <details><summary>10. Super Long Front HCMA</summary></details>
+      <details><summary>11. Oil Contamination</summary></details>
+      <details><summary>12. Quality Patrol</summary></details>
+      <details><summary>13. Stock-In Checksheet</summary></details>
+    </div>
   </div>
 
   <!-- MASTER DATA Section -->
-  <div class="section-header" id="master-data">Master Data</div>
-  <div class="job-items">
-    <details>
-      <summary>Master Data Item</summary>
-      <div class="content">
-        <button onclick="openModal('Master Data', 'docs/master-data.pdf')">View Details</button>
-      </div>
-    </details>
+  <div id="master-data">
+    <h2>MASTER DATA</h2>
+    <div class="job-items">
+      <details><summary>1. Custom Master for Performance Test</summary></details>
+      <details><summary>2. Custom Master for Final Inspection</summary></details>
+      <details><summary>3. Custom Master Unit Model</summary></details>
+      <details><summary>4. CTM Data Control Excel</summary></details>
+      <details><summary>5. CTM Data Checksheet Stock In</summary></details>
+      <details><summary>6. Certification List Performance Test & Blacklight</summary></details>
+      <details><summary>7. Certification List Visual-Stock In Inspection</summary></details>
+      <details><summary>8. Specification List Performance Test</summary></details>
+    </div>
   </div>
-</section>
+</div>
 
-<div id="modal" class="modal">
+<div class="modal" id="modal">
   <div class="modal-content">
     <button class="close-btn" onclick="closeModal()">Close</button>
-    <h2 id="modal-title"></h2>
-    <iframe id="modal-iframe"></iframe>
+    <iframe id="modal-frame" src=""></iframe>
   </div>
 </div>
 
 <script>
-  function openMenu() {
-    document.getElementById('sidebar').style.display = 'block';
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
   }
-
-  function closeMenu() {
-    document.getElementById('sidebar').style.display = 'none';
-  }
-
-  function openModal(title, filePath) {
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-iframe').src = filePath;
+  function openModal(url) {
+    document.getElementById('modal-frame').src = url;
     document.getElementById('modal').style.display = 'flex';
   }
-
   function closeModal() {
     document.getElementById('modal').style.display = 'none';
-    document.getElementById('modal-iframe').src = '';
+    document.getElementById('modal-frame').src = '';
   }
 </script>
 
