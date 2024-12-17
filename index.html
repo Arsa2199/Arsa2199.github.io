@@ -3,158 +3,175 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excavator Parts Inspection Report</title>
+    <title>CTM Monitoring</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-top: 20px;
+            margin: 20px;
+            background-color: #f4f4f4;
         }
         table {
             width: 100%;
-            margin: 20px auto;
             border-collapse: collapse;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
         }
         th, td {
             padding: 10px;
-            border: 1px solid #ddd;
             text-align: center;
         }
         th {
             background-color: #4CAF50;
             color: white;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+        .filter-container {
+            margin-bottom: 20px;
         }
-        tr:hover {
-            background-color: #f1f1f1;
+        select, input {
+            padding: 8px;
+            margin-right: 10px;
         }
-        .ok {
-            color: green;
-            font-weight: bold;
-        }
-        .ng {
-            color: red;
-            font-weight: bold;
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Excavator Parts Inspection Report</h1>
-    <table>
+    <h1>CTM Monitoring Dashboard</h1>
+
+    <!-- Filter Section -->
+    <div class="filter-container">
+        <label for="country-filter">Filter by Destination:</label>
+        <select id="country-filter">
+            <option value="">All</option>
+            <option value="ANGOLA">ANGOLA</option>
+            <option value="BELGIUM">BELGIUM</option>
+            <option value="CAMBODIA">CAMBODIA</option>
+            <option value="ETHIOPIA">ETHIOPIA</option>
+            <option value="INDONESIA">INDONESIA</option>
+            <option value="LAOS">LAOS</option>
+            <option value="MALAYSIA">MALAYSIA</option>
+            <option value="MYANMAR">MYANMAR</option>
+            <option value="NETHERLANDS">NETHERLANDS</option>
+            <!-- Add more options as needed -->
+        </select>
+        
+        <label for="judgment-filter">Filter by Judgment:</label>
+        <select id="judgment-filter">
+            <option value="">All</option>
+            <option value="OK">OK</option>
+            <option value="NG">NG</option>
+            <option value="#N/A">#N/A</option>
+        </select>
+
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Data Table -->
+    <table id="ctm-table">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Part Number</th>
                 <th>Part Name</th>
-                <th>Serial Number</th>
-                <th>Model</th>
+                <th>Controller Type</th>
+                <th>Part Number</th>
                 <th>Destination</th>
-                <th>Supplier</th>
-                <th>Judgment</th>
+                <th>Judgment (CTM HCM)</th>
+                <th>Judgment (Checksheet)</th>
             </tr>
         </thead>
         <tbody>
+            <!-- Sample Data Rows (Replace with actual data from your Excel) -->
             <tr>
-                <td>1</td>
-                <td>123456</td>
-                <td>Pump Assembly</td>
-                <td>S/N-00123</td>
-                <td>EX-300</td>
-                <td>USA</td>
-                <td>ABC Ltd</td>
-                <td class="ok">OK</td>
+                <td>RADIO</td>
+                <td>YA00010689</td>
+                <td>YA00010689</td>
+                <td>ANGOLA</td>
+                <td>ANGOLA</td>
+                <td>NG</td>
             </tr>
             <tr>
-                <td>2</td>
-                <td>234567</td>
-                <td>Valve Block</td>
-                <td>S/N-00456</td>
-                <td>EX-350</td>
-                <td>Germany</td>
-                <td>XYZ Co</td>
-                <td class="ng">NG</td>
+                <td>RADIO</td>
+                <td>YA00010689</td>
+                <td>YA00010689</td>
+                <td>BELGIUM</td>
+                <td>BELGIUM</td>
+                <td>OK</td>
             </tr>
             <tr>
-                <td>3</td>
-                <td>345678</td>
-                <td>Hydraulic Cylinder</td>
-                <td>S/N-00789</td>
-                <td>EX-400</td>
-                <td>China</td>
-                <td>LMN Inc</td>
-                <td class="ok">OK</td>
+                <td>RADIO</td>
+                <td>YA00010689</td>
+                <td>YA00010689</td>
+                <td>CAMBODIA</td>
+                <td>CAMBODIA</td>
+                <td>NG</td>
             </tr>
-            <tr>
-                <td>4</td>
-                <td>456789</td>
-                <td>Engine Mount</td>
-                <td>S/N-01011</td>
-                <td>EX-450</td>
-                <td>India</td>
-                <td>PQR Pvt</td>
-                <td class="ng">NG</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>567890</td>
-                <td>Control Panel</td>
-                <td>S/N-01314</td>
-                <td>EX-500</td>
-                <td>Japan</td>
-                <td>JKL Ltd</td>
-                <td class="ok">OK</td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>678901</td>
-                <td>Oil Filter</td>
-                <td>S/N-01617</td>
-                <td>EX-550</td>
-                <td>Brazil</td>
-                <td>RST Corp</td>
-                <td class="ng">NG</td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>789012</td>
-                <td>Gear Box</td>
-                <td>S/N-01920</td>
-                <td>EX-600</td>
-                <td>Russia</td>
-                <td>UVW LLC</td>
-                <td class="ok">OK</td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>890123</td>
-                <td>Track Assembly</td>
-                <td>S/N-02223</td>
-                <td>EX-650</td>
-                <td>UK</td>
-                <td>GHI Ltd</td>
-                <td class="ng">NG</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>901234</td>
-                <td>Cabin Frame</td>
-                <td>S/N-02526</td>
-                <td>EX-700</td>
-                <td>Australia</td>
-                <td>DEF Inc</td>
-                <td class="ok">OK</td>
-            </tr>
+            <!-- Add more data rows dynamically here -->
         </tbody>
     </table>
+
+    <script>
+        const table = document.getElementById("ctm-table");
+        const countryFilter = document.getElementById("country-filter");
+        const judgmentFilter = document.getElementById("judgment-filter");
+
+        // Function to apply filters
+        function applyFilters() {
+            const countryValue = countryFilter.value.toUpperCase();
+            const judgmentValue = judgmentFilter.value.toUpperCase();
+
+            const rows = table.getElementsByTagName("tr");
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                const countryCell = cells[3].innerText.toUpperCase();
+                const judgmentCell = cells[5].innerText.toUpperCase();
+
+                if (
+                    (countryValue === "" || countryCell.includes(countryValue)) &&
+                    (judgmentValue === "" || judgmentCell.includes(judgmentValue))
+                ) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+
+        // Adding sorting functionality for the table
+        function sortTable(n) {
+            const rows = table.rows;
+            let switching = true;
+            let dir = "asc";
+            while (switching) {
+                switching = false;
+                const rowsArray = Array.from(rows).slice(1);
+                for (let i = 0; i < rowsArray.length - 1; i++) {
+                    const x = rowsArray[i].getElementsByTagName("TD")[n];
+                    const y = rowsArray[i + 1].getElementsByTagName("TD")[n];
+                    if (dir === "asc" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() || 
+                        dir === "desc" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
+                        switching = true;
+                        break;
+                    }
+                }
+                if (!switching && dir === "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+
+        // Add sorting to table headers
+        const headers = table.querySelectorAll("th");
+        headers.forEach((header, index) => {
+            header.addEventListener("click", () => sortTable(index));
+        });
+    </script>
 </body>
 </html>
