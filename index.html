@@ -1,145 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quality Control Test & Final Section</title>
-  <style>
-    /* CSS styling */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background-color: #2f2f2f; color: #fff; }
-    header { background-color: #1a1a1a; color: #fff; text-align: center; padding: 20px; }
-    header h1 { font-size: 2.5em; color: #f39c12; }
-    .sidebar { position: fixed; top: 0; left: 0; width: 200px; height: 100%; background-color: #333; padding: 20px; color: #fff; display: none; }
-    .sidebar a { color: #fff; text-decoration: none; padding: 10px; display: block; margin-bottom: 10px; border-radius: 5px; }
-    .sidebar a:hover { background-color: #f39c12; }
-    .menu-btn { background-color: #f39c12; color: #fff; padding: 10px; border: none; cursor: pointer; border-radius: 5px; margin: 10px; }
-    .content-wrapper { padding: 20px; margin-left: 220px; }
-    .job-items { display: flex; flex-direction: column; gap: 15px; }
-    details { background-color: #444; padding: 20px; border-radius: 8px; }
-    summary { font-size: 1.2em; color: #f39c12; cursor: pointer; }
-    .modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); justify-content: center; align-items: center; }
-    .modal-content { background: #fff; padding: 20px; border-radius: 8px; width: 80%; height: 80%; }
-    iframe { width: 100%; height: 90%; border: none; }
-    .close-btn { background: #f39c12; color: #fff; padding: 10px; border: none; cursor: pointer; border-radius: 5px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Middleware App - Data Jobs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        .sidebar {
+            width: 240px;
+            background-color: #fff;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            position: fixed;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 30px;
+            color: #ff6600;
+            font-size: 1.2em;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background-color: #f0f0f0;
+            color: #ff6600;
+        }
+
+        .content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .content h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .filters input,
+        .filters select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f3f3f3;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .actions {
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        .actions:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-
-<header>
-  <h1>Quality Control Test & Final Section</h1>
-</header>
-
-<button class="menu-btn" onclick="toggleSidebar()">Toggle Menu</button>
-<div class="sidebar" id="sidebar">
-  <a href="#powerbi">POWER BI</a>
-  <a href="#work-instruction">WORK INSTRUCTION</a>
-  <a href="#ops">OPS</a>
-  <a href="#checksheet">CHECKSHEET</a>
-  <a href="#master-data">MASTER DATA</a>
-</div>
-
-<div class="content-wrapper">
-  <!-- POWER BI Section -->
-  <div id="powerbi">
-    <h2>POWER BI</h2>
-    <div class="job-items">
-      <details><summary onclick="openModal('file:///C:/path/to/C:\Users\70824292\Downloads\SLF Monitoring.pbix)">1. Blacklight & Performance Test Dashboard</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Visual_Accessories_Final_Inspection_Dashboard.pbix')">2. Visual, Accessories & Final Inspection Dashboard</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Oil_Contamination_Dashboard.pbix')">3. Oil Contamination Dashboard</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Voltage_Coolant_Oil_Contamination_Statistical_Data.pbix')">4. Voltage, Coolant & Oil Contamination Statistical Data</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Visual_Painting_Data_1.pbix')">5. Visual Painting Data 1</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Visual_Painting_Data_2.pbix')">6. Visual Painting Data 2</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Visual_Painting_Data_3.pbix')">7. Visual Painting Data 3</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Global_E_Service_Dashboard.pbix')">8. Global E-Service (MME) Dashboard</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Export_Order_Form_Control.pbix')">9. Export Order Form Control</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Remanufacturing_Dashboard.pbix')">10. Remanufacturing Dashboard</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/SLF_Monitoring_Progress.pbix')">11. SLF Monitoring Progress</summary></details>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Middleware APP</h2>
+        <a href="#">Dashboard</a>
+        <a href="#">Job SMAPv3</a>
+        <a href="#">Failed Job To SMAPv3</a>
+        <a href="#">List Scheduler To I-Reporter</a>
     </div>
-  </div>
 
-  <!-- WORK INSTRUCTION Section -->
-  <div id="work-instruction">
-    <h2>WORK INSTRUCTION</h2>
-    <div class="job-items">
-      <details><summary onclick="openModal('file:///C:\Users\70824292\Downloads\ZX130-5G+DAGF1+121159+Diesel+Fuel+Tank+Found+Rusty.pdf')">1. Aerial Angle Setting</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Pengisian_Checksheet_Stock-In.docx')">2. Pengisian Checksheet Stock-In</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Aktivasi_GPS.docx')">3. Aktivasi GPS</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Setting_Tampilan_Aplikasi_MPro.docx')">4. Setting Tampilan Aplikasi M-Pro</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Pemeriksaan_Kebocoran_Oli_Hydraulic.docx')">5. Pemeriksaan Kebocoran Oli Hydraulic</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Pengecekan_Kontaminasi_Oil_Hydraulic.docx')">6. Pengecekan Kontaminasi Oil Hydraulic</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Pemeriksaan_Kualitas_Painting.docx')">7. Pemeriksaan Kualitas Painting</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Mechanical_Check.docx')">8. Mechanical Check</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Performance_Test.docx')">9. Performance Test</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Final_Inspection.docx')">10. Final Inspection</summary></details>
+    <!-- Content -->
+    <div class="content">
+        <h1>Data Jobs [RUNNING]</h1>
+        <p>Last data fetched successfully by the middleware app.</p>
+
+        <!-- Filters -->
+        <div class="filters">
+            <input type="text" id="search" placeholder="Search Serial Number..." onkeyup="filterTable()">
+            <select id="department" onchange="filterTable()">
+                <option value="">Assembling</option>
+            </select>
+            <select id="type" onchange="filterTable()">
+                <option value="">Excavator</option>
+            </select>
+        </div>
+
+        <!-- Table -->
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Job Number</th>
+                    <th>Production Process - Dept</th>
+                    <th>Item Code</th>
+                    <th>Item Name</th>
+                    <th>Parent Item</th>
+                    <th>C No</th>
+                    <th>Model Type</th>
+                    <th>Serial Number</th>
+                    <th>Sequence No</th>
+                    <th>Qty</th>
+                    <th>Start End Job</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>11</td>
+                    <td>70454803</td>
+                    <td>EXCAVATOR - ASSEMBLING</td>
+                    <td>ZX350H-7G_TYPE_R*EX00022675*0</td>
+                    <td>ZX350H-7G</td>
+                    <td>ZX350H-7G_TYPE_R*EX00022675*0</td>
+                    <td>EX00022675</td>
+                    <td>ZX350H-7G_TYPE_R</td>
+                    <td>10081</td>
+                    <td>4</td>
+                    <td>1.00</td>
+                    <td>2024-12-16 to 2024-12-18</td>
+                    <td class="actions">...</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>70449516</td>
+                    <td>EXCAVATOR - ASSEMBLING</td>
+                    <td>ZX200*EX00022502*0*0</td>
+                    <td>ZX200</td>
+                    <td>ZX200*EX00022502*0*0</td>
+                    <td>EX00022502</td>
+                    <td>ZX200</td>
+                    <td>67720</td>
+                    <td>5</td>
+                    <td>1.00</td>
+                    <td>2024-12-16 to 2024-12-18</td>
+                    <td class="actions">...</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>70455255</td>
+                    <td>EXCAVATOR - ASSEMBLING</td>
+                    <td>ZX138MF-5G_TYPE_D*EX00022683*0</td>
+                    <td>ZX138MF-5G</td>
+                    <td>ZX138MF-5G_TYPE_D*EX00022683*0</td>
+                    <td>EX00022683</td>
+                    <td>ZX138MF-5G_TYPE_D</td>
+                    <td>132091</td>
+                    <td>6</td>
+                    <td>1.00</td>
+                    <td>2024-12-16 to 2024-12-20</td>
+                    <td class="actions">...</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
 
-  <!-- OPS Section -->
-  <div id="ops">
-    <h2>OPS</h2>
-    <div class="job-items">
-      <details><summary onclick="openModal('file:///C:/path/to/QRQC_Data_Creation.docx')">1. QRQC Data Creation</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Pengecekan_Tools_Unit.docx')">2. Pengecekan Tools Unit</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Revisi_Model_Unit_Pada_GeS.docx')">3. Revisi Model Unit Pada GeS</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Reducing_Valve_Setting.docx')">4. Reducing Valve Setting</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Revisi_GPS_Type_Pada_GeS.docx')">5. Revisi GPS Type Pada GeS</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Operational_Power_BI_Final_Inspection_Area.docx')">6. Operational Power BI Final Inspection Area</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Backlash_Inspection.docx')">7. Backlash Inspection</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Pengecekan_Toolbox_dan_Pengisian_Checksheet.docx')">8. Pengecekan Toolbox dan Pengisian Checksheet</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Revisi_Depot_Pada_GeS.docx')">9. Revisi Depot Pada GeS</summary></details>
-    </div>
-  </div>
+    <!-- JavaScript -->
+    <script>
+        function filterTable() {
+            const search = document.getElementById('search').value.toLowerCase();
+            const table = document.getElementById('dataTable');
+            const rows = table.getElementsByTagName('tr');
 
-  <!-- CHECKSHEET Section -->
-  <div id="checksheet">
-    <h2>CHECKSHEET</h2>
-    <div class="job-items">
-      <details><summary onclick="openModal('file:///C:/path/to/Final_Inspection_Checksheet.xlsx')">1. Final Inspection Checksheet</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Visual_Painting_Checksheet.xlsx')">2. Visual Painting Checksheet</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Visual_Accessories_Checksheet.xlsx')">3. Visual Accessories Checksheet</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Oil_Contamination_Checksheet.xlsx')">4. Oil Contamination Checksheet</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Voltage_Contamination_Checksheet.xlsx')">5. Voltage Contamination Checksheet</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Backlash_Checksheet.xlsx')">6. Backlash Checksheet</summary></details>
-    </div>
-  </div>
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let rowMatch = false;
 
-  <!-- MASTER DATA Section -->
-  <div id="master-data">
-    <h2>MASTER DATA</h2>
-    <div class="job-items">
-      <details><summary onclick="openModal('file:///C:/path/to/Custom_Master_Performance_Test.xlsx')">1. Custom Master for Performance Test</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Custom_Master_Final_Inspection.xlsx')">2. Custom Master for Final Inspection</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Custom_Master_Voltage_Test.xlsx')">3. Custom Master for Voltage Test</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Custom_Master_Oil_Contamination.xlsx')">4. Custom Master for Oil Contamination</summary></details>
-      <details><summary onclick="openModal('file:///C:/path/to/Custom_Master_Voltage_Contamination.xlsx')">5. Custom Master for Voltage Contamination</summary></details>
-    </div>
-  </div>
-</div>
-
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal()">Close</button>
-    <iframe id="modal-frame" src=""></iframe>
-  </div>
-</div>
-
-<script>
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
-  }
-
-  function openModal(url) {
-    document.getElementById('modal-frame').src = url;
-    document.getElementById('modal').style.display = 'flex';
-  }
-
-  function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-    document.getElementById('modal-frame').src = '';
-  }
-</script>
-
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toLowerCase().includes(search)) {
+                        rowMatch = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = rowMatch ? '' : 'none';
+            }
+        }
+    </script>
 </body>
 </html>
