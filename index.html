@@ -3,174 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTM Monitoring</title>
+    <title>Communication Terminal Management Monitoring</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
             margin: 20px;
-            background-color: #f4f4f4;
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
+            margin-top: 20px;
         }
         th, td {
             padding: 10px;
             text-align: center;
+            border: 1px solid #ddd;
         }
-        th {
-            background-color: #4CAF50;
+        .status-ok {
+            background-color: #28a745;
             color: white;
         }
-        .filter-container {
+        .status-ng {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status-na {
+            background-color: #ffc107;
+            color: black;
+        }
+        .search-bar {
             margin-bottom: 20px;
-        }
-        select, input {
-            padding: 8px;
-            margin-right: 10px;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>CTM Monitoring Dashboard</h1>
+    <div class="container">
+        <h1>Communication Terminal Management Monitoring</h1>
 
-    <!-- Filter Section -->
-    <div class="filter-container">
-        <label for="country-filter">Filter by Destination:</label>
-        <select id="country-filter">
-            <option value="">All</option>
-            <option value="ANGOLA">ANGOLA</option>
-            <option value="BELGIUM">BELGIUM</option>
-            <option value="CAMBODIA">CAMBODIA</option>
-            <option value="ETHIOPIA">ETHIOPIA</option>
-            <option value="INDONESIA">INDONESIA</option>
-            <option value="LAOS">LAOS</option>
-            <option value="MALAYSIA">MALAYSIA</option>
-            <option value="MYANMAR">MYANMAR</option>
-            <option value="NETHERLANDS">NETHERLANDS</option>
-            <!-- Add more options as needed -->
-        </select>
-        
-        <label for="judgment-filter">Filter by Judgment:</label>
-        <select id="judgment-filter">
-            <option value="">All</option>
-            <option value="OK">OK</option>
-            <option value="NG">NG</option>
-            <option value="#N/A">#N/A</option>
-        </select>
+        <!-- Search and Filter Section -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by Part Number or Destination..." style="width: 100%; padding: 8px;">
+        </div>
 
-        <button onclick="applyFilters()">Apply Filters</button>
+        <!-- Results Data Table -->
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Part Name</th>
+                    <th>Part Number</th>
+                    <th>Destination</th>
+                    <th>Judgment from CTM HCM</th>
+                    <th>Judgment for Checksheet</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted dynamically here -->
+            </tbody>
+        </table>
     </div>
 
-    <!-- Data Table -->
-    <table id="ctm-table">
-        <thead>
-            <tr>
-                <th>Part Name</th>
-                <th>Controller Type</th>
-                <th>Part Number</th>
-                <th>Destination</th>
-                <th>Judgment (CTM HCM)</th>
-                <th>Judgment (Checksheet)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Sample Data Rows (Replace with actual data from your Excel) -->
-            <tr>
-                <td>RADIO</td>
-                <td>YA00010689</td>
-                <td>YA00010689</td>
-                <td>ANGOLA</td>
-                <td>ANGOLA</td>
-                <td>NG</td>
-            </tr>
-            <tr>
-                <td>RADIO</td>
-                <td>YA00010689</td>
-                <td>YA00010689</td>
-                <td>BELGIUM</td>
-                <td>BELGIUM</td>
-                <td>OK</td>
-            </tr>
-            <tr>
-                <td>RADIO</td>
-                <td>YA00010689</td>
-                <td>YA00010689</td>
-                <td>CAMBODIA</td>
-                <td>CAMBODIA</td>
-                <td>NG</td>
-            </tr>
-            <!-- Add more data rows dynamically here -->
-        </tbody>
-    </table>
-
     <script>
-        const table = document.getElementById("ctm-table");
-        const countryFilter = document.getElementById("country-filter");
-        const judgmentFilter = document.getElementById("judgment-filter");
+        $(document).ready(function() {
+            // Complete Data List
+            const data = [
+                // Part Number 1 (YA00010689)
+                { partName: "YA00010689", partNumber: "AGO", destination: "ANGOLA", judgmentCTM: "ANGOLA", judgmentSheet: "× NG" },
+                { partName: "YA00010689", partNumber: "BEL", destination: "BELGIUM", judgmentCTM: "BELGIUM", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "KHM", destination: "CAMBODIA", judgmentCTM: "CAMBODIA", judgmentSheet: "× NG" },
+                { partName: "YA00010689", partNumber: "ETH", destination: "ETHIOPIA", judgmentCTM: "ETHIOPIA", judgmentSheet: "× NG" },
+                { partName: "YA00010689", partNumber: "IDN", destination: "INDONESIA", judgmentCTM: "INDONESIA", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "LAO", destination: "LAOS", judgmentCTM: "LAOS", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "MYS", destination: "MALAYSIA", judgmentCTM: "MALAYSIA", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "MMR", destination: "MYANMAR", judgmentCTM: "MYANMAR", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "NLD", destination: "NETHERLANDS", judgmentCTM: "NETHERLANDS", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "NGA", destination: "NIGERIA", judgmentCTM: "NIGERIA", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "OMN", destination: "OMAN", judgmentCTM: "OMAN", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "PNG", destination: "PAPUA NEW GUINEA", judgmentCTM: "PAPUA NEW GUINEA", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "PHL", destination: "PHILIPPINES", judgmentCTM: "PHILIPPINES", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "SGP", destination: "SINGAPORE", judgmentCTM: "SINGAPORE", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "SLB", destination: "SOLOMON ISLANDS", judgmentCTM: "SOLOMON ISLANDS", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "ZAF", destination: "SOUTH AFRICA", judgmentCTM: "SOUTH AFRICA", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "THA", destination: "THAILAND", judgmentCTM: "THAILAND", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "VNM", destination: "VIETNAM", judgmentCTM: "VIETNAM", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "AZE", destination: "AZERBAIJAN", judgmentCTM: "AZERBAIJAN", judgmentSheet: "× NG" },
+                { partName: "YA00010689", partNumber: "SUR", destination: "SURINAME", judgmentCTM: "SURINAME", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "SSD", destination: "SOUTH SUDAN", judgmentCTM: "SOUTH SUDAN", judgmentSheet: "× NG" },
+                { partName: "YA00010689", partNumber: "UAE", destination: "UAE", judgmentCTM: "UAE", judgmentSheet: "#N/A" },
+                { partName: "YA00010689", partNumber: "USA", destination: "NORTH AMERICA", judgmentCTM: "NORTH AMERICA", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "COL", destination: "COLUMBIA", judgmentCTM: "COLUMBIA", judgmentSheet: "○ OK" },
+                { partName: "YA00010689", partNumber: "NZE", destination: "NEW ZEALAND", judgmentCTM: "NEW ZEALAND", judgmentSheet: "#N/A" },
+                // Part Number 2 (4714374)
+                { partName: "4714374", partNumber: "AGO", destination: "ANGOLA", judgmentCTM: "ANGOLA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "BEL", destination: "BELGIUM", judgmentCTM: "BELGIUM", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "KHM", destination: "CAMBODIA", judgmentCTM: "CAMBODIA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "ETH", destination: "ETHIOPIA", judgmentCTM: "ETHIOPIA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "IDN", destination: "INDONESIA", judgmentCTM: "INDONESIA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "LAO", destination: "LAOS", judgmentCTM: "LAOS", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "MYS", destination: "MALAYSIA", judgmentCTM: "MALAYSIA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "MMR", destination: "MYANMAR", judgmentCTM: "MYANMAR", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "NLD", destination: "NETHERLANDS", judgmentCTM: "NETHERLANDS", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "NGA", destination: "NIGERIA", judgmentCTM: "NIGERIA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "OMN", destination: "OMAN", judgmentCTM: "OMAN", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "PNG", destination: "PAPUA NEW GUINEA", judgmentCTM: "PAPUA NEW GUINEA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "PHL", destination: "PHILIPPINES", judgmentCTM: "PHILIPPINES", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "SGP", destination: "SINGAPORE", judgmentCTM: "SINGAPORE", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "SLB", destination: "SOLOMON ISLANDS", judgmentCTM: "SOLOMON ISLANDS", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "ZAF", destination: "SOUTH AFRICA", judgmentCTM: "SOUTH AFRICA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "THA", destination: "THAILAND", judgmentCTM: "THAILAND", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "VNM", destination: "VIETNAM", judgmentCTM: "VIETNAM", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "AZE", destination: "AZERBAIJAN", judgmentCTM: "AZERBAIJAN", judgmentSheet: "× NG" },
+                { partName: "4714374", partNumber: "SUR", destination: "SURINAME", judgmentCTM: "SURINAME", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "SSD", destination: "SOUTH SUDAN", judgmentCTM: "SOUTH SUDAN", judgmentSheet: "× NG" },
+                { partName: "4714374", partNumber: "UAE", destination: "UAE", judgmentCTM: "UAE", judgmentSheet: "#N/A" },
+                { partName: "4714374", partNumber: "USA", destination: "NORTH AMERICA", judgmentCTM: "NORTH AMERICA", judgmentSheet: "× NG" },
+                { partName: "4714374", partNumber: "COL", destination: "COLUMBIA", judgmentCTM: "COLUMBIA", judgmentSheet: "○ OK" },
+                { partName: "4714374", partNumber: "NZE", destination: "NEW ZEALAND", judgmentCTM: "NEW ZEALAND", judgmentSheet: "#N/A" },
+                // Part Number 3 (4635318)
+                { partName: "4635318", partNumber: "AGO", destination: "ANGOLA", judgmentCTM: "ANGOLA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "BEL", destination: "BELGIUM", judgmentCTM: "BELGIUM", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "KHM", destination: "CAMBODIA", judgmentCTM: "CAMBODIA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "ETH", destination: "ETHIOPIA", judgmentCTM: "ETHIOPIA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "IDN", destination: "INDONESIA", judgmentCTM: "INDONESIA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "LAO", destination: "LAOS", judgmentCTM: "LAOS", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "MYS", destination: "MALAYSIA", judgmentCTM: "MALAYSIA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "MMR", destination: "MYANMAR", judgmentCTM: "MYANMAR", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "NLD", destination: "NETHERLANDS", judgmentCTM: "NETHERLANDS", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "NGA", destination: "NIGERIA", judgmentCTM: "NIGERIA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "OMN", destination: "OMAN", judgmentCTM: "OMAN", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "PNG", destination: "PAPUA NEW GUINEA", judgmentCTM: "PAPUA NEW GUINEA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "PHL", destination: "PHILIPPINES", judgmentCTM: "PHILIPPINES", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "SGP", destination: "SINGAPORE", judgmentCTM: "SINGAPORE", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "SLB", destination: "SOLOMON ISLANDS", judgmentCTM: "SOLOMON ISLANDS", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "ZAF", destination: "SOUTH AFRICA", judgmentCTM: "SOUTH AFRICA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "THA", destination: "THAILAND", judgmentCTM: "THAILAND", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "VNM", destination: "VIETNAM", judgmentCTM: "VIETNAM", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "AZE", destination: "AZERBAIJAN", judgmentCTM: "AZERBAIJAN", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "SUR", destination: "SURINAME", judgmentCTM: "SURINAME", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "SSD", destination: "SOUTH SUDAN", judgmentCTM: "SOUTH SUDAN", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "UAE", destination: "UAE", judgmentCTM: "UAE", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "USA", destination: "NORTH AMERICA", judgmentCTM: "NORTH AMERICA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "COL", destination: "COLUMBIA", judgmentCTM: "COLUMBIA", judgmentSheet: "#N/A" },
+                { partName: "4635318", partNumber: "NZE", destination: "NEW ZEALAND", judgmentCTM: "NEW ZEALAND", judgmentSheet: "#N/A" }
+            ];
 
-        // Function to apply filters
-        function applyFilters() {
-            const countryValue = countryFilter.value.toUpperCase();
-            const judgmentValue = judgmentFilter.value.toUpperCase();
+            // Populate Table with Data
+            const tableBody = $("#dataTable tbody");
+            data.forEach(item => {
+                const row = `<tr>
+                    <td>${item.partName}</td>
+                    <td>${item.partNumber}</td>
+                    <td>${item.destination}</td>
+                    <td>${item.judgmentCTM}</td>
+                    <td class="${item.judgmentSheet.includes('OK') ? 'status-ok' : item.judgmentSheet.includes('NG') ? 'status-ng' : 'status-na'}">${item.judgmentSheet}</td>
+                </tr>`;
+                tableBody.append(row);
+            });
 
-            const rows = table.getElementsByTagName("tr");
-            for (let i = 1; i < rows.length; i++) {
-                const cells = rows[i].getElementsByTagName("td");
-                const countryCell = cells[3].innerText.toUpperCase();
-                const judgmentCell = cells[5].innerText.toUpperCase();
+            // Initialize DataTable with search functionality
+            $('#dataTable').DataTable();
 
-                if (
-                    (countryValue === "" || countryCell.includes(countryValue)) &&
-                    (judgmentValue === "" || judgmentCell.includes(judgmentValue))
-                ) {
-                    rows[i].style.display = "";
-                } else {
-                    rows[i].style.display = "none";
-                }
-            }
-        }
-
-        // Adding sorting functionality for the table
-        function sortTable(n) {
-            const rows = table.rows;
-            let switching = true;
-            let dir = "asc";
-            while (switching) {
-                switching = false;
-                const rowsArray = Array.from(rows).slice(1);
-                for (let i = 0; i < rowsArray.length - 1; i++) {
-                    const x = rowsArray[i].getElementsByTagName("TD")[n];
-                    const y = rowsArray[i + 1].getElementsByTagName("TD")[n];
-                    if (dir === "asc" && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() || 
-                        dir === "desc" && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        rowsArray[i].parentNode.insertBefore(rowsArray[i + 1], rowsArray[i]);
-                        switching = true;
-                        break;
-                    }
-                }
-                if (!switching && dir === "asc") {
-                    dir = "desc";
-                    switching = true;
-                }
-            }
-        }
-
-        // Add sorting to table headers
-        const headers = table.querySelectorAll("th");
-        headers.forEach((header, index) => {
-            header.addEventListener("click", () => sortTable(index));
+            // Search Filter
+            $('#searchInput').on('keyup', function() {
+                var table = $('#dataTable').DataTable();
+                table.search(this.value).draw();
+            });
         });
     </script>
 </body>
