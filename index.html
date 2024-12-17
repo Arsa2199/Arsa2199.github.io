@@ -3,140 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Communication Monitoring</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <title>Excavator Parts Inspection Report</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
         }
         h1 {
             text-align: center;
+            color: #333;
             margin-top: 20px;
         }
-        .status-ok {
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .ok {
             color: green;
             font-weight: bold;
         }
-        .status-ng {
+        .ng {
             color: red;
-            font-weight: bold;
-        }
-        .status-n-a {
-            color: gray;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-
-    <!-- Page Title -->
-    <h1>Communication Terminal Monitoring</h1>
-
-    <!-- Table -->
-    <div class="container mt-4">
-        <table id="monitoring-table" class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>Part Name</th>
-                    <th>Controller Type</th>
-                    <th>Part Number</th>
-                    <th>Destination</th>
-                    <th>Judgement from CTH HCM</th>
-                    <th>Judgement for Checksheet</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data loaded dynamically -->
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Chart -->
-    <div class="container mt-5">
-        <h3>Status Summary</h3>
-        <canvas id="statusChart"></canvas>
-    </div>
-
-    <!-- Footer -->
-    <footer class="text-center mt-5">
-        <p>&copy; 2024 Advanced Monitoring System</p>
-    </footer>
-
-    <!-- JS Libraries -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script>
-        async function fetchData() {
-            const response = await fetch("/api/data");
-            return response.json();
-        }
-
-        function formatStatus(status) {
-            if (status === "OK") return "status-ok";
-            if (status === "NG") return "status-ng";
-            return "status-n-a";
-        }
-
-        async function populateTable() {
-            const data = await fetchData();
-            const tableBody = document.querySelector("#monitoring-table tbody");
-
-            data.forEach(row => {
-                const cthStatus = formatStatus(row["JUDGEMENT FROM CTH HCM"]);
-                const checkSheetStatus = formatStatus(row["JUDGEMENT FOR CHECKSHEET"]);
-
-                const tr = `
-                    <tr>
-                        <td>${row["PART NAME"]}</td>
-                        <td>${row["CONTROLLER TYPE"]}</td>
-                        <td>${row["PART NUMBER"]}</td>
-                        <td>${row["DESTINATION"]}</td>
-                        <td class="${cthStatus}">${row["JUDGEMENT FROM CTH HCM"]}</td>
-                        <td class="${checkSheetStatus}">${row["JUDGEMENT FOR CHECKSHEET"]}</td>
-                    </tr>
-                `;
-                tableBody.insertAdjacentHTML("beforeend", tr);
-            });
-
-            $("#monitoring-table").DataTable();
-        }
-
-        async function generateChart() {
-            const data = await fetchData();
-            const statusCounts = { OK: 0, NG: 0, N_A: 0 };
-
-            data.forEach(row => {
-                const status = row["JUDGEMENT FOR CHECKSHEET"];
-                if (status === "OK") statusCounts.OK++;
-                else if (status === "NG") statusCounts.NG++;
-                else statusCounts.N_A++;
-            });
-
-            const ctx = document.getElementById("statusChart").getContext("2d");
-            new Chart(ctx, {
-                type: "pie",
-                data: {
-                    labels: ["OK", "NG", "N/A"],
-                    datasets: [{
-                        data: [statusCounts.OK, statusCounts.NG, statusCounts.N_A],
-                        backgroundColor: ["#28a745", "#dc3545", "#6c757d"]
-                    }]
-                }
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            populateTable();
-            generateChart();
-        });
-    </script>
+    <h1>Excavator Parts Inspection Report</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Part Number</th>
+                <th>Part Name</th>
+                <th>Serial Number</th>
+                <th>Model</th>
+                <th>Destination</th>
+                <th>Supplier</th>
+                <th>Judgment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>123456</td>
+                <td>Pump Assembly</td>
+                <td>S/N-00123</td>
+                <td>EX-300</td>
+                <td>USA</td>
+                <td>ABC Ltd</td>
+                <td class="ok">OK</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>234567</td>
+                <td>Valve Block</td>
+                <td>S/N-00456</td>
+                <td>EX-350</td>
+                <td>Germany</td>
+                <td>XYZ Co</td>
+                <td class="ng">NG</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>345678</td>
+                <td>Hydraulic Cylinder</td>
+                <td>S/N-00789</td>
+                <td>EX-400</td>
+                <td>China</td>
+                <td>LMN Inc</td>
+                <td class="ok">OK</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>456789</td>
+                <td>Engine Mount</td>
+                <td>S/N-01011</td>
+                <td>EX-450</td>
+                <td>India</td>
+                <td>PQR Pvt</td>
+                <td class="ng">NG</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>567890</td>
+                <td>Control Panel</td>
+                <td>S/N-01314</td>
+                <td>EX-500</td>
+                <td>Japan</td>
+                <td>JKL Ltd</td>
+                <td class="ok">OK</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>678901</td>
+                <td>Oil Filter</td>
+                <td>S/N-01617</td>
+                <td>EX-550</td>
+                <td>Brazil</td>
+                <td>RST Corp</td>
+                <td class="ng">NG</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>789012</td>
+                <td>Gear Box</td>
+                <td>S/N-01920</td>
+                <td>EX-600</td>
+                <td>Russia</td>
+                <td>UVW LLC</td>
+                <td class="ok">OK</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>890123</td>
+                <td>Track Assembly</td>
+                <td>S/N-02223</td>
+                <td>EX-650</td>
+                <td>UK</td>
+                <td>GHI Ltd</td>
+                <td class="ng">NG</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>901234</td>
+                <td>Cabin Frame</td>
+                <td>S/N-02526</td>
+                <td>EX-700</td>
+                <td>Australia</td>
+                <td>DEF Inc</td>
+                <td class="ok">OK</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
