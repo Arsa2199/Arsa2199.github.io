@@ -3,168 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Monitoring Dashboard</title>
+    <title>Communication Terminal Management</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
     <style>
-        /* General Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: "Arial", sans-serif;
-            background-color: #f4f7fc;
-            color: #333;
-            padding: 20px;
+            background-color: #f4f6f9;
+            font-family: Arial, sans-serif;
         }
-
-        /* Dashboard Container */
-        .dashboard {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #0056b3;
-            margin-bottom: 20px;
-        }
-
-        /* Card Layout */
-        .card {
-            background: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.2s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-        }
-
-        .card-header {
-            background: #007BFF;
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            font-size: 1.2rem;
+        .status-ok {
+            color: green;
             font-weight: bold;
         }
-
-        .card-body {
-            padding: 20px;
-            text-align: center;
+        .status-ng {
+            color: red;
+            font-weight: bold;
         }
-
-        /* Table Styling */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
+        .status-n-a {
+            color: gray;
+            font-weight: bold;
         }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #007BFF;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        /* Refresh Button */
-        .refresh-btn {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            cursor: pointer;
-            border-radius: 5px;
-            display: block;
+        .table-container {
             margin: 20px auto;
+            max-width: 95%;
         }
-
-        .refresh-btn:hover {
-            background-color: #218838;
+        .title-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>Advanced Item Monitoring Dashboard</h1>
-
-    <!-- Dashboard Container -->
-    <div class="dashboard">
-        <!-- Data Card -->
-        <div class="card">
-            <div class="card-header">Item List</div>
-            <div class="card-body">
-                <table id="item-table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Item Name</th>
-                            <th>Quantity</th>
-                            <th>Status</th>
-                            <th>Last Updated</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Table Rows Will Be Populated Dynamically -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <!-- Header -->
+    <div class="title-header">
+        <h1>Communication Terminal Management Status</h1>
+        <p>Interactive Monitoring System</p>
     </div>
 
-    <!-- Refresh Button -->
-    <button class="refresh-btn" onclick="fetchData()">Refresh Data</button>
+    <!-- Table Container -->
+    <div class="table-container">
+        <table id="status-table" class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Part Name</th>
+                    <th>Controller Type</th>
+                    <th>Part Number</th>
+                    <th>Destination</th>
+                    <th>Judgement from CTH HCM</th>
+                    <th>Judgement for Checksheet</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be inserted dynamically here -->
+            </tbody>
+        </table>
+    </div>
 
-    <!-- JavaScript for Data Fetching -->
+    <!-- Footer -->
+    <div class="text-center mt-4">
+        <p>&copy; 2024 Communication Terminal Monitoring System</p>
+    </div>
+
+    <!-- JQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
     <script>
-        // Function to Fetch Data from Backend API
-        async function fetchData() {
-            try {
-                const response = await fetch("http://your-backend-url/api/items"); // Replace with your API
-                const data = await response.json();
+        // Sample data - Replace this with JSON from your backend
+        const data = [
+            { "part_name": "AGO", "controller_type": "VA00010689", "part_number": "AGOY00010689", "destination": "ANGOLA", "judgement_cth": "OK", "judgement_checksheet": "NG" },
+            { "part_name": "BEL", "controller_type": "VA00010689", "part_number": "BELY00010689", "destination": "BELGIUM", "judgement_cth": "OK", "judgement_checksheet": "OK" },
+            { "part_name": "PHL", "controller_type": "4174374", "part_number": "PHLY4174374", "destination": "PHILIPPINES", "judgement_cth": "OK", "judgement_checksheet": "OK" },
+            { "part_name": "SGP", "controller_type": "VA00010689", "part_number": "SGPY00010689", "destination": "SINGAPORE", "judgement_cth": "NG", "judgement_checksheet": "OK" },
+            { "part_name": "THA", "controller_type": "4635318", "part_number": "THAY4635318", "destination": "THAILAND", "judgement_cth": "N/A", "judgement_checksheet": "N/A" }
+        ];
 
-                const tableBody = document.querySelector("#item-table tbody");
-                tableBody.innerHTML = ""; // Clear existing table data
+        // Function to generate table rows dynamically
+        function populateTable(data) {
+            const tableBody = document.querySelector("#status-table tbody");
+            tableBody.innerHTML = "";
 
-                // Populate Table Rows
-                data.forEach((item, index) => {
-                    const row = `
-                        <tr>
-                            <td>${index + 1}</td>
-                            <td>${item.name}</td>
-                            <td>${item.quantity}</td>
-                            <td>${item.status}</td>
-                            <td>${item.updated_at}</td>
-                        </tr>
-                    `;
-                    tableBody.innerHTML += row;
-                });
-            } catch (error) {
-                console.error("Failed to fetch data:", error);
-                alert("Failed to load data. Please check your backend API.");
-            }
+            data.forEach(item => {
+                const row = document.createElement("tr");
+
+                // Status Formatting
+                const judgementCTHClass = formatStatus(item.judgement_cth);
+                const judgementChecksheetClass = formatStatus(item.judgement_checksheet);
+
+                row.innerHTML = `
+                    <td>${item.part_name}</td>
+                    <td>${item.controller_type}</td>
+                    <td>${item.part_number}</td>
+                    <td>${item.destination}</td>
+                    <td class="${judgementCTHClass}">${item.judgement_cth}</td>
+                    <td class="${judgementChecksheetClass}">${item.judgement_checksheet}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
         }
 
-        // Automatically Fetch Data When Page Loads
-        window.onload = fetchData;
+        // Function to apply color formatting based on status
+        function formatStatus(status) {
+            if (status === "OK") return "status-ok";
+            if (status === "NG") return "status-ng";
+            return "status-n-a";
+        }
+
+        // Initialize DataTables and Populate Data
+        $(document).ready(function () {
+            populateTable(data); // Populate the table with data
+
+            // Initialize DataTable plugin
+            $('#status-table').DataTable({
+                responsive: true
+            });
+        });
     </script>
 </body>
 </html>
