@@ -11,22 +11,37 @@
             padding: 0;
         }
         .container {
-            border: 1px solid black;
-            max-width: 900px;
+            width: 794px;
             margin: 20px auto;
+            border: 1px solid black;
             padding: 20px;
         }
         .header {
             text-align: center;
+            margin-bottom: 20px;
         }
         .header img {
-            width: 100px;
+            width: 80px;
         }
-        .header h1, .header h2, .header p {
+        .header h1 {
+            font-size: 18px;
             margin: 5px 0;
         }
-        .info, .footer {
-            margin-top: 20px;
+        .header h2 {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .header p {
+            font-size: 12px;
+            margin: 5px 0;
+        }
+        .title {
+            text-align: center;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .info {
+            margin-bottom: 20px;
         }
         .info table {
             width: 100%;
@@ -34,22 +49,25 @@
             margin-bottom: 20px;
         }
         .info td {
-            padding: 8px 10px;
-            vertical-align: top;
+            padding: 5px;
+            font-size: 14px;
         }
-        .info .label {
-            width: 25%;
+        .info td.label {
+            width: 30%;
             font-weight: bold;
         }
         .exam-table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            font-size: 14px;
         }
         .exam-table th, .exam-table td {
             border: 1px solid black;
-            padding: 10px;
+            padding: 5px;
             text-align: center;
+        }
+        .exam-table th {
+            background-color: #f2f2f2;
         }
         .footer {
             text-align: left;
@@ -66,9 +84,9 @@
             <p>KAMPUS A, GEDUNG F&G LT. 4 KABAG TU FTI<br>
             Telp: 62-21-5663232, 62-21-5605835 ext.8406,5605841<br>
             Email: fti@trisakti.ac.id</p>
-            <hr>
-            <h3>KARTU PESERTA UJIAN</h3>
         </div>
+
+        <div class="title">KARTU PESERTA UJIAN</div>
 
         <div class="info">
             <table>
