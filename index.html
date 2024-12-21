@@ -8,13 +8,13 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 0;
         }
         .container {
             border: 1px solid black;
+            max-width: 900px;
+            margin: 20px auto;
             padding: 20px;
-            max-width: 800px;
-            margin: auto;
         }
         .header {
             text-align: center;
@@ -22,10 +22,10 @@
         .header img {
             width: 100px;
         }
-        .header h1, .header h2 {
-            margin: 5px;
+        .header h1, .header h2, .header p {
+            margin: 5px 0;
         }
-        .info {
+        .info, .footer {
             margin-top: 20px;
         }
         .info table {
@@ -34,24 +34,25 @@
             margin-bottom: 20px;
         }
         .info td {
-            padding: 5px;
+            padding: 8px 10px;
+            vertical-align: top;
         }
         .info .label {
-            width: 30%;
+            width: 25%;
             font-weight: bold;
         }
-        .table {
+        .exam-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        .table th, .table td {
+        .exam-table th, .exam-table td {
             border: 1px solid black;
+            padding: 10px;
             text-align: center;
-            padding: 5px;
         }
         .footer {
-            text-align: right;
+            text-align: left;
             margin-top: 20px;
         }
     </style>
@@ -73,11 +74,11 @@
             <table>
                 <tr>
                     <td class="label">NIM</td>
-                    <td>061002304046</td>
+                    <td>061002304044</td>
                 </tr>
                 <tr>
                     <td class="label">Nama</td>
-                    <td>ARSA DAMARA PUTRA</td>
+                    <td>HOTMA PANYAPULAN HARAHAP</td>
                 </tr>
                 <tr>
                     <td class="label">Program Studi</td>
@@ -94,7 +95,7 @@
             </table>
         </div>
 
-        <table class="table">
+        <table class="exam-table">
             <thead>
                 <tr>
                     <th>No.</th>
