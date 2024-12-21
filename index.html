@@ -1,345 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTM Monitoring Dashboard</title>
+    <title>Kartu Peserta Ujian</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-
-        header {
-            background: #35424a;
-            color: #ffffff;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        main {
             padding: 20px;
         }
-
-        table {
+        .container {
+            border: 1px solid black;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+        .header {
+            text-align: center;
+        }
+        .header img {
+            width: 100px;
+        }
+        .header h1, .header h2 {
+            margin: 5px;
+        }
+        .info {
+            margin-top: 20px;
+        }
+        .info table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .info td {
+            padding: 5px;
+        }
+        .info .label {
+            width: 30%;
+            font-weight: bold;
+        }
+        .table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-
-        table, th, td {
-            border: 1px solid #dddddd;
+        .table th, .table td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
         }
-
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #35424a;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        input[type="text"] {
-            margin-bottom: 10px;
-            padding: 8px;
-            width: 100%;
-            box-sizing: border-box;
+        .footer {
+            text-align: right;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Communication Terminal Management Monitoring</h1>
-    </header>
-    <main>
-        <section>
-            <h2>Data Overview</h2>
-            <input type="text" id="searchInput" placeholder="Search by Part Name or Controller Type" onkeyup="filterTable()">
-            <table id="dataTable">
-                <thead>
-                    <tr>
-                        <th>Part Name</th>
-                        <th>Controller Type</th>
-                        <th>Part Number</th>
-                        <th>Destination</th>
-                        <th>Judgement from CTM HCM</th>
-                        <th>Judgement for Checksheet</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>AGO</td>
-                        <td>ANGOLA</td>
-                        <td>AGOYA00010689</td>
-                        <td>×</td>
-                        <td>NG</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>BEL</td>
-                        <td>BELGIUM</td>
-                        <td>BELYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>KHM</td>
-                        <td>CAMBODIA</td>
-                        <td>KHMYA00010689</td>
-                        <td>×</td>
-                        <td>NG</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>ETH</td>
-                        <td>ETHIOPIA</td>
-                        <td>ETHYA00010689</td>
-                        <td>×</td>
-                        <td>NG</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>IDN</td>
-                        <td>INDONESIA</td>
-                        <td>IDNYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>LAO</td>
-                        <td>LAOS</td>
-                        <td>LAOYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        < td></td>
-                        <td>YA00010689</td>
-                        <td>MYS</td>
-                        <td>MALAYSIA</td>
-                        <td>MYSYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>MMR</td>
-                        <td>MYANMAR</td>
-                        <td>MMRYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>NLD</td>
-                        <td>NETHERLANDS</td>
-                        <td>NLDYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>NGA</td>
-                        <td>NIGERIA</td>
-                        <td>NGAYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>OMN</td>
-                        <td>OMAN</td>
-                        <td>OMNYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>PNG</td>
-                        <td>PAPUA NEW GUINEA</td>
-                        <td>PNGYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>PHL</td>
-                        <td>PHILIPPINES</td>
-                        <td>PHLYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>SGP</td>
-                        <td>SINGAPORE</td>
-                        <td>SGPYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>THA</td>
-                        <td>THAILAND</td>
-                        <td>THAYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>VNM</td>
-                        <td>VIETNAM</td>
-                        <td>VNMYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>AZE</td>
-                        <td>AZERBAIJAN</td>
-                        <td>AZEYA00010689</td>
-                        <td>×</td>
-                        <td>NG</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>SUR</td>
-                        <td>SURINAME</td>
-                        <td>SURYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>SSD</td ```html
-                        <td>SOUTH SUDAN</td>
-                        <td>SSDYA00010689</td>
-                        <td>×</td>
-                        <td>NG</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>UAE</td>
-                        <td>UAE</td>
-                        <td>UAEYA00010689</td>
-                        <td>#N/A</td>
-                        <td>#N/A</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>USA</td>
-                        <td>NORTH AMERICA</td>
-                        <td>USAYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>COL</td>
-                        <td>COLUMBIA</td>
-                        <td>COLYA00010689</td>
-                        <td>○</td>
-                        <td>OK</td>
-                    </tr>
-                    <tr>
-                        <td>RADIO</td>
-                        <td></td>
-                        <td>YA00010689</td>
-                        <td>NZE</td>
-                        <td>NEW ZEALAND</td>
-                        <td>NZEYA00010689</td>
-                        <td>#N/A</td>
-                        <td>#N/A</td>
-                    </tr>
-                    <!-- Add more rows as needed -->
-                </tbody>
-            </table>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 CTM Monitoring. All rights reserved.</p>
-    </footer>
-    <script>
-        function filterTable() {
-            const input = document.getElementById("searchInput");
-            const filter = input.value.toLowerCase();
-            const table = document.getElementById("dataTable");
-            const tr = table.getElementsByTagName("tr");
+    <div class="container">
+        <div class="header">
+            <img src="logo-univ.png" alt="Logo Universitas">
+            <h1>FAKULTAS TEKNOLOGI INDUSTRI</h1>
+            <h2>UNIVERSITAS TRISAKTI</h2>
+            <p>KAMPUS A, GEDUNG F&G LT. 4 KABAG TU FTI<br>
+            Telp: 62-21-5663232, 62-21-5605835 ext.8406,5605841<br>
+            Email: fti@trisakti.ac.id</p>
+            <hr>
+            <h3>KARTU PESERTA UJIAN</h3>
+        </div>
 
-            for (let i = 1; i < tr.length; i++) {
-                const td = tr[i].getElementsByTagName("td");
-                let found = false;
-                for (let j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        const txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                tr[i].style.display = found ? "" : "none";
-            }
-        }
-    </script>
+        <div class="info">
+            <table>
+                <tr>
+                    <td class="label">NIM</td>
+                    <td>061002304046</td>
+                </tr>
+                <tr>
+                    <td class="label">Nama</td>
+                    <td>ARSA DAMARA PUTRA</td>
+                </tr>
+                <tr>
+                    <td class="label">Program Studi</td>
+                    <td>TEKNIK MESIN</td>
+                </tr>
+                <tr>
+                    <td class="label">Penasihat Akademik</td>
+                    <td>Supriyadi</td>
+                </tr>
+                <tr>
+                    <td class="label">Periode Ujian</td>
+                    <td>Midterm Exam - Gasal 2024/2025 (R)</td>
+                </tr>
+            </table>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Kode</th>
+                    <th>Nama MK</th>
+                    <th>sks</th>
+                    <th>Tanggal</th>
+                    <th>Waktu</th>
+                    <th>Ruang</th>
+                    <th>TTD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>IMU6202</td>
+                    <td>Statistik dan Kontrol Kualitas</td>
+                    <td>2.00</td>
+                    <td>21 Oktober 2024</td>
+                    <td>18:30:00</td>
+                    <td>OLR-FTI</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>IMU6105</td>
+                    <td>Proyek Inovasi II</td>
+                    <td>1.00</td>
+                    <td>Belum/Tidak ada</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>IMK6208</td>
+                    <td>Getaran Mekanik</td>
+                    <td>2.00</td>
+                    <td>23 Oktober 2024</td>
+                    <td>18:30:00</td>
+                    <td>Online/Daring</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>IME6319</td>
+                    <td>Motor Bakar</td>
+                    <td>3.00</td>
+                    <td>26 Oktober 2024</td>
+                    <td>12:30:00</td>
+                    <td>Online/Daring</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>IMG6204</td>
+                    <td>Teknik Pengaturan</td>
+                    <td>2.00</td>
+                    <td>26 Oktober 2024</td>
+                    <td>18:30:00</td>
+                    <td>Online/Daring</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>IME6318</td>
+                    <td>Energi Alternatif</td>
+                    <td>3.00</td>
+                    <td>28 Oktober 2024</td>
+                    <td>18:30:00</td>
+                    <td>Online/Daring</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>IME6218</td>
+                    <td>Perpindahan Panas I</td>
+                    <td>2.00</td>
+                    <td>30 Oktober 2024</td>
+                    <td>18:30:00</td>
+                    <td>Online/Daring</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>IMK6301</td>
+                    <td>Statika Struktur</td>
+                    <td>3.00</td>
+                    <td>31 Oktober 2024</td>
+                    <td>18:30:00</td>
+                    <td>Online/Daring</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>IME6221</td>
+                    <td>Termodinamika I</td>
+                    <td>2.00</td>
+                    <td>2 November 2024</td>
+                    <td>08:30:00</td>
+                    <td>Online/Daring</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p>Jakarta, 21 Oktober 2024</p>
+        </div>
+    </div>
 </body>
 </html>
