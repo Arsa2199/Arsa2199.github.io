@@ -3,226 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kartu Peserta Ujian</title>
+    <title>CASA ARISTA BOARDING HOUSE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
         .container {
-            width: 794px;
-            margin: 20px auto;
-            border: 1px solid black;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        header {
+            background: #0056b3;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .pricing, .facilities {
+            text-align: left;
             padding: 20px;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
+        .pricing ul, .facilities ul {
+            list-style: none;
+            padding: 0;
         }
-        .header img {
-            width: 80px;
-        }
-        .header h1 {
+        .pricing li, .facilities li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
             font-size: 18px;
-            margin: 5px 0;
         }
-        .header h2 {
-            font-size: 16px;
-            margin: 5px 0;
-        }
-        .header p {
-            font-size: 12px;
-            margin: 5px 0;
-        }
-        .title {
-            text-align: center;
+        .facilities li::before {
+            content: "✔ ";
+            color: green;
             font-weight: bold;
-            margin: 20px 0;
         }
-        .info {
-            margin-bottom: 20px;
+        .gallery {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
         }
-        .info table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        .info td {
-            padding: 5px;
-            font-size: 14px;
-        }
-        .info td.label {
+        .gallery img {
             width: 30%;
-            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .exam-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        .exam-table th, .exam-table td {
-            border: 1px solid black;
-            padding: 5px;
+        .cta {
+            margin: 20px;
             text-align: center;
         }
-        .exam-table th {
-            background-color: #f2f2f2;
+        .cta button {
+            padding: 15px 25px;
+            background: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .cta button:hover {
+            background: #003d82;
         }
         .footer {
-            text-align: left;
-            margin-top: 20px;
+            text-align: center;
+            padding: 15px;
+            background: #0056b3;
+            color: white;
+            font-size: 16px;
+            border-radius: 0 0 8px 8px;
         }
     </style>
 </head>
 <body>
+    <header>CASA ARISTA BOARDING HOUSE</header>
     <div class="container">
-        <div class="header">
-            <img src="logo-univ.png" alt="Logo Universitas">
-            <h1>FAKULTAS TEKNOLOGI INDUSTRI</h1>
-            <h2>UNIVERSITAS TRISAKTI</h2>
-            <p>KAMPUS A, GEDUNG F&G LT. 4 KABAG TU FTI<br>
-            Telp: 62-21-5663232, 62-21-5605835 ext.8406,5605841<br>
-            Email: fti@trisakti.ac.id</p>
+        <h2>Tipe Kamar & Harga Sewa</h2>
+        <div class="pricing">
+            <ul>
+                <li><strong>Kamar Premium</strong> – Rp 1.250.000/bulan</li>
+                <li><strong>Kamar Standar</strong> – Rp 1.150.000/bulan</li>
+                <li><strong>Paviliun Deluxe</strong> – Rp 1.600.000/bulan</li>
+                <li><strong>Paviliun Executive</strong> – Rp 1.900.000/bulan</li>
+            </ul>
         </div>
-
-        <div class="title">KARTU PESERTA UJIAN</div>
-
-        <div class="info">
-            <table>
-                <tr>
-                    <td class="label">NIM</td>
-                    <td>061002304044</td>
-                </tr>
-                <tr>
-                    <td class="label">Nama</td>
-                    <td>HOTMA PANYAPULAN HARAHAP</td>
-                </tr>
-                <tr>
-                    <td class="label">Program Studi</td>
-                    <td>TEKNIK MESIN</td>
-                </tr>
-                <tr>
-                    <td class="label">Penasihat Akademik</td>
-                    <td>Supriyadi</td>
-                </tr>
-                <tr>
-                    <td class="label">Periode Ujian</td>
-                    <td>Midterm Exam - Gasal 2024/2025 (R)</td>
-                </tr>
-            </table>
+        <h2>Fasilitas Unggulan</h2>
+        <div class="facilities">
+            <ul>
+                <li>Kamar Full Furnished – AC, kamar mandi dalam, lemari, meja belajar, spring bed, dan WiFi kecepatan tinggi. (Water heater opsional +Rp 50.000/bulan)</li>
+                <li>Area Parkir Luas – Bisa untuk mobil dan motor.</li>
+                <li>Balkon Bersama – Tempat nyaman untuk bersantai.</li>
+                <li>Dapur Bersama Lengkap – Kulkas, kompor, dan dispenser.</li>
+                <li>Lingkungan Tenang & Strategis – Menjamin kenyamanan dan kemudahan akses bagi penghuni.</li>
+            </ul>
         </div>
-
-        <table class="exam-table">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Kode</th>
-                    <th>Nama MK</th>
-                    <th>sks</th>
-                    <th>Tanggal</th>
-                    <th>Waktu</th>
-                    <th>Ruang</th>
-                    <th>TTD</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>IMU6202</td>
-                    <td>Statistik dan Kontrol Kualitas</td>
-                    <td>2.00</td>
-                    <td>21 Oktober 2024</td>
-                    <td>18:30:00</td>
-                    <td>OLR-FTI</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>IMU6105</td>
-                    <td>Proyek Inovasi II</td>
-                    <td>1.00</td>
-                    <td>Belum/Tidak ada</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>IMK6208</td>
-                    <td>Getaran Mekanik</td>
-                    <td>2.00</td>
-                    <td>23 Oktober 2024</td>
-                    <td>18:30:00</td>
-                    <td>Online/Daring</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>IME6319</td>
-                    <td>Motor Bakar</td>
-                    <td>3.00</td>
-                    <td>26 Oktober 2024</td>
-                    <td>12:30:00</td>
-                    <td>Online/Daring</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>IMG6204</td>
-                    <td>Teknik Pengaturan</td>
-                    <td>2.00</td>
-                    <td>26 Oktober 2024</td>
-                    <td>18:30:00</td>
-                    <td>Online/Daring</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>IME6318</td>
-                    <td>Energi Alternatif</td>
-                    <td>3.00</td>
-                    <td>28 Oktober 2024</td>
-                    <td>18:30:00</td>
-                    <td>Online/Daring</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>IME6218</td>
-                    <td>Perpindahan Panas I</td>
-                    <td>2.00</td>
-                    <td>30 Oktober 2024</td>
-                    <td>18:30:00</td>
-                    <td>Online/Daring</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>IMK6301</td>
-                    <td>Statika Struktur</td>
-                    <td>3.00</td>
-                    <td>31 Oktober 2024</td>
-                    <td>18:30:00</td>
-                    <td>Online/Daring</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>IME6221</td>
-                    <td>Termodinamika I</td>
-                    <td>2.00</td>
-                    <td>2 November 2024</td>
-                    <td>08:30:00</td>
-                    <td>Online/Daring</td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="footer">
-            <p>Jakarta, 21 Oktober 2024</p>
+        <h2>Galeri</h2>
+        <div class="gallery">
+            <img src="https://via.placeholder.com/300" alt="Room Image 1">
+            <img src="https://via.placeholder.com/300" alt="Room Image 2">
+            <img src="https://via.placeholder.com/300" alt="Room Image 3">
         </div>
+        <div class="cta">
+            <button>Hubungi Kami</button>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2025 CASA ARISTA BOARDING HOUSE | All Rights Reserved
     </div>
 </body>
 </html>
