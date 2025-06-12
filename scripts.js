@@ -3,10 +3,8 @@
 // Since we are not using a bundler like Webpack, we access libraries from the global window object.
 // React and its hooks are provided by the 'react' script.
 const { useState, useEffect, useMemo, useCallback } = React;
-// Charting components are provided by the 'recharts' script on the global 'Recharts' object.
-const { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } = Recharts;
-// Icons are provided by the 'lucide-react' script on the global 'LucideReact' object.
-const { ChevronDown, CheckCircle2, XCircle, CircleHelp, Wrench, Zap, ListChecks, RefreshCw } = LucideReact;
+// Charting and Icon components will be accessed directly from their global objects (e.g., Recharts.PieChart)
+// to ensure they are correctly referenced in a no-bundler environment.
 
 
 // --- MOCK DATA GENERATION ---
@@ -60,7 +58,7 @@ const Header = ({ stats }) => (
     <header className="bg-gray-900/80 backdrop-blur-sm text-white p-4 border-b border-gray-700/50 sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
             <div className="flex items-center space-x-3">
-                <ListChecks className="h-8 w-8 text-blue-400" />
+                <LucideReact.ListChecks className="h-8 w-8 text-blue-400" />
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight">Excavator Test Control Standard</h1>
                     <p className="text-sm text-gray-400">Quality Assurance & Compliance Dashboard</p>
@@ -97,9 +95,9 @@ const ExcavatorListItem = ({ excavator, onSelect, isSelected, progress }) => (
 
 const ChecklistItem = ({ item, onStatusChange }) => {
     const statusInfo = {
-        'Pass': { icon: <CheckCircle2 className="text-green-500" />, color: 'text-green-400' },
-        'Fail': { icon: <XCircle className="text-red-500" />, color: 'text-red-400' },
-        'Untested': { icon: <CircleHelp className="text-gray-500" />, color: 'text-gray-500' },
+        'Pass': { icon: <LucideReact.CheckCircle2 className="text-green-500" />, color: 'text-green-400' },
+        'Fail': { icon: <LucideReact.XCircle className="text-red-500" />, color: 'text-red-400' },
+        'Untested': { icon: <LucideReact.CircleHelp className="text-gray-500" />, color: 'text-gray-500' },
     };
 
     return (
@@ -109,8 +107,8 @@ const ChecklistItem = ({ item, onStatusChange }) => {
                 <span className={statusInfo[item.status].color}>{item.name}</span>
             </div>
             <div className="flex space-x-1">
-                <button onClick={() => onStatusChange(item.id, 'Pass')} className="p-1 rounded-md hover:bg-green-500/20 disabled:opacity-50" disabled={item.status === 'Pass'}><CheckCircle2 size={18} className="text-green-500"/></button>
-                <button onClick={() => onStatusChange(item.id, 'Fail')} className="p-1 rounded-md hover:bg-red-500/20 disabled:opacity-50" disabled={item.status === 'Fail'}><XCircle size={18} className="text-red-500"/></button>
+                <button onClick={() => onStatusChange(item.id, 'Pass')} className="p-1 rounded-md hover:bg-green-500/20 disabled:opacity-50" disabled={item.status === 'Pass'}><LucideReact.CheckCircle2 size={18} className="text-green-500"/></button>
+                <button onClick={() => onStatusChange(item.id, 'Fail')} className="p-1 rounded-md hover:bg-red-500/20 disabled:opacity-50" disabled={item.status === 'Fail'}><LucideReact.XCircle size={18} className="text-red-500"/></button>
             </div>
         </div>
     );
@@ -130,14 +128,14 @@ const TestCategoryAccordion = ({ category, items, onStatusChange }) => {
         <div className="bg-gray-800/40 border border-gray-700/50 rounded-lg">
             <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between p-4 text-left">
                 <div className="flex items-center space-x-3">
-                    <Wrench className="text-blue-300" />
+                    <LucideReact.Wrench className="text-blue-300" />
                     <span className="font-bold text-lg text-white">{category}</span>
                 </div>
                 <div className="flex items-center space-x-4">
                     <span className="text-sm text-green-400">{stats.passed} Passed</span>
                     <span className="text-sm text-red-400">{stats.failed} Failed</span>
                     <span className="text-sm text-gray-400">{stats.total - stats.passed - stats.failed} Untested</span>
-                    <ChevronDown className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                    <LucideReact.ChevronDown className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                 </div>
             </button>
             {isOpen && (
@@ -236,7 +234,7 @@ function App() {
     }, [selectedExcavator]);
 
     return (
-        <div className="font-sans">
+        <div className="font-sans text-gray-200">
             <Header stats={fleetStats} />
             <main className="container mx-auto p-4 flex flex-col lg:flex-row gap-4">
                 {/* Left Panel: Excavator List */}
@@ -268,23 +266,23 @@ function App() {
                                     <p className="text-gray-400 text-lg">{selectedExcavator.model}</p>
                                     <div className="mt-4 flex space-x-2">
                                       <button onClick={() => handleBulkAction('Run All')} className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition-colors">
-                                          <Zap size={16}/><span>Run All Tests</span>
+                                          <LucideReact.Zap size={16}/><span>Run All Tests</span>
                                       </button>
                                       <button onClick={() => handleBulkAction('Reset')} className="flex items-center space-x-2 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition-colors">
-                                          <RefreshCw size={16}/><span>Reset</span>
+                                          <LucideReact.RefreshCw size={16}/><span>Reset</span>
                                       </button>
                                     </div>
                                 </div>
                                 <div className="h-40">
-                                  <ResponsiveContainer width="100%" height="100%">
-                                    <PieChart>
-                                      <Pie data={selectedExcavatorStats.data} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={35} outerRadius={60} fill="#8884d8" paddingAngle={5}>
-                                        {selectedExcavatorStats.data.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.color} />))}
-                                      </Pie>
-                                      <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #4b5563' }} />
-                                      <Legend />
-                                    </PieChart>
-                                  </ResponsiveContainer>
+                                  <Recharts.ResponsiveContainer width="100%" height="100%">
+                                    <Recharts.PieChart>
+                                      <Recharts.Pie data={selectedExcavatorStats.data} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={35} outerRadius={60} fill="#8884d8" paddingAngle={5}>
+                                        {selectedExcavatorStats.data.map((entry, index) => (<Recharts.Cell key={`cell-${index}`} fill={entry.color} />))}
+                                      </Recharts.Pie>
+                                      <Recharts.Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #4b5563' }} />
+                                      <Recharts.Legend />
+                                    </Recharts.PieChart>
+                                  </Recharts.ResponsiveContainer>
                                 </div>
                             </div>
                             
@@ -314,4 +312,4 @@ function App() {
 // Find the root DOM element and render the React App into it.
 const domContainer = document.querySelector('#root');
 const root = ReactDOM.createRoot(domContainer);
-root.render(<App />);
+root.render(React.createElement(App));
