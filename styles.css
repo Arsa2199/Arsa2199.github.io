@@ -1,0 +1,44 @@
+/*
+  This file contains custom CSS styles that supplement the Tailwind CSS framework.
+  It's used for styles that are difficult or verbose to implement with utility classes alone,
+  such as overriding third-party library styles or adding custom scrollbars.
+*/
+
+/* Basic body font as a fallback */
+body {
+    font-family: sans-serif;
+}
+
+/* Custom styling for Recharts Tooltip */
+.recharts-tooltip-cursor {
+    fill: rgba(255, 255, 255, 0.1);
+}
+
+.recharts-tooltip-wrapper {
+    background-color: #1f2937 !important; /* Corresponds to bg-gray-800 */
+    border-color: #4b5563 !important; /* Corresponds to border-gray-600 */
+    border-radius: 0.5rem !important;
+}
+
+.recharts-default-tooltip .recharts-tooltip-label {
+    color: #f3f4f6 !important; /* Corresponds to text-gray-100 */
+}
+
+/* Custom scrollbar styling for a consistent dark theme look */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1f2937; /* Corresponds to bg-gray-800 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b5563; /* Corresponds to bg-gray-600 */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* Corresponds to bg-gray-500 */
+}
