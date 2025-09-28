@@ -3,220 +3,257 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gift Tracker</title>
+  <title>LIST SESERAHAN ARSA & DINDA CANTIK</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background: #f5f7fa; padding: 20px; }
-    header { text-align: center; margin-bottom: 20px; }
-    h1 { margin-bottom: 10px; }
-    #searchInput {
-      padding: 10px; width: 80%; max-width: 400px;
-      border-radius: 8px; border: 1px solid #bbb;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffeef7;
+      margin: 0;
+      padding: 0;
+      color: #5a3c45;
     }
-    .progress-container {
-      width: 100%; background: #ddd; border-radius: 8px;
-      margin: 15px 0; height: 20px; overflow: hidden;
+    header {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffb6c1, #ffcce0);
+      color: #fff;
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 1px;
     }
-    .progress-bar {
-      height: 100%; background: #28a745; width: 0%; text-align: center;
-      color: white; font-size: 12px; transition: width 0.4s ease;
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
     }
-    table {
-      width: 100%; border-collapse: collapse; margin-top: 20px;
-      background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    .category {
+      background: #fff;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
     }
-    th, td {
-      padding: 10px; border: 1px solid #ddd; text-align: center;
+    .category h2 {
+      color: #d63384;
+      border-bottom: 2px solid #f7d6e6;
+      padding-bottom: 10px;
     }
-    th { background: #007bff; color: white; }
-    img {
-      width: 80px; height: 80px; object-fit: cover;
-      border-radius: 6px;
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 10px;
+      border-bottom: 1px dashed #f1c6d9;
     }
-    button {
-      padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer;
+    .item:last-child {
+      border-bottom: none;
     }
-    .buy-btn { background: #28a745; color: white; }
-    .unbuy-btn { background: #dc3545; color: white; }
-    input[type="number"] {
-      width: 100px; padding: 5px; border-radius: 6px; border: 1px solid #bbb;
+    .item input[type="text"], .item input[type="number"] {
+      padding: 5px;
+      border: 1px solid #f7c6d9;
+      border-radius: 8px;
+      margin-left: 10px;
     }
-    footer { text-align: center; margin-top: 30px; font-size: 13px; color: #777; }
+    .item input[type="file"] {
+      margin-left: 10px;
+    }
+    .item img {
+      max-width: 60px;
+      max-height: 60px;
+      border-radius: 10px;
+      margin-left: 10px;
+    }
+    .summary {
+      background: #fff0f6;
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    }
+    .summary h2 {
+      color: #c2185b;
+      margin-bottom: 15px;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+    .bought {
+      text-decoration: line-through;
+      color: #999;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎁 Gift Tracker</h1>
-    <input type="text" id="searchInput" placeholder="Search gift...">
-    <div class="progress-container">
-      <div class="progress-bar" id="progressBar">0%</div>
-    </div>
-  </header>
+  <header>💖 LIST SESERAHAN ARSA & DINDA CANTIK 💖</header>
+  <div class="container" id="giftList"></div>
 
-  <main>
-    <table id="giftTable">
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Item</th>
-          <th>Brand</th>
-          <th>Price</th>
-          <th>Status</th>
-          <th>Photo</th>
-          <th>Action</th>
-          <th>Upload</th>
-        </tr>
-      </thead>
-      <tbody id="giftBody"></tbody>
-    </table>
-  </main>
-
-  <footer>
-    <p>Gift Tracker • All data saved locally</p>
-  </footer>
+  <div class="summary">
+    <h2>💎 Summary</h2>
+    <p><strong>Total Price: Rp <span id="totalPrice">0</span></strong></p>
+    <canvas id="priceChart"></canvas>
+  </div>
 
   <script>
-    const gifts = [
-      {category:"MAKE UP", item:"Backstage Glow Face Pallete shade universa", brand:"Dior"},
-      {category:"MAKE UP", item:"Eyelash curler", brand:"Lashboss"},
-      {category:"MAKE UP", item:"Addict Refillable shine lipstick shade 727", brand:"Dior"},
-      {category:"MAKE UP", item:"Touche glow pact cushion shade B20", brand:"YSL"},
-      {category:"MAKE UP", item:"Brush 3 pcs", brand:"Aeris"},
-      {category:"MAKE UP", item:"Loose powder shade fair light", brand:"Something"},
-      {category:"MAKE UP", item:"Beautybland", brand:"Haquhara"},
-      {category:"MAKE UP", item:"Airbrush flawless setting spray", brand:"Charlotte Tilbury"},
-      {category:"MAKE UP", item:"Lume baked powder blush shade Maja", brand:"Guele"},
-      {category:"MAKE UP", item:"Cream blush shade Hope", brand:"-"},
-      {category:"MAKE UP", item:"Embryolisse lait cream 30ml", brand:"Embryolisse"},
-      {category:"MAKE UP", item:"Noir lash mascara", brand:"Instaperfect"},
+    const categories = {
+      "MAKE UP": [
+        "Backstage Glow Face Pallete shade universa (Dior)",
+        "Eyelash curler (lashboss)",
+        "Addict Refillable shine lipstick shade 727 (Dior)",
+        "Ysl touche glow pact cushion shade B20 (Ysl)",
+        "Brush 3 pcs (aeris)",
+        "Loose powder shade fair light (something)",
+        "Beautybland (haquhara)",
+        "Airbrush flawles setting spray (charlotte tilbury)",
+        "Lume baked powder blush shade maja (guele)",
+        "Cream blush (shade hope)",
+        "Embryolisse lait cream (30ml)",
+        "Noir lash mascara (instaperfect)"
+      ],
+      "PERLENGKAPAN IBADAH": [
+        "Mukena (Heylocal)",
+        "Sajadah (howel & co)",
+        "Al quran mini",
+        "Tasbih"
+      ],
+      "SKINCARE": [
+        "Cleansing Oil (Centella madagascar 1004)",
+        "Sabun cuci muka low Ph (Cosrx)",
+        "Soothing toner (anua)",
+        "Brightning capsule ampule (Centella skin 1004)",
+        "Sunscreen hyalu cica water fit (Centella 1004)",
+        "Cica pad (Npure)",
+        "Sheet mask (Npure)",
+        "Lait cream concentrate moisterizer (embryolise)"
+      ],
+      "BODYCARE": [
+        "Almond milk scrub (The body shop)",
+        "Almond milk body butter (The body shop)",
+        "Body mist (bath and body works)",
+        "Parfume (bebas apa aja)"
+      ],
+      "PERALATAN MANDI": [
+        "Shower puff",
+        "Handuk couple (howel & co)",
+        "Sabun (bath and body works)",
+        "Shampo (bath and body works)",
+        "Cermin kecil"
+      ],
+      "ACCESSORIES": [
+        "Tas tangan (charles and keith)",
+        "Tas (teserah apa aja)",
+        "Sneakers (teserah kamu aja)",
+        "Heels (staccato/steve madden)",
+        "Flatshoes (dianalable)"
+      ],
+      "BAKAL & BAJU": [
+        "Pashmina viscose (hijabqa)",
+        "Pashmina ceruty (daissy)",
+        "Pashmina kaos (lafiye)",
+        "Bakal baju 3 meter",
+        "Renda baju 3 meter",
+        "Baju (bebas apa aja)"
+      ],
+      "LAIN-LAIN": [
+        "Piyama couple (bebas)",
+        "Linggerie",
+        "Daleman (3bra&3underware)",
+        "Kain sarung 2 pcs",
+        "Kain jarik barik 2 pcs",
+        "Sisir"
+      ]
+    };
 
-      {category:"PERLENGKAPAN IBADAH", item:"Mukena", brand:"Heylocal"},
-      {category:"PERLENGKAPAN IBADAH", item:"Sajadah", brand:"Howel & Co"},
-      {category:"PERLENGKAPAN IBADAH", item:"Al Quran mini", brand:"-"},
-      {category:"PERLENGKAPAN IBADAH", item:"Tasbih", brand:"-"},
+    const giftList = document.getElementById("giftList");
+    let chart;
 
-      {category:"SKINCARE", item:"Cleansing Oil", brand:"Centella Madagascar 1004"},
-      {category:"SKINCARE", item:"Sabun cuci muka low pH", brand:"Cosrx"},
-      {category:"SKINCARE", item:"Soothing toner", brand:"Anua"},
-      {category:"SKINCARE", item:"Brightening capsule ampoule", brand:"Centella Skin 1004"},
-      {category:"SKINCARE", item:"Sunscreen hyalu cica water fit", brand:"Centella 1004"},
-      {category:"SKINCARE", item:"Cica pad", brand:"Npure"},
-      {category:"SKINCARE", item:"Sheet mask", brand:"Npure"},
-      {category:"SKINCARE", item:"Moisturizer lait cream concentrate", brand:"Embryolisse"},
-
-      {category:"BODYCARE", item:"Almond milk scrub", brand:"The Body Shop"},
-      {category:"BODYCARE", item:"Almond milk body butter", brand:"The Body Shop"},
-      {category:"BODYCARE", item:"Body mist", brand:"Bath and Body Works"},
-      {category:"BODYCARE", item:"Parfume", brand:"Bebas"},
-
-      {category:"PERALATAN MANDI", item:"Shower puff", brand:"-"},
-      {category:"PERALATAN MANDI", item:"Handuk couple", brand:"Howel & Co"},
-      {category:"PERALATAN MANDI", item:"Sabun", brand:"Bath and Body Works"},
-      {category:"PERALATAN MANDI", item:"Shampo", brand:"Bath and Body Works"},
-      {category:"PERALATAN MANDI", item:"Cermin kecil", brand:"-"},
-
-      {category:"ACCESSORIES", item:"Tas tangan", brand:"Charles & Keith"},
-      {category:"ACCESSORIES", item:"Tas", brand:"Bebas"},
-      {category:"ACCESSORIES", item:"Sneakers", brand:"Bebas"},
-      {category:"ACCESSORIES", item:"Heels", brand:"Staccato / Steve Madden"},
-      {category:"ACCESSORIES", item:"Flatshoes", brand:"Dianalabelle"},
-
-      {category:"BAKAL & BAJU", item:"Pashmina viscose", brand:"Hijabqa"},
-      {category:"BAKAL & BAJU", item:"Pashmina ceruty", brand:"Daissy"},
-      {category:"BAKAL & BAJU", item:"Pashmina kaos", brand:"Lafiye"},
-      {category:"BAKAL & BAJU", item:"Bakal baju 3 meter", brand:"-"},
-      {category:"BAKAL & BAJU", item:"Renda baju 3 meter", brand:"-"},
-      {category:"BAKAL & BAJU", item:"Baju", brand:"Bebas"},
-
-      {category:"LAIN-LAIN", item:"Piyama couple", brand:"Bebas"},
-      {category:"LAIN-LAIN", item:"Lingerie", brand:"-"},
-      {category:"LAIN-LAIN", item:"Daleman (3 bra & 3 underwear)", brand:"-"},
-      {category:"LAIN-LAIN", item:"Kain sarung 2 pcs", brand:"-"},
-      {category:"LAIN-LAIN", item:"Kain jarik batik 2 pcs", brand:"-"},
-      {category:"LAIN-LAIN", item:"Sisir", brand:"-"}
-    ];
-
-    let saved = JSON.parse(localStorage.getItem("giftTrackerList")) || {};
-
-    const tbody = document.getElementById("giftBody");
-    const progressBar = document.getElementById("progressBar");
-
-    function renderGifts(filter = "") {
-      tbody.innerHTML = "";
-      let boughtCount = 0;
-      gifts.forEach((gift, idx) => {
-        const key = gift.item;
-        const data = saved[key] || { bought:false, image:null, price:"" };
-
-        if (!gift.item.toLowerCase().includes(filter.toLowerCase()) &&
-            !gift.category.toLowerCase().includes(filter.toLowerCase()) &&
-            !gift.brand.toLowerCase().includes(filter.toLowerCase())) return;
-
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-          <td>${gift.category}</td>
-          <td>${gift.item}</td>
-          <td>${gift.brand}</td>
-          <td><input type="number" value="${data.price}" min="0" step="1000"></td>
-          <td>${data.bought ? "✅ Bought" : "❌ Not bought"}</td>
-          <td><img src="${data.image || "https://via.placeholder.com/80?text=No+Img"}"></td>
-        `;
-
-        // Action button
-        const actionTd = document.createElement("td");
-        const btn = document.createElement("button");
-        btn.textContent = data.bought ? "Unbuy" : "Buy";
-        btn.className = data.bought ? "unbuy-btn" : "buy-btn";
-        btn.onclick = () => {
-          data.bought = !data.bought;
-          saved[key] = data;
-          localStorage.setItem("giftTrackerList", JSON.stringify(saved));
-          renderGifts(filter);
-        };
-        actionTd.appendChild(btn);
-        tr.appendChild(actionTd);
-
-        // Upload photo
-        const uploadTd = document.createElement("td");
-        const upload = document.createElement("input");
-        upload.type = "file";
-        upload.onchange = e => {
-          const file = e.target.files[0];
-          const reader = new FileReader();
-          reader.onload = evt => {
-            data.image = evt.target.result;
-            saved[key] = data;
-            localStorage.setItem("giftTrackerList", JSON.stringify(saved));
-            renderGifts(filter);
-          };
-          reader.readAsDataURL(file);
-        };
-        uploadTd.appendChild(upload);
-        tr.appendChild(uploadTd);
-
-        // Price save event
-        tr.querySelector("input").addEventListener("input", e => {
-          data.price = e.target.value;
-          saved[key] = data;
-          localStorage.setItem("giftTrackerList", JSON.stringify(saved));
+    function renderList() {
+      giftList.innerHTML = "";
+      for (let category in categories) {
+        const catDiv = document.createElement("div");
+        catDiv.className = "category";
+        catDiv.innerHTML = `<h2>${category}</h2>`;
+        categories[category].forEach((item, i) => {
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "item";
+          itemDiv.innerHTML = `
+            <label>
+              <input type="checkbox" onchange="toggleBought(this)">
+              <span>${item}</span>
+            </label>
+            <input type="number" placeholder="Price (Rp)" onchange="updateSummary()">
+            <input type="file" accept="image/*" onchange="showImage(this)">
+            <img style="display:none">
+          `;
+          catDiv.appendChild(itemDiv);
         });
-
-        tbody.appendChild(tr);
-
-        if (data.bought) boughtCount++;
-      });
-
-      // Progress bar update
-      const percent = Math.round((boughtCount / gifts.length) * 100);
-      progressBar.style.width = percent + "%";
-      progressBar.textContent = percent + "%";
+        giftList.appendChild(catDiv);
+      }
     }
 
-    document.getElementById("searchInput").addEventListener("input", e => {
-      renderGifts(e.target.value);
-    });
+    function toggleBought(checkbox) {
+      const span = checkbox.nextElementSibling;
+      if (checkbox.checked) {
+        span.classList.add("bought");
+      } else {
+        span.classList.remove("bought");
+      }
+    }
 
-    renderGifts();
+    function showImage(input) {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = input.nextElementSibling;
+          img.src = e.target.result;
+          img.style.display = "inline";
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function updateSummary() {
+      let total = 0;
+      let categoryTotals = {};
+      document.querySelectorAll(".category").forEach(catDiv => {
+        let catName = catDiv.querySelector("h2").innerText;
+        let catTotal = 0;
+        catDiv.querySelectorAll("input[type='number']").forEach(input => {
+          let val = parseInt(input.value) || 0;
+          catTotal += val;
+        });
+        categoryTotals[catName] = catTotal;
+        total += catTotal;
+      });
+      document.getElementById("totalPrice").innerText = total.toLocaleString();
+
+      const ctx = document.getElementById("priceChart").getContext("2d");
+      if (chart) chart.destroy();
+      chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: Object.keys(categoryTotals),
+          datasets: [{
+            data: Object.values(categoryTotals),
+            backgroundColor: [
+              '#ffb6c1','#ffc0cb','#ff69b4','#ff1493',
+              '#db7093','#c71585','#e75480','#f8a5c2'
+            ]
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              position: 'bottom'
+            }
+          }
+        }
+      });
+    }
+
+    renderList();
   </script>
 </body>
 </html>
