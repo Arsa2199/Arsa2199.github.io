@@ -1,310 +1,64 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from 'recharts';
-import { ChevronDown, CheckCircle2, XCircle, CircleHelp, Wrench, Zap, ListChecks, RefreshCw } from 'lucide-react';
+/* Gift Tracker - Vanilla JS
+   - Keeps data in localStorage (key: giftTracker_v1)
+   - Supports images (base64), add/edit, mark bought, filter/search, export
+*/
 
-// --- MOCK DATA GENERATION ---
-// This section generates the sample data for the application.
-const EXCAVATOR_MODELS = Array.from({ length: 35 }, (_, i) => `EX-${String(200 + i * 5).padStart(3, '0')}${i % 3 === 0 ? 'LC' : ''}${i % 5 === 0 ? '-PRO' : ''}`);
+// ---------- Utilities ----------
+const qs = s => document.querySelector(s);
+const qsa = s => Array.from(document.querySelectorAll(s));
+const LS_KEY = 'giftTracker_v1';
 
-const TEST_CATEGORIES = [
-    { name: 'Engine Systems', points: 20 },
-    { name: 'Hydraulic System', points: 25 },
-    { name: 'Undercarriage & Tracks', points: 18 },
-    { name: 'Cab & Controls', points: 22 },
-    { name: 'Electrical System', points: 19 },
-    { name: 'Swing Mechanism', points: 15 },
-    { name: 'Boom, Stick & Bucket', points: 17 },
-    { name: 'Cooling System', points: 12 },
-    { name: 'Fuel System', points: 10 },
-    { name: 'Safety Features', points: 20 },
-    { name: 'Software & Diagnostics', points: 13 },
-    { name: 'Emissions Control', points: 10 },
-    { name: 'Final Assembly Quality', points: 10 },
-];
+const uid = () => 'id_' + Math.random().toString(36).slice(2,9);
 
-const generateChecklist = () => {
-    let checklist = [];
-    TEST_CATEGORIES.forEach(category => {
-        const items = Array.from({ length: category.points }, (_, i) => {
-            const randomStatus = Math.random();
-            return {
-                id: `${category.name.replace(/ /g, '-')}-${i + 1}`,
-                name: `${category.name} Checkpoint #${i + 1}`,
-                status: randomStatus < 0.6 ? 'Pass' : randomStatus < 0.85 ? 'Fail' : 'Untested'
-            };
-        });
-        checklist.push({ category: category.name, items });
-    });
-    return checklist;
-};
-
-const generateInitialData = (count) => {
-    return Array.from({ length: count }, (_, i) => ({
-        id: `UNIT-7${String(100 + i).padStart(3, '0')}`,
-        model: EXCAVATOR_MODELS[i % EXCAVATOR_MODELS.length],
-        checklist: generateChecklist(),
-    }));
-};
-
-// --- UI COMPONENTS ---
-
-const Header = ({ stats }) => (
-    <header className="bg-gray-900/80 backdrop-blur-sm text-white p-4 border-b border-gray-700/50 sticky top-0 z-50">
-        <div className="container mx-auto flex justify-between items-center">
-            <div className="flex items-center space-x-3">
-                <ListChecks className="h-8 w-8 text-blue-400" />
-                <div>
-                    <h1 className="text-2xl font-bold tracking-tight">Excavator Test Control Standard</h1>
-                    <p className="text-sm text-gray-400">Quality Assurance & Compliance Dashboard</p>
-                </div>
-            </div>
-            <div className="hidden md:flex items-center space-x-6">
-                <div className="text-center"><p className="text-xl font-bold">{stats.totalUnits}</p><p className="text-xs text-gray-400">Total Units</p></div>
-                <div className="text-center"><p className="text-xl font-bold text-green-400">{stats.totalPassed}</p><p className="text-xs text-gray-400">Checks Passed</p></div>
-                <div className="text-center"><p className="text-xl font-bold text-red-500">{stats.totalFailed}</p><p className="text-xs text-gray-400">Checks Failed</p></div>
-                <div className="text-center"><p className="text-xl font-bold text-gray-400">{stats.totalUntested}</p><p className="text-xs text-gray-400">Untested</p></div>
-            </div>
-        </div>
-    </header>
-);
-
-const ProgressBar = ({ value, color = 'blue' }) => (
-    <div className="w-full bg-gray-600/50 rounded-full h-2.5">
-        <div className={`bg-${color}-500 h-2.5 rounded-full transition-all duration-500`} style={{ width: `${value}%` }}></div>
-    </div>
-);
-
-const ExcavatorListItem = ({ excavator, onSelect, isSelected, progress }) => (
-    <div onClick={() => onSelect(excavator)} className={`p-4 rounded-lg cursor-pointer transition-all duration-300 ${isSelected ? 'bg-blue-500/20 ring-2 ring-blue-500' : 'bg-gray-800/60 hover:bg-gray-700/80'}`}>
-        <div className="flex justify-between items-center mb-2">
-            <div>
-                <p className="font-bold text-white">{excavator.id}</p>
-                <p className="text-sm text-gray-400">{excavator.model}</p>
-            </div>
-            <p className="font-mono text-lg text-white">{progress.toFixed(1)}%</p>
-        </div>
-        <ProgressBar value={progress} />
-    </div>
-);
-
-const ChecklistItem = ({ item, onStatusChange }) => {
-    const statusInfo = {
-        'Pass': { icon: <CheckCircle2 className="text-green-500" />, color: 'text-green-400' },
-        'Fail': { icon: <XCircle className="text-red-500" />, color: 'text-red-400' },
-        'Untested': { icon: <CircleHelp className="text-gray-500" />, color: 'text-gray-500' },
-    };
-
-    return (
-        <div className="flex items-center justify-between p-3 bg-gray-800/50 rounded-md hover:bg-gray-700/50 transition-colors duration-200">
-            <div className="flex items-center space-x-3">
-                {statusInfo[item.status].icon}
-                <span className={statusInfo[item.status].color}>{item.name}</span>
-            </div>
-            <div className="flex space-x-1">
-                <button onClick={() => onStatusChange(item.id, 'Pass')} className="p-1 rounded-md hover:bg-green-500/20 disabled:opacity-50" disabled={item.status === 'Pass'}><CheckCircle2 size={18} className="text-green-500"/></button>
-                <button onClick={() => onStatusChange(item.id, 'Fail')} className="p-1 rounded-md hover:bg-red-500/20 disabled:opacity-50" disabled={item.status === 'Fail'}><XCircle size={18} className="text-red-500"/></button>
-            </div>
-        </div>
-    );
-};
-
-const TestCategoryAccordion = ({ category, items, onStatusChange }) => {
-    const [isOpen, setIsOpen] = useState(true);
-    const stats = useMemo(() => {
-        const passed = items.filter(i => i.status === 'Pass').length;
-        const failed = items.filter(i => i.status === 'Fail').length;
-        const total = items.length;
-        const progress = total > 0 ? ((passed + failed) / total) * 100 : 0;
-        return { passed, failed, progress, total };
-    }, [items]);
-
-    return (
-        <div className="bg-gray-800/40 border border-gray-700/50 rounded-lg">
-            <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center justify-between p-4 text-left">
-                <div className="flex items-center space-x-3">
-                    <Wrench className="text-blue-300" />
-                    <span className="font-bold text-lg text-white">{category}</span>
-                </div>
-                <div className="flex items-center space-x-4">
-                    <span className="text-sm text-green-400">{stats.passed} Passed</span>
-                    <span className="text-sm text-red-400">{stats.failed} Failed</span>
-                    <span className="text-sm text-gray-400">{stats.total - stats.passed - stats.failed} Untested</span>
-                    <ChevronDown className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
-                </div>
-            </button>
-            {isOpen && (
-                <div className="p-4 border-t border-gray-700/50">
-                    <ProgressBar value={stats.progress} color="green" />
-                    <div className="mt-4 space-y-2 max-h-96 overflow-y-auto pr-2">
-                        {items.map(item => <ChecklistItem key={item.id} item={item} onStatusChange={onStatusChange} />)}
-                    </div>
-                </div>
-            )}
-        </div>
-    );
-};
-
-
-// --- MAIN APP COMPONENT ---
-export default function App() {
-    const [excavators, setExcavators] = useState(generateInitialData(35));
-    const [selectedExcavator, setSelectedExcavator] = useState(excavators[0]);
-    
-    const calculateProgress = useCallback((checklist) => {
-        const allItems = checklist.flatMap(c => c.items);
-        if (allItems.length === 0) return 0;
-        const testedCount = allItems.filter(i => i.status !== 'Untested').length;
-        return (testedCount / allItems.length) * 100;
-    }, []);
-
-    const handleStatusChange = (checkId, newStatus) => {
-        setExcavators(prev => prev.map(ex => {
-            if (ex.id === selectedExcavator.id) {
-                const newChecklist = ex.checklist.map(cat => ({
-                    ...cat,
-                    items: cat.items.map(item => item.id === checkId ? { ...item, status: newStatus } : item)
-                }));
-                return { ...ex, checklist: newChecklist };
-            }
-            return ex;
-        }));
-    };
-    
-    const handleBulkAction = (action) => {
-        setExcavators(prev => prev.map(ex => {
-            if (ex.id === selectedExcavator.id) {
-                 const newChecklist = ex.checklist.map(cat => ({
-                    ...cat,
-                    items: cat.items.map(item => {
-                        if (action === 'Reset') return {...item, status: 'Untested'};
-                        if (action === 'Run All') {
-                           const randomStatus = Math.random();
-                           return {...item, status: randomStatus < 0.9 ? 'Pass' : 'Fail'};
-                        }
-                        return item;
-                    })
-                }));
-                return { ...ex, checklist: newChecklist };
-            }
-            return ex;
-        }));
-    };
-
-
-    useEffect(() => {
-        if(selectedExcavator) {
-            const updatedSelected = excavators.find(ex => ex.id === selectedExcavator.id);
-            if(updatedSelected) setSelectedExcavator(updatedSelected);
-        }
-    }, [excavators, selectedExcavator?.id]);
-
-    const fleetStats = useMemo(() => {
-        let totalPassed = 0, totalFailed = 0, totalUntested = 0;
-        excavators.forEach(ex => {
-            ex.checklist.forEach(cat => {
-                cat.items.forEach(item => {
-                    if (item.status === 'Pass') totalPassed++;
-                    else if (item.status === 'Fail') totalFailed++;
-                    else totalUntested++;
-                });
-            });
-        });
-        return { totalUnits: excavators.length, totalPassed, totalFailed, totalUntested };
-    }, [excavators]);
-
-    const selectedExcavatorStats = useMemo(() => {
-        if (!selectedExcavator) return null;
-        const allItems = selectedExcavator.checklist.flatMap(c => c.items);
-        const passed = allItems.filter(i => i.status === 'Pass').length;
-        const failed = allItems.filter(i => i.status === 'Fail').length;
-        const untested = allItems.length - passed - failed;
-        const data = [
-            { name: 'Passed', value: passed, color: '#22c55e' },
-            { name: 'Failed', value: failed, color: '#ef4444' },
-            { name: 'Untested', value: untested, color: '#6b7280' },
-        ];
-        return { passed, failed, untested, data, total: allItems.length };
-    }, [selectedExcavator]);
-
-    return (
-        <div className="bg-gray-900 text-gray-200 min-h-screen font-sans">
-            <style>{`
-                /* Custom scrollbar styling for a consistent dark theme look */
-                ::-webkit-scrollbar { width: 8px; height: 8px; }
-                ::-webkit-scrollbar-track { background: #1f2937; }
-                ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
-                ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
-            `}</style>
-            <Header stats={fleetStats} />
-            <main className="container mx-auto p-4 flex flex-col lg:flex-row gap-4">
-                {/* Left Panel: Excavator List */}
-                <div className="lg:w-1/3 xl:w-1/4 flex-shrink-0">
-                    <div className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-4">
-                        <h2 className="text-lg font-bold mb-4 text-white">Fleet Units (35 Total)</h2>
-                        <div className="space-y-2 h-[calc(100vh-180px)] overflow-y-auto pr-2">
-                            {excavators.map(ex => (
-                                <ExcavatorListItem
-                                    key={ex.id}
-                                    excavator={ex}
-                                    onSelect={setSelectedExcavator}
-                                    isSelected={selectedExcavator?.id === ex.id}
-                                    progress={calculateProgress(ex.checklist)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Right Panel: Details & Checklist */}
-                <div className="lg:w-2/3 xl:w-3/4">
-                    {selectedExcavator && selectedExcavatorStats ? (
-                        <div className="flex flex-col gap-4">
-                            {/* Top Detail & Chart Row */}
-                            <div className="bg-gray-800/30 border border-gray-700/50 rounded-lg p-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                                <div className="md:col-span-2">
-                                    <h2 className="text-3xl font-bold text-white">{selectedExcavator.id}</h2>
-                                    <p className="text-gray-400 text-lg">{selectedExcavator.model}</p>
-                                    <div className="mt-4 flex space-x-2">
-                                      <button onClick={() => handleBulkAction('Run All')} className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition-colors">
-                                          <Zap size={16}/><span>Run All Tests</span>
-                                      </button>
-                                      <button onClick={() => handleBulkAction('Reset')} className="flex items-center space-x-2 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition-colors">
-                                          <RefreshCw size={16}/><span>Reset</span>
-                                      </button>
-                                    </div>
-                                </div>
-                                <div className="h-40">
-                                  <ResponsiveContainer width="100%" height="100%">
-                                    <PieChart>
-                                      <Pie data={selectedExcavatorStats.data} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={35} outerRadius={60} fill="#8884d8" paddingAngle={5}>
-                                        {selectedExcavatorStats.data.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.color} />))}
-                                      </Pie>
-                                      <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #4b5563' }} />
-                                      <Legend />
-                                    </PieChart>
-                                  </ResponsiveContainer>
-                                </div>
-                            </div>
-                            
-                            {/* Checklist Accordions */}
-                            <div className="space-y-3 h-[calc(100vh-340px)] overflow-y-auto pr-2">
-                                {selectedExcavator.checklist.map(categoryData => (
-                                    <TestCategoryAccordion
-                                        key={categoryData.category}
-                                        category={categoryData.category}
-                                        items={categoryData.items}
-                                        onStatusChange={handleStatusChange}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    ) : (
-                        <div className="flex items-center justify-center h-full bg-gray-800/30 rounded-lg">
-                            <p className="text-gray-500">Select a unit to view its test checklist.</p>
-                        </div>
-                    )}
-                </div>
-            </main>
-        </div>
-    );
+// safe image to base64
+function fileToDataUrl(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
 }
+
+// CSV export helper
+function toCSV(items){
+  const header = ['id','name','category','bought','imageData','notes'];
+  const rows = items.map(it => [
+    it.id,
+    `"${String(it.name).replace(/"/g,'""')}"`,
+    `"${String(it.category).replace(/"/g,'""')}"`,
+    it.bought ? '1' : '0',
+    it.imageData ? `"${it.imageData.slice(0,100).replace(/"/g,'""')}..."` : '',
+    `"${(it.notes||'').replace(/"/g,'""')}"`
+  ]);
+  return [header.join(','), ...rows.map(r=>r.join(','))].join('\n');
+}
+
+// ---------- Default data (from user's list) ----------
+const DEFAULT_ITEMS = [
+  // MAKE UP
+  {name:'Backstage Glow Face Pallete shade universa (Dior)', category:'MAKE UP'},
+  {name:'Eyelash curler (lashboss)', category:'MAKE UP'},
+  {name:'Addict Refillable shine lipstick shade 727 (Dior)', category:'MAKE UP'},
+  {name:'Ysl touche glow pact cushion shade B20 (Ysl)', category:'MAKE UP'},
+  {name:'Brush 3 pcs (aeris)', category:'MAKE UP'},
+  {name:'Loose powder shade fair light (something)', category:'MAKE UP'},
+  {name:'Beautybland (haquhara)', category:'MAKE UP'},
+  {name:'Airbrush flawless setting spray (charlotte tilbury)', category:'MAKE UP'},
+  {name:'Lume baked powder blush shade maja (guele)', category:'MAKE UP'},
+  {name:'Cream blush (shade hope)', category:'MAKE UP'},
+  {name:'Embryolisse lait cream (30ml)', category:'MAKE UP'},
+  {name:'Noir lash mascara (instaperfect)', category:'MAKE UP'},
+
+  // PERLENGKAPAN IBADAH
+  {name:'Mukena (Heylocal)', category:'PERLENGKAPAN IBADAH'},
+  {name:'Sajadah (howel & co)', category:'PERLENGKAPAN IBADAH', bought:true},
+  {name:'Al quran mini', category:'PERLENGKAPAN IBADAH', bought:true},
+  {name:'Tasbih', category:'PERLENGKAPAN IBADAH'},
+
+  // SKINCARE
+  {name:'Cleansing Oil (Centella madagascar 1004)', category:'SKINCARE'},
+  {name:'Sabun cuci muka low Ph (Cosrx)', category:'SKINCARE'},
+  {name:'Soothing toner (anua)', category:'SKINCARE'},
+  {name:'Brightning capsule ampule (Centella skin 1004)', category:'SKINCARE'},
+  {n
