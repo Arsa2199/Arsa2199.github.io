@@ -1,32 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Excavator Test Control Standard</title>
-
-    <!-- Tailwind CSS Framework -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- React Libraries -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-
-    <!-- Babel for JSX compilation in the browser -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-    <!-- Third-party libraries for charts and icons -->
-    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
-    <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gift Tracker — Wishlist</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="bg-gray-900">
-    <!-- The root element where the React application will be mounted -->
-    <div id="root"></div>
+<body>
+  <header class="topbar">
+    <h1>Gift Tracker</h1>
+    <div class="controls">
+      <input id="search" placeholder="Search items or categories..." aria-label="Search gifts" />
+      <select id="filterCategory" aria-label="Filter by category">
+        <option value="all">All categories</option>
+      </select>
+      <select id="filterStatus" aria-label="Filter by status">
+        <option value="all">All</option>
+        <option value="not">Not bought</option>
+        <option value="bought">Bought</option>
+      </select>
+      <button id="addNewBtn">+ Add item</button>
+    </div>
+  </header>
 
-    <!-- Main Application Script (must be type="text/babel") -->
-    <script type="text/babel" src="script.js"></script>
+  <main class="container">
+    <section class="sidebar">
+      <h2>Summary</h2>
+      <div class="progress-wrap">
+        <div class="progress-label"><span id="boughtCount">0</span> / <span id="totalCount">0</span> bought</div>
+        <div class="progress-bar"><div id="progressInner"></div></div>
+      </div>
+
+      <div class="sidebar-actions">
+        <button id="exportJson">Export JSON</button>
+        <button id="exportCsv">Export CSV</button>
+        <button id="printList">Print</button>
+        <button id="clearAll" class="danger">Clear all (reset)</button>
+      </div>
+
+      <h3>Bulk actions (current view)</h3>
+      <div class="bulk-actions">
+        <button id="bulkBought">Mark all as bought</button>
+        <button id="bulkNotBought">Mark all not bought</button>
+        <button id="bulkDelete" class="danger">Delete selected</button>
+      </div>
+
+      <hr/>
+      <div class="legend">
+        <strong>Legend</strong>
+        <div><span class="badge bought"></span> Bought</div>
+        <div><span class="badge not"></span> Not bought</div>
+      </div>
+    </section>
+
+    <section class="main-area">
+      <div class="toolbar">
+        <label>Sort:
+          <select id="sortBy">
+            <option value="default">Default</option>
+            <option value="alpha">Name A→Z</option>
+            <option value="alphaDesc">Name Z→A</option>
+            <option value="status">Bought first</option>
+          </select>
+        </label>
+      </div>
+
+      <ul id="itemsList" class="items-grid" aria-live="polite"></ul>
+    </section>
+  </main>
+
+  <!-- Add / Edit modal -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <button class="close" id="modalClose">&times;</button>
+      <h2 id="modalTitle">Add new item</h2>
+      <form id="itemForm">
+        <label>
+          Name
+          <input id="itemName" required />
+        </label>
+
+        <label>
+          Category
+          <input id="itemCategory" list="categoryList" required />
+          <datalist id="categoryList"></datalist>
+        </label>
+
+        <label>
+          Photo (optional)
+          <input id="itemPhoto" type="file" accept="image/*" />
+        </label>
+
+        <div class="photo-preview" id="photoPreview"></div>
+
+        <label class="checkbox-inline">
+          <input type="checkbox" id="itemBought" /> Mark as bought
+        </label>
+
+        <div class="modal-actions">
+          <button type="submit" class="primary">Save</button>
+          <button type="button" id="modalCancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
