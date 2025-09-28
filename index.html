@@ -1,110 +1,32 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gift Tracker — Wishlist</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gift Tracker</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  <header class="topbar">
+  <header>
     <h1>Gift Tracker</h1>
-    <div class="controls">
-      <input id="search" placeholder="Search items or categories..." aria-label="Search gifts" />
-      <select id="filterCategory" aria-label="Filter by category">
-        <option value="all">All categories</option>
-      </select>
-      <select id="filterStatus" aria-label="Filter by status">
-        <option value="all">All</option>
-        <option value="not">Not bought</option>
-        <option value="bought">Bought</option>
-      </select>
-      <button id="addNewBtn">+ Add item</button>
-    </div>
+    <p>Mark items as <b>Bought</b> ✅ or leave as <b>Not Bought</b> ❌</p>
   </header>
 
-  <main class="container">
-    <section class="sidebar">
-      <h2>Summary</h2>
-      <div class="progress-wrap">
-        <div class="progress-label"><span id="boughtCount">0</span> / <span id="totalCount">0</span> bought</div>
-        <div class="progress-bar"><div id="progressInner"></div></div>
-      </div>
+  <main>
+    <div class="filters">
+      <label for="categoryFilter">Filter by Category: </label>
+      <select id="categoryFilter">
+        <option value="all">All</option>
+      </select>
+    </div>
 
-      <div class="sidebar-actions">
-        <button id="exportJson">Export JSON</button>
-        <button id="exportCsv">Export CSV</button>
-        <button id="printList">Print</button>
-        <button id="clearAll" class="danger">Clear all (reset)</button>
-      </div>
-
-      <h3>Bulk actions (current view)</h3>
-      <div class="bulk-actions">
-        <button id="bulkBought">Mark all as bought</button>
-        <button id="bulkNotBought">Mark all not bought</button>
-        <button id="bulkDelete" class="danger">Delete selected</button>
-      </div>
-
-      <hr/>
-      <div class="legend">
-        <strong>Legend</strong>
-        <div><span class="badge bought"></span> Bought</div>
-        <div><span class="badge not"></span> Not bought</div>
-      </div>
-    </section>
-
-    <section class="main-area">
-      <div class="toolbar">
-        <label>Sort:
-          <select id="sortBy">
-            <option value="default">Default</option>
-            <option value="alpha">Name A→Z</option>
-            <option value="alphaDesc">Name Z→A</option>
-            <option value="status">Bought first</option>
-          </select>
-        </label>
-      </div>
-
-      <ul id="itemsList" class="items-grid" aria-live="polite"></ul>
-    </section>
+    <div id="giftList" class="gift-list"></div>
   </main>
 
-  <!-- Add / Edit modal -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
-    <div class="modal-content">
-      <button class="close" id="modalClose">&times;</button>
-      <h2 id="modalTitle">Add new item</h2>
-      <form id="itemForm">
-        <label>
-          Name
-          <input id="itemName" required />
-        </label>
+  <footer>
+    <p>Gift Tracker © 2025</p>
+  </footer>
 
-        <label>
-          Category
-          <input id="itemCategory" list="categoryList" required />
-          <datalist id="categoryList"></datalist>
-        </label>
-
-        <label>
-          Photo (optional)
-          <input id="itemPhoto" type="file" accept="image/*" />
-        </label>
-
-        <div class="photo-preview" id="photoPreview"></div>
-
-        <label class="checkbox-inline">
-          <input type="checkbox" id="itemBought" /> Mark as bought
-        </label>
-
-        <div class="modal-actions">
-          <button type="submit" class="primary">Save</button>
-          <button type="button" id="modalCancel">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>
