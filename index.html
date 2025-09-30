@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <title>LIST SESERAHAN ARSA & DINDA CANTIK</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
   <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  
   <style>
     body {
       margin: 0;
@@ -22,7 +26,7 @@
     header {
       text-align: center;
       padding: 30px;
-      background: #ffb6c1;
+      background: linear-gradient(135deg, #ff9eb5, #ffb6c1);
       color: #fff;
       border-bottom: 5px solid #ff8da1;
     }
@@ -36,7 +40,7 @@
       margin: 30px auto;
       background: #fff;
       border-radius: 20px;
-      padding: 20px;
+      padding: 25px;
       box-shadow: 0 8px 20px rgba(255, 182, 193, 0.5);
       position: relative;
       z-index: 1;
@@ -44,10 +48,10 @@
     .item-form {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       flex-wrap: wrap;
     }
-    .item-form input, .item-form button {
+    .item-form input, .item-form select, .item-form button {
       padding: 10px;
       border-radius: 10px;
       border: 1px solid #ddd;
@@ -81,6 +85,16 @@
     li span {
       font-weight: 500;
     }
+    .actions button {
+      margin-left: 5px;
+      padding: 5px 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .edit-btn { background: #ffc1cc; }
+    .delete-btn { background: #ff8da1; color: #fff; }
     .summary {
       margin-top: 30px;
       background: #ffe6f2;
@@ -116,14 +130,22 @@
 </head>
 <body>
   <header>
-    <h1>💖 LIST SESERAHAN ARSA & DINDA 💖</h1>
-    <p>Soft pink elegance seserahan tracker ✨</p>
+    <h1>💖 LIST SESERAHAN ARSA & DINDA CANTIK 💖</h1>
+    <p>Elegance & Love in Every Gift ✨</p>
   </header>
 
   <div class="container">
     <form class="item-form" id="itemForm">
       <input type="text" id="itemName" placeholder="Nama Barang" required>
       <input type="text" id="itemBrand" placeholder="Merek" required>
+      <select id="itemCategory" required>
+        <option value="" disabled selected>Pilih Kategori</option>
+        <option value="Makeup">Makeup</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Aksesoris">Aksesoris</option>
+        <option value="Perhiasan">Perhiasan</option>
+        <option value="Lainnya">Lainnya</option>
+      </select>
       <input type="number" id="itemPrice" placeholder="Harga (Rp)" required>
       <button type="submit">Tambah</button>
     </form>
@@ -131,7 +153,7 @@
     <ul id="itemList"></ul>
 
     <div class="summary">
-      <h2>📊 Ringkasan Harga</h2>
+      <h2>📊 Ringkasan Harga per Kategori</h2>
       <canvas id="priceChart"></canvas>
     </div>
   </div>
@@ -148,7 +170,7 @@
       messagingSenderId: "YOUR_SENDER_ID",
       appId: "YOUR_APP_ID"
     };
-    const app = firebase.initializeApp(firebaseConfig);
+    firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
     const itemForm = document.getElementById("itemForm");
@@ -157,57 +179,80 @@
 
     let chart;
 
-    // Add item to Firestore
+    // Add item
     itemForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const name = document.getElementById("itemName").value;
       const brand = document.getElementById("itemBrand").value;
+      const category = document.getElementById("itemCategory").value;
       const price = parseInt(document.getElementById("itemPrice").value);
 
-      await db.collection("seserahan").add({ name, brand, price });
+      await db.collection("seserahan").add({ name, brand, category, price });
       itemForm.reset();
     });
 
-    // Realtime listener
+    // Realtime updates
     db.collection("seserahan").onSnapshot((snapshot) => {
       itemList.innerHTML = "";
       const items = [];
       snapshot.forEach((doc) => {
-        const item = doc.data();
+        const item = { id: doc.id, ...doc.data() };
         items.push(item);
 
         const li = document.createElement("li");
-        li.innerHTML = `<span>${item.name} (${item.brand}) - Rp ${item.price.toLocaleString()}</span>`;
+        li.innerHTML = `
+          <span>${item.name} (${item.brand}) - Rp ${item.price.toLocaleString()} [${item.category}]</span>
+          <div class="actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete-btn">Hapus</button>
+          </div>
+        `;
+
+        li.querySelector(".delete-btn").addEventListener("click", () => {
+          db.collection("seserahan").doc(item.id).delete();
+        });
+
+        li.querySelector(".edit-btn").addEventListener("click", () => {
+          const newPrice = prompt("Masukkan harga baru:", item.price);
+          if (newPrice) {
+            db.collection("seserahan").doc(item.id).update({ price: parseInt(newPrice) });
+          }
+        });
+
         itemList.appendChild(li);
       });
 
       updateChart(items);
     });
 
-    // Update chart
+    // Update chart per category
     function updateChart(items) {
-      const labels = items.map(i => i.name);
-      const prices = items.map(i => i.price);
+      const categories = {};
+      items.forEach(i => {
+        categories[i.category] = (categories[i.category] || 0) + i.price;
+      });
+
+      const labels = Object.keys(categories);
+      const prices = Object.values(categories);
 
       if (chart) chart.destroy();
       chart = new Chart(priceChartCtx, {
-        type: "bar",
+        type: "pie",
         data: {
           labels,
           datasets: [{
-            label: "Harga (Rp)",
             data: prices,
-            backgroundColor: "#ff8da1"
+            backgroundColor: ["#ff8da1","#ffc1cc","#ff5c7a","#ffd6e0","#ff9eb5"]
           }]
         },
         options: {
           responsive: true,
-          plugins: { legend: { display: false } }
+          plugins: { legend: { position: "bottom" } }
         }
       });
     }
 
-    // Floating hearts animation
+    // Floating hearts
     function createHeart() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -216,10 +261,9 @@
       heart.style.fontSize = (Math.random() * 20 + 15) + "px";
       heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
       document.getElementById("hearts").appendChild(heart);
-
       setTimeout(() => heart.remove(), 6000);
     }
-    setInterval(createHeart, 1000);
+    setInterval(createHeart, 1200);
   </script>
 </body>
 </html>
