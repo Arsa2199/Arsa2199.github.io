@@ -2,328 +2,224 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIST SESERAHAN ARSA & DINDA CANTIK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      color: #5a3c45;
-      background: linear-gradient(135deg, #ffd6e8, #ffeaf5, #fcd4f0, #ffe0f0);
-      background-size: 400% 400%;
-      animation: bgmove 15s ease infinite;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffe6f2, #fff0f5, #ffeaf6);
+      color: #444;
+      overflow-x: hidden;
     }
-
-    @keyframes bgmove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     header {
       text-align: center;
       padding: 30px;
-      background: linear-gradient(135deg, #ff9ecb, #ffcce0);
-      color: white;
-      font-size: 2em;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
+      background: #ffb6c1;
+      color: #fff;
+      border-bottom: 5px solid #ff8da1;
     }
-
+    header h1 {
+      font-family: 'Parisienne', cursive;
+      font-size: 3em;
+      margin: 0;
+    }
     .container {
       max-width: 1100px;
       margin: 30px auto;
-      padding: 20px;
-      display: grid;
-      gap: 20px;
-    }
-
-    .category {
       background: #fff;
-      border-radius: 18px;
+      border-radius: 20px;
       padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 20px rgba(255, 182, 193, 0.5);
       position: relative;
-      overflow: hidden;
-      transition: transform 0.2s ease-in-out;
+      z-index: 1;
     }
-
-    .category:hover {
-      transform: translateY(-3px);
-    }
-
-    .category h2 {
-      color: #d63384;
-      border-bottom: 2px solid #f7d6e6;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
-
-    .item {
+    .item-form {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin: 10px 0;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .item-form input, .item-form button {
       padding: 10px;
       border-radius: 10px;
-      background: #fff9fc;
-      transition: background 0.2s ease;
+      border: 1px solid #ddd;
+      font-size: 14px;
     }
-
-    .item:hover {
-      background: #ffeaf3;
+    .item-form button {
+      background: #ff8da1;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
     }
-
-    .item input[type="number"], 
-    .item input[type="file"] {
-      margin-left: 10px;
+    .item-form button:hover {
+      background: #ff5c7a;
     }
-
-    .item img {
-      max-width: 60px;
-      max-height: 60px;
-      border-radius: 10px;
-      margin-left: 10px;
-      display: none;
+    ul {
+      list-style: none;
+      padding: 0;
     }
-
+    li {
+      background: #fff0f5;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+      animation: fadeIn 0.5s ease;
+    }
+    li span {
+      font-weight: 500;
+    }
     .summary {
-      background: #fff0f6;
-      padding: 25px;
+      margin-top: 30px;
+      background: #ffe6f2;
       border-radius: 20px;
-      margin: 30px auto;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 800px;
+      padding: 20px;
+      box-shadow: inset 0 4px 12px rgba(255, 182, 193, 0.3);
     }
-
-    .summary h2 {
-      color: #c2185b;
-      margin-bottom: 15px;
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
     }
-
-    canvas {
-      margin-top: 20px;
-    }
-
-    .bought {
-      text-decoration: line-through;
-      color: #999;
-    }
-
-    /* Ornamen bintang & bunga */
-    .ornament {
+    .heart {
       position: absolute;
-      width: 15px;
-      height: 15px;
-      background: #fff;
-      border-radius: 50%;
-      opacity: 0.6;
-      animation: float 10s linear infinite;
+      color: #ff8da1;
+      font-size: 20px;
+      animation: float 6s infinite ease-in;
     }
-
-    .flower {
-      background: pink;
-      border-radius: 50% 50% 0 0;
-      transform: rotate(45deg);
-    }
-
     @keyframes float {
-      from { transform: translateY(0) rotate(0deg); opacity: 0.6; }
-      to { transform: translateY(-800px) rotate(360deg); opacity: 0; }
+      from { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      to { transform: translateY(-10vh) scale(1.2); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <header>💖 LIST SESERAHAN ARSA & DINDA 💖</header>
+  <header>
+    <h1>💖 LIST SESERAHAN ARSA & DINDA 💖</h1>
+    <p>Soft pink elegance seserahan tracker ✨</p>
+  </header>
 
-  <div class="container" id="giftList"></div>
+  <div class="container">
+    <form class="item-form" id="itemForm">
+      <input type="text" id="itemName" placeholder="Nama Barang" required>
+      <input type="text" id="itemBrand" placeholder="Merek" required>
+      <input type="number" id="itemPrice" placeholder="Harga (Rp)" required>
+      <button type="submit">Tambah</button>
+    </form>
 
-  <div class="summary">
-    <h2>💎 Summary</h2>
-    <p><strong>Total Price: Rp <span id="totalPrice">0</span></strong></p>
-    <canvas id="priceChart"></canvas>
+    <ul id="itemList"></ul>
+
+    <div class="summary">
+      <h2>📊 Ringkasan Harga</h2>
+      <canvas id="priceChart"></canvas>
+    </div>
   </div>
 
-  <script>
-    // Buat ornamen dekorasi
-    function createOrnaments() {
-      for (let i = 0; i < 20; i++) {
-        const ornament = document.createElement("div");
-        ornament.className = i % 2 === 0 ? "ornament flower" : "ornament";
-        ornament.style.left = Math.random() * window.innerWidth + "px";
-        ornament.style.top = window.innerHeight + "px";
-        ornament.style.animationDuration = 5 + Math.random() * 10 + "s";
-        ornament.style.width = ornament.style.height = 10 + Math.random() * 15 + "px";
-        document.body.appendChild(ornament);
-        setTimeout(() => ornament.remove(), 15000);
-      }
-    }
-    setInterval(createOrnaments, 3000);
+  <div class="floating-hearts" id="hearts"></div>
 
-    // Data kategori & item
-    const categories = {
-      "MAKE UP": [
-        "Backstage Glow Face Pallete shade universa (Dior)",
-        "Eyelash curler (lashboss)",
-        "Addict Refillable shine lipstick shade 727 (Dior)",
-        "Ysl touche glow pact cushion shade B20 (Ysl)",
-        "Brush 3 pcs (aeris)",
-        "Loose powder shade fair light (something)",
-        "Beautybland (haquhara)",
-        "Airbrush flawles setting spray (charlotte tilbury)",
-        "Lume baked powder blush shade maja (guele)",
-        "Cream blush (shade hope)",
-        "Embryolisse lait cream (30ml)",
-        "Noir lash mascara (instaperfect)"
-      ],
-      "PERLENGKAPAN IBADAH": [
-        "Mukena (Heylocal)",
-        "Sajadah (howel & co)",
-        "Al quran mini",
-        "Tasbih"
-      ],
-      "SKINCARE": [
-        "Cleansing Oil (Centella madagascar 1004)",
-        "Sabun cuci muka low Ph (Cosrx)",
-        "Soothing toner (anua)",
-        "Brightning capsule ampule (Centella skin 1004)",
-        "Sunscreen hyalu cica water fit (Centella 1004)",
-        "Cica pad (Npure)",
-        "Sheet mask (Npure)",
-        "Lait cream concentrate moisterizer (embryolise)"
-      ],
-      "BODYCARE": [
-        "Almond milk scrub (The body shop)",
-        "Almond milk body butter (The body shop)",
-        "Body mist (bath and body works)",
-        "Parfume (bebas apa aja)"
-      ],
-      "PERALATAN MANDI": [
-        "Shower puff",
-        "Handuk couple (howel & co)",
-        "Sabun (bath and body works)",
-        "Shampo (bath and body works)",
-        "Cermin kecil"
-      ],
-      "ACCESSORIES": [
-        "Tas tangan (charles and keith)",
-        "Tas (teserah apa aja)",
-        "Sneakers (teserah kamu aja)",
-        "Heels (staccato/steve madden)",
-        "Flatshoes (dianalable)"
-      ],
-      "BAKAL & BAJU": [
-        "Pashmina viscose (hijabqa)",
-        "Pashmina ceruty (daissy)",
-        "Pashmina kaos (lafiye)",
-        "Bakal baju 3 meter",
-        "Renda baju 3 meter",
-        "Baju (bebas apa aja)"
-      ],
-      "LAIN-LAIN": [
-        "Piyama couple (bebas)",
-        "Linggerie",
-        "Daleman (3bra&3underware)",
-        "Kain sarung 2 pcs",
-        "Kain jarik barik 2 pcs",
-        "Sisir"
-      ]
+  <script type="module">
+    // --- Firebase Config ---
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
     };
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-    const giftList = document.getElementById("giftList");
+    const itemForm = document.getElementById("itemForm");
+    const itemList = document.getElementById("itemList");
+    const priceChartCtx = document.getElementById("priceChart").getContext("2d");
+
     let chart;
 
-    function renderList() {
-      giftList.innerHTML = "";
-      for (let category in categories) {
-        const catDiv = document.createElement("div");
-        catDiv.className = "category";
-        catDiv.innerHTML = `<h2>${category}</h2>`;
-        categories[category].forEach((item) => {
-          const itemDiv = document.createElement("div");
-          itemDiv.className = "item";
-          itemDiv.innerHTML = `
-            <label>
-              <input type="checkbox" onchange="toggleBought(this)">
-              <span>${item}</span>
-            </label>
-            <input type="number" placeholder="Price (Rp)" onchange="updateSummary()">
-            <input type="file" accept="image/*" onchange="showImage(this)">
-            <img>
-          `;
-          catDiv.appendChild(itemDiv);
-        });
-        giftList.appendChild(catDiv);
-      }
-    }
+    // Add item to Firestore
+    itemForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("itemName").value;
+      const brand = document.getElementById("itemBrand").value;
+      const price = parseInt(document.getElementById("itemPrice").value);
 
-    function toggleBought(checkbox) {
-      const span = checkbox.nextElementSibling;
-      if (checkbox.checked) {
-        span.classList.add("bought");
-      } else {
-        span.classList.remove("bought");
-      }
-    }
+      await db.collection("seserahan").add({ name, brand, price });
+      itemForm.reset();
+    });
 
-    function showImage(input) {
-      const file = input.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const img = input.nextElementSibling;
-          img.src = e.target.result;
-          img.style.display = "inline";
-        }
-        reader.readAsDataURL(file);
-      }
-    }
+    // Realtime listener
+    db.collection("seserahan").onSnapshot((snapshot) => {
+      itemList.innerHTML = "";
+      const items = [];
+      snapshot.forEach((doc) => {
+        const item = doc.data();
+        items.push(item);
 
-    function updateSummary() {
-      let total = 0;
-      let categoryTotals = {};
-      document.querySelectorAll(".category").forEach(catDiv => {
-        let catName = catDiv.querySelector("h2").innerText;
-        let catTotal = 0;
-        catDiv.querySelectorAll("input[type='number']").forEach(input => {
-          let val = parseInt(input.value) || 0;
-          catTotal += val;
-        });
-        categoryTotals[catName] = catTotal;
-        total += catTotal;
+        const li = document.createElement("li");
+        li.innerHTML = `<span>${item.name} (${item.brand}) - Rp ${item.price.toLocaleString()}</span>`;
+        itemList.appendChild(li);
       });
-      document.getElementById("totalPrice").innerText = total.toLocaleString();
 
-      const ctx = document.getElementById("priceChart").getContext("2d");
+      updateChart(items);
+    });
+
+    // Update chart
+    function updateChart(items) {
+      const labels = items.map(i => i.name);
+      const prices = items.map(i => i.price);
+
       if (chart) chart.destroy();
-      chart = new Chart(ctx, {
-        type: 'doughnut',
+      chart = new Chart(priceChartCtx, {
+        type: "bar",
         data: {
-          labels: Object.keys(categoryTotals),
+          labels,
           datasets: [{
-            data: Object.values(categoryTotals),
-            backgroundColor: [
-              '#ffb6c1','#ffc0cb','#ff69b4','#ff1493',
-              '#db7093','#c71585','#e75480','#f8a5c2'
-            ]
+            label: "Harga (Rp)",
+            data: prices,
+            backgroundColor: "#ff8da1"
           }]
         },
         options: {
-          plugins: {
-            legend: {
-              position: 'bottom'
-            }
-          }
+          responsive: true,
+          plugins: { legend: { display: false } }
         }
       });
     }
 
-    renderList();
+    // Floating hearts animation
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.getElementById("hearts").appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 1000);
   </script>
 </body>
 </html>
